@@ -2,7 +2,7 @@
 
 import React from "react";
 import { SidebarCartProps } from "./types";
-import { Icon } from "../../atoms";
+import { Icon } from "@/components/atoms";
 
 export const SidebarCart: React.FC<SidebarCartProps> = ({ isOpen, onClose }) => {
   return (

@@ -1,4 +1,4 @@
-import { Book, Author, Category, PromoSlide } from "../types";
+import { Book, Author, Category, PromoSlide } from "@/types";
 
 export const promoSlides: PromoSlide[] = [
   {

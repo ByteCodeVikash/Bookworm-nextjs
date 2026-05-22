@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { FeaturedBooksTabProps } from "./types";
-import { ProductCard } from "../../molecules";
+import { ProductCard } from "@/components/molecules";
 
 export const FeaturedBooksTab: React.FC<FeaturedBooksTabProps> = ({
   featured,

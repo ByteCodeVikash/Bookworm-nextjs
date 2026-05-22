@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { DealsOfWeekProps } from "./types";
-import { Badge, Icon } from "../../atoms";
+import { Badge, Icon } from "@/components/atoms";
 
 export const DealsOfWeek: React.FC<DealsOfWeekProps> = ({ books }) => {
   const [timeLeft, setTimeLeft] = useState({

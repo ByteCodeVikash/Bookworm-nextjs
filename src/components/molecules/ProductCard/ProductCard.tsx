@@ -1,6 +1,6 @@
 import React from "react";
 import { ProductCardProps } from "./types";
-import { Badge, Icon } from "../../atoms";
+import { Badge, Icon } from "@/components/atoms";
 
 export const ProductCard: React.FC<ProductCardProps> = ({ book, layout = "grid" }) => {
   if (layout === "card") {

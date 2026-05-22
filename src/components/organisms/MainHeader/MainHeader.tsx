@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { MainHeaderProps } from "./types";
-import { Logo, Icon } from "../../atoms";
-import { SearchBar } from "../../molecules";
+import { Logo, Icon } from "@/components/atoms";
+import { SearchBar } from "@/components/molecules";
 
 export const MainHeader: React.FC<MainHeaderProps> = ({
   onToggleCategories,
@@ -42,9 +43,9 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
 
           {/* Branding Logo */}
           <div className="site-branding pr-md-4">
-            <a href="#" className="d-block mb-1">
+            <Link href="/" className="d-block mb-1">
               <Logo />
-            </a>
+            </Link>
           </div>
 
           {/* Navigation Links */}
@@ -56,27 +57,23 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
                 onMouseLeave={() => setActiveDropdown(null)}
                 style={{ listStyleType: "none" }}
               >
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleDropdown("home");
-                  }}
+                <Link
+                  href="/"
                   className="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
                 >
                   Home
-                </a>
+                </Link>
                 <ul className={`dropdown-unfold dropdown-menu font-size-2 rounded-0 border-gray-900 ${activeDropdown === "home" ? "show" : ""}`} style={{ listStyleType: "none" }}>
-                  <li style={{ listStyleType: "none" }}><a href="#" className="dropdown-item link-black-100">Home v1</a></li>
-                  <li style={{ listStyleType: "none" }}><a href="#" className="dropdown-item link-black-100">Home v2</a></li>
-                  <li style={{ listStyleType: "none" }}><a href="#" className="dropdown-item link-black-100">Home v3</a></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/" className="dropdown-item link-black-100">Home v1</Link></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/" className="dropdown-item link-black-100">Home v2</Link></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/" className="dropdown-item link-black-100">Home v3</Link></li>
                 </ul>
               </li>
 
               <li className="nav-item" style={{ listStyleType: "none" }}>
-                <a href="#" className="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium active border-bottom border-primary border-width-2">
+                <Link href="/" className="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium">
                   Categories
-                </a>
+                </Link>
               </li>
 
               <li
@@ -85,35 +82,48 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
                 onMouseLeave={() => setActiveDropdown(null)}
                 style={{ listStyleType: "none" }}
               >
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleDropdown("shop");
-                  }}
+                <Link
+                  href="/"
                   className="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
                 >
                   Shop
-                </a>
+                </Link>
                 <ul className={`dropdown-unfold dropdown-menu font-size-2 rounded-0 border-gray-900 ${activeDropdown === "shop" ? "show" : ""}`} style={{ listStyleType: "none" }}>
-                  <li style={{ listStyleType: "none" }}><a href="#" className="dropdown-item link-black-100">Shop List v1</a></li>
-                  <li style={{ listStyleType: "none" }}><a href="#" className="dropdown-item link-black-100">Shop List v2</a></li>
-                  <li style={{ listStyleType: "none" }}><a href="#" className="dropdown-item link-black-100">Single Product</a></li>
-                  <li style={{ listStyleType: "none" }}><a href="#" className="dropdown-item link-black-100">Shop cart</a></li>
-                  <li style={{ listStyleType: "none" }}><a href="#" className="dropdown-item link-black-100">Shop checkout</a></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/" className="dropdown-item link-black-100">Shop List v1</Link></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/" className="dropdown-item link-black-100">Shop List v2</Link></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/product" className="dropdown-item link-black-100">Single Product</Link></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/cart" className="dropdown-item link-black-100">Shop cart</Link></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/checkout" className="dropdown-item link-black-100">Shop checkout</Link></li>
                 </ul>
               </li>
 
               <li className="nav-item" style={{ listStyleType: "none" }}>
-                <a href="#" className="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium">
-                  Blog
-                </a>
+                <Link href="/my-account" className="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium">
+                  My Account
+                </Link>
               </li>
 
-              <li className="nav-item" style={{ listStyleType: "none" }}>
-                <a href="#" className="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium">
-                  Others
+              <li
+                className={`nav-item dropdown ${activeDropdown === "others" ? "show" : ""}`}
+                onMouseEnter={() => setActiveDropdown("others")}
+                onMouseLeave={() => setActiveDropdown(null)}
+                style={{ listStyleType: "none" }}
+              >
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleDropdown("others");
+                  }}
+                  className="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
+                >
+                  Pages
                 </a>
+                <ul className={`dropdown-unfold dropdown-menu font-size-2 rounded-0 border-gray-900 ${activeDropdown === "others" ? "show" : ""}`} style={{ listStyleType: "none" }}>
+                  <li style={{ listStyleType: "none" }}><Link href="/about" className="dropdown-item link-black-100">About Us</Link></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/contact" className="dropdown-item link-black-100">Contact Us</Link></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/faq" className="dropdown-item link-black-100">FAQ</Link></li>
+                </ul>
               </li>
             </ul>
           </div>

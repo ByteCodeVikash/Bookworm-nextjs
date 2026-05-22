@@ -1,6 +1,6 @@
 import React from "react";
 import { SearchBarProps } from "./types";
-import { Icon } from "../../atoms";
+import { Icon } from "@/components/atoms";
 
 export const SearchBar: React.FC<SearchBarProps> = ({
   placeholder = "Search for books by keyword",

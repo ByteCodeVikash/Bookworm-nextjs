@@ -2,7 +2,7 @@
 
 import React from "react";
 import { SidebarCategoriesProps } from "./types";
-import { Icon } from "../../atoms";
+import { Icon } from "@/components/atoms";
 
 export const SidebarCategories: React.FC<SidebarCategoriesProps> = ({ isOpen, onClose }) => {
   const categoriesList = [

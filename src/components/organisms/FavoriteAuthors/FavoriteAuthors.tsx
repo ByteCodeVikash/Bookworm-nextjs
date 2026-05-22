@@ -1,7 +1,7 @@
 import React from "react";
 import { FavoriteAuthorsProps } from "./types";
-import { AuthorCard } from "../../molecules";
-import { Icon } from "../../atoms";
+import { AuthorCard } from "@/components/molecules";
+import { Icon } from "@/components/atoms";
 
 export const FavoriteAuthors: React.FC<FavoriteAuthorsProps> = ({ authors }) => {
   return (

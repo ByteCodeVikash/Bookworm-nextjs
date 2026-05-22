@@ -1,7 +1,8 @@
 import React from "react";
+import Link from "next/link";
 import { FooterProps } from "./types";
-import { Logo, Icon } from "../../atoms";
-import { NewsletterForm } from "../../molecules";
+import { Logo, Icon } from "@/components/atoms";
+import { NewsletterForm } from "@/components/molecules";
 
 export const Footer: React.FC<FooterProps> = () => {
   return (
@@ -23,9 +24,9 @@ export const Footer: React.FC<FooterProps> = () => {
           {/* Logo & Contact details */}
           <div className="col-lg-4 mb-6 mb-lg-0">
             <div className="pb-4">
-              <a href="#" className="d-inline-block mb-4">
+              <Link href="/" className="d-inline-block mb-4">
                 <Logo />
-              </a>
+              </Link>
               <p className="text-gray-600 font-size-2 mb-4">
                 1418 Riverwood Drive, Suite 3245 Cottonwood,<br />
                 CA 96022, United States
@@ -43,10 +44,10 @@ export const Footer: React.FC<FooterProps> = () => {
           <div className="col-lg-2 col-md-4 mb-6 mb-lg-0">
             <h4 className="font-size-3 font-weight-medium mb-3">Explore</h4>
             <ul className="list-unstyled mb-0 font-size-2" style={{ paddingLeft: 0 }}>
-              <li className="py-1" style={{ listStyleType: "none" }}><a href="#" className="text-gray-600 h-primary">About Us</a></li>
-              <li className="py-1" style={{ listStyleType: "none" }}><a href="#" className="text-gray-600 h-primary">Sitemap</a></li>
-              <li className="py-1" style={{ listStyleType: "none" }}><a href="#" className="text-gray-600 h-primary">Bookmarks</a></li>
-              <li className="py-1" style={{ listStyleType: "none" }}><a href="#" className="text-gray-600 h-primary">Sign in/Join</a></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/about" className="text-gray-600 h-primary">About Us</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Sitemap</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Bookmarks</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/my-account" className="text-gray-600 h-primary">Sign in/Join</Link></li>
             </ul>
           </div>
 
@@ -54,11 +55,11 @@ export const Footer: React.FC<FooterProps> = () => {
           <div className="col-lg-2 col-md-4 mb-6 mb-lg-0">
             <h4 className="font-size-3 font-weight-medium mb-3">Customer Service</h4>
             <ul className="list-unstyled mb-0 font-size-2" style={{ paddingLeft: 0 }}>
-              <li className="py-1" style={{ listStyleType: "none" }}><a href="#" className="text-gray-600 h-primary">Help Center</a></li>
-              <li className="py-1" style={{ listStyleType: "none" }}><a href="#" className="text-gray-600 h-primary">Returns</a></li>
-              <li className="py-1" style={{ listStyleType: "none" }}><a href="#" className="text-gray-600 h-primary">Product Recalls</a></li>
-              <li className="py-1" style={{ listStyleType: "none" }}><a href="#" className="text-gray-600 h-primary">Accessibility</a></li>
-              <li className="py-1" style={{ listStyleType: "none" }}><a href="#" className="text-gray-600 h-primary">Contact Us</a></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/faq" className="text-gray-600 h-primary">Help Center</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Returns</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Product Recalls</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Accessibility</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/contact" className="text-gray-600 h-primary">Contact Us</Link></li>
             </ul>
           </div>
 
@@ -66,10 +67,10 @@ export const Footer: React.FC<FooterProps> = () => {
           <div className="col-lg-2 col-md-4 mb-6 mb-lg-0">
             <h4 className="font-size-3 font-weight-medium mb-3">Policy</h4>
             <ul className="list-unstyled mb-0 font-size-2" style={{ paddingLeft: 0 }}>
-              <li className="py-1" style={{ listStyleType: "none" }}><a href="#" className="text-gray-600 h-primary">Return Policy</a></li>
-              <li className="py-1" style={{ listStyleType: "none" }}><a href="#" className="text-gray-600 h-primary">Terms of Use</a></li>
-              <li className="py-1" style={{ listStyleType: "none" }}><a href="#" className="text-gray-600 h-primary">Security</a></li>
-              <li className="py-1" style={{ listStyleType: "none" }}><a href="#" className="text-gray-600 h-primary">Privacy Policy</a></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/faq" className="text-gray-600 h-primary">Return Policy</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/faq" className="text-gray-600 h-primary">Terms of Use</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/faq" className="text-gray-600 h-primary">Security</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/faq" className="text-gray-600 h-primary">Privacy Policy</Link></li>
             </ul>
           </div>
 
@@ -77,10 +78,10 @@ export const Footer: React.FC<FooterProps> = () => {
           <div className="col-lg-2 col-md-4">
             <h4 className="font-size-3 font-weight-medium mb-3">Categories</h4>
             <ul className="list-unstyled mb-0 font-size-2" style={{ paddingLeft: 0 }}>
-              <li className="py-1" style={{ listStyleType: "none" }}><a href="#" className="text-gray-600 h-primary">Action & Adventure</a></li>
-              <li className="py-1" style={{ listStyleType: "none" }}><a href="#" className="text-gray-600 h-primary">Arts & Photography</a></li>
-              <li className="py-1" style={{ listStyleType: "none" }}><a href="#" className="text-gray-600 h-primary">Biographies</a></li>
-              <li className="py-1" style={{ listStyleType: "none" }}><a href="#" className="text-gray-600 h-primary">Business & Money</a></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Action & Adventure</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Arts & Photography</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Biographies</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Business & Money</Link></li>
             </ul>
           </div>
         </div>

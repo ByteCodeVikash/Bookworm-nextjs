@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { MainLayoutProps } from "./types";
-import { TopHeader, MainHeader, SidebarCart, SidebarAccount, SidebarCategories, Footer } from "../../organisms";
+import { TopHeader, MainHeader, SidebarCart, SidebarAccount, SidebarCategories, Footer } from "@/components/organisms";
 
 export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);

@@ -1,6 +1,6 @@
 import React from "react";
 import { CategorySectionProps } from "./types";
-import { Icon } from "../../atoms";
+import { Icon } from "@/components/atoms";
 
 const bgAndTextClasses: Record<string, { bg: string; text: string }> = {
   arts: { bg: "bg-indigo-light", text: "text-primary-indigo" },

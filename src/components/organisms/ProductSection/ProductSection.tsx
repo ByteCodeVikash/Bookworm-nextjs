@@ -1,7 +1,7 @@
 import React from "react";
 import { ProductSectionProps } from "./types";
-import { ProductCard } from "../../molecules";
-import { Icon } from "../../atoms";
+import { ProductCard } from "@/components/molecules";
+import { Icon } from "@/components/atoms";
 
 export const ProductSection: React.FC<ProductSectionProps> = ({
   title,

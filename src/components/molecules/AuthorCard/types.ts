@@ -1,4 +1,4 @@
-import { Author } from "../../../types";
+import { Author } from "@/types";
 
 export interface AuthorCardProps {
   author: Author;

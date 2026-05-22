@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { NewReleasesProps } from "./types";
-import { ProductCard } from "../../molecules";
+import { ProductCard } from "@/components/molecules";
 
 export const NewReleases: React.FC<NewReleasesProps> = ({
   history,

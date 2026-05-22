@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { SidebarAccountProps } from "./types";
-import { Icon } from "../../atoms";
+import { Icon } from "@/components/atoms";
 
 export const SidebarAccount: React.FC<SidebarAccountProps> = ({ isOpen, onClose }) => {
   const [mode, setMode] = useState<"signin" | "signup">("signin");

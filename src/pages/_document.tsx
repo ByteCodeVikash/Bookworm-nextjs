@@ -1,20 +1,9 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import { Html, Head, Main, NextScript } from "next/document";
 
-export const metadata: Metadata = {
-  title: "Bookworm - Bookstore E-commerce Template",
-  description: "A premium, fully responsive React Next.js Bookstore and Digital Storefront built using TypeScript, Atomic Design, and custom CSS theme layouts.",
-  viewport: "width=device-width, initial-scale=1, shrink-to-fit=no",
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function Document() {
   return (
-    <html lang="en">
-      <head>
+    <Html lang="en">
+      <Head>
         {/* 1. Google Font Inter */}
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
@@ -50,8 +39,11 @@ export default function RootLayout({
 
         {/* 8. Compiled Bootstrap 4 & Theme layouts */}
         <link rel="stylesheet" href="/assets/css/theme.css" />
-      </head>
-      <body>{children}</body>
-    </html>
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
   );
 }
