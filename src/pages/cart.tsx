@@ -339,7 +339,7 @@ export default function CartPage() {
                           Apply
                         </button>
                       </form>
-                      <p className="font-size-1 text-gray-500 mt-2 mb-0">Use "BOOKWORM20" for 20% off!</p>
+                      <p className="font-size-1 text-gray-500 mt-2 mb-0">Use &quot;BOOKWORM20&quot; for 20% off!</p>
                     </div>
                   </div>
 

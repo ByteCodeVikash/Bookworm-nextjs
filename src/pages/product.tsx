@@ -272,11 +272,11 @@ export default function ProductPage() {
                           <p className="mb-0">#1 New York Times Bestseller</p>
                           <p className="mb-0">A Reese Witherspoon x Hello Sunshine Book Club Pick</p>
                           <br />
-                          <p className="mb-4">"I can't even express how much I love this book! I didn't want this story to end!"--Reese Witherspoon</p>
-                          <p className="mb-4">"Painfully beautiful."--The New York Times Book Review</p>
-                          <p>"Perfect for fans of Barbara Kingsolver."--Bustle</p>
+                          <p className="mb-4">&quot;I can&apos;t even express how much I love this book! I didn&apos;t want this story to end!&quot;--Reese Witherspoon</p>
+                          <p className="mb-4">&quot;Painfully beautiful.&quot;--The New York Times Book Review</p>
+                          <p>&quot;Perfect for fans of Barbara Kingsolver.&quot;--Bustle</p>
                           <br />
-                          <p className="mb-4">For years, rumors of the "Marsh Girl" have haunted Barkley Cove, a quiet town on the North Carolina coast. So in late 1969, when handsome Chase Andrews is found dead, the locals immediately suspect Kya Clark, the so-called Marsh Girl. But Kya is not what they say. Sensitive and intelligent, she has survived for years alone in the marsh that she calls home, finding friends in the gulls and lessons in the sand. Then the time comes when she yearns to be touched and loved. When two young men from town become intrigued by her wild beauty, Kya opens herself to a new life--until the unthinkable happens.</p>
+                          <p className="mb-4">For years, rumors of the &quot;Marsh Girl&quot; have haunted Barkley Cove, a quiet town on the North Carolina coast. So in late 1969, when handsome Chase Andrews is found dead, the locals immediately suspect Kya Clark, the so-called Marsh Girl. But Kya is not what they say. Sensitive and intelligent, she has survived for years alone in the marsh that she calls home, finding friends in the gulls and lessons in the sand. Then the time comes when she yearns to be touched and loved. When two young men from town become intrigued by her wild beauty, Kya opens herself to a new life--until the unthinkable happens.</p>
                           <p className="mb-4">Perfect for fans of Barbara Kingsolver and Karen Russell, Where the Crawdads Sing is at once an exquisite ode to the natural world, a heartbreaking coming-of-age story, and a surprising tale of possible murder. Owens reminds us that we are forever shaped by the children we once were, and that we are all subject to the beautiful and violent secrets that nature keeps</p>
                           <p>WHERE THE CRAWDADS LP</p>
                         </div>
@@ -559,7 +559,7 @@ export default function ProductPage() {
                                   <small className="far fa-star"></small>
                                 </div>
                               </div>
-                              <p className="mb-4 text-lh-md">I read this book shortly after I got it and didn't just put it on my TBR shelf mainly because I saw it on Reese Witherspoon's bookclub September read. It was one of the best books I've read this year, and reminded me some of Kristen Hannah's The Great Alone.</p>
+                              <p className="mb-4 text-lh-md">I read this book shortly after I got it and didn&apos;t just put it on my TBR shelf mainly because I saw it on Reese Witherspoon&apos;s bookclub September read. It was one of the best books I&apos;ve read this year, and reminded me some of Kristen Hannah&apos;s The Great Alone.</p>
                               <div className="text-gray-600 mb-4">Staci, February 22, 2020</div>
                               <ul className="nav gap-3">
                                 <li className="mr-7">
