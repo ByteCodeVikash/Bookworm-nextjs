@@ -1,7 +1,22 @@
 import React from "react";
 import { LogoProps } from "./types";
+import { useSiteConfig } from "@/contexts/ConfigContext";
 
 export const Logo: React.FC<LogoProps> = ({ className = "" }) => {
+  const { config } = useSiteConfig();
+  const logoUrl = config?.businessDetails?.logoUrl;
+
+  if (logoUrl) {
+    return (
+      <img
+        src={logoUrl}
+        className={className}
+        alt={config.businessDetails.storeName || "Logo"}
+        style={{ maxHeight: "30px", width: "auto", objectFit: "contain" }}
+      />
+    );
+  }
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

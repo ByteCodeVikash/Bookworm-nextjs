@@ -1,10 +1,11 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import { HeroSliderProps } from "./types";
+import { useSiteConfig } from "@/contexts/ConfigContext";
 
 export const HeroSlider: React.FC<HeroSliderProps> = ({ slides }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { config } = useSiteConfig();
+  const { heroTitle, heroSubtitle, buttonText } = config?.content || {};
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -37,17 +38,17 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ slides }) => {
                         </p>
                         <h2 className="hero__title font-size-14 mb-4">
                           <span className="hero__title-line-1 font-weight-regular d-block">
-                            {slide.titleSuffix}
+                            {heroTitle || slide.titleSuffix}
                           </span>
                           <span className="hero__title-line-2 font-weight-bold d-block">
-                            {slide.titleHighlighted}
+                            {heroSubtitle || slide.titleHighlighted}
                           </span>
                         </h2>
                         <a
                           href={slide.actionUrl}
                           className="btn btn-dark btn-wide rounded-0 hero__btn py-3 px-5 font-weight-medium"
                         >
-                          See More
+                          {buttonText || "See More"}
                         </a>
                       </div>
                     </div>
