@@ -1,8 +1,12 @@
 import React from "react";
 import { TopHeaderProps } from "./types";
 import { Icon } from "@/components/atoms";
+import { useCart } from "@/contexts/CartContext";
 
 export const TopHeader: React.FC<TopHeaderProps> = ({ onToggleCart, onToggleAccount }) => {
+  const { cartItems } = useCart();
+  const totalCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+
   return (
     <div className="topbar border-bottom d-none d-md-block">
       <div className="container-fluid px-2 px-md-5 px-xl-8d75">
@@ -53,7 +57,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({ onToggleCart, onToggleAcco
                 style={{ background: "none", boxShadow: "none" }}
               >
                 <span className="position-absolute bg-dark width-16 height-16 rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9 right-0" style={{ top: "-8px" }}>
-                  3
+                  {totalCount}
                 </span>
                 <Icon name="flaticon-icon-126515" />
               </button>

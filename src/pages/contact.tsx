@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { MainLayout } from "@/components";
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({ name: "", email: "", subject: "", text: "" });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSuccess, setIsSuccess] = useState(false);
+
   const offices = [
     {
       city: "New York Office",
@@ -24,6 +28,37 @@ export default function ContactPage() {
     { icon: "fab fa-twitter", href: "#" },
     { icon: "fab fa-pinterest", href: "#" },
   ];
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const newErrors: Record<string, string> = {};
+    
+    if (!formData.name.trim()) newErrors.name = "Name is required.";
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required.";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address.";
+    }
+    if (!formData.subject.trim()) newErrors.subject = "Subject is required.";
+    if (!formData.text.trim()) newErrors.text = "Inquiry details are required.";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      setIsSuccess(false);
+    } else {
+      setIsSuccess(true);
+      setFormData({ name: "", email: "", subject: "", text: "" });
+      setErrors({});
+    }
+  };
 
   return (
     <MainLayout>
@@ -104,7 +139,15 @@ export default function ContactPage() {
                     {/* Get In Touch Contact Form */}
                     <div>
                       <h6 className="font-weight-medium font-size-10 mb-3 pb-xl-1">Get In Touch</h6>
-                      <form className="js-validate" noValidate>
+                      
+                      {isSuccess && (
+                        <div className="alert alert-success rounded-0 mb-4 font-size-2 py-3 px-4" role="alert">
+                          <i className="fa fa-check-circle mr-2"></i>
+                          Thank you! Your message has been sent successfully. We will get back to you soon.
+                        </div>
+                      )}
+
+                      <form className="js-validate" onSubmit={handleSubmit} noValidate>
                         <div className="row">
                           {/* Name Input */}
                           <div className="col-sm-6 mb-5">
@@ -113,11 +156,13 @@ export default function ContactPage() {
                               <input
                                 id="contactName"
                                 type="text"
-                                className="form-control rounded-0 px-4 height-5"
+                                className={`form-control rounded-0 px-4 height-5 ${errors.name ? "is-invalid" : ""}`}
                                 name="name"
+                                value={formData.name}
+                                onChange={handleChange}
                                 placeholder="Jack Wayley"
-                                required
                               />
+                              {errors.name && <div className="invalid-feedback font-size-1 mt-1">{errors.name}</div>}
                             </div>
                           </div>
 
@@ -128,11 +173,13 @@ export default function ContactPage() {
                               <input
                                 id="contactEmail"
                                 type="email"
-                                className="form-control rounded-0 px-4 height-5"
+                                className={`form-control rounded-0 px-4 height-5 ${errors.email ? "is-invalid" : ""}`}
                                 name="email"
+                                value={formData.email}
+                                onChange={handleChange}
                                 placeholder="jackwayley@gmail.com"
-                                required
                               />
+                              {errors.email && <div className="invalid-feedback font-size-1 mt-1">{errors.email}</div>}
                             </div>
                           </div>
 
@@ -143,11 +190,13 @@ export default function ContactPage() {
                               <input
                                 id="contactSubject"
                                 type="text"
-                                className="form-control rounded-0 px-4 height-5"
+                                className={`form-control rounded-0 px-4 height-5 ${errors.subject ? "is-invalid" : ""}`}
                                 name="subject"
+                                value={formData.subject}
+                                onChange={handleChange}
                                 placeholder="I have an inquiry..."
-                                required
                               />
+                              {errors.subject && <div className="invalid-feedback font-size-1 mt-1">{errors.subject}</div>}
                             </div>
                           </div>
 
@@ -158,12 +207,14 @@ export default function ContactPage() {
                                 <label htmlFor="contactDetails" className="font-weight-medium font-size-2">Details please! Your inquiry helps us assist you better.</label>
                                 <textarea
                                   id="contactDetails"
-                                  className="form-control rounded-0 p-3 font-size-2 placeholder-color-3"
+                                  className={`form-control rounded-0 p-3 font-size-2 placeholder-color-3 ${errors.text ? "is-invalid" : ""}`}
                                   rows={6}
                                   name="text"
+                                  value={formData.text}
+                                  onChange={handleChange}
                                   placeholder="What did you like or dislike? What should other shoppers know before buying?"
-                                  required
                                 ></textarea>
+                                {errors.text && <div className="invalid-feedback font-size-1 mt-1 d-block">{errors.text}</div>}
                               </div>
                             </div>
                           </div>

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { MainLayout } from "@/components";
+import { useCart } from "@/contexts/CartContext";
 
 export default function ProductPage() {
+  const { addToCart } = useCart();
   const [selectedFormat, setSelectedFormat] = useState<string>("Paperback");
   const [quantity, setQuantity] = useState<number>(1);
   const [activeTab, setActiveTab] = useState<"Description" | "ProductDetails" | "ProductVideos" | "ProductReviews">("Description");
@@ -13,6 +15,14 @@ export default function ProductPage() {
 
   const handleAddToCart = (e: React.FormEvent) => {
     e.preventDefault();
+    addToCart({
+      id: "where-the-crawdads-sing",
+      name: "Where the Crawdads Sing",
+      author: "Anna Banks",
+      price: 29.95,
+      image: "https://placehold.co/300x452",
+      quantity
+    });
     alert(`Added ${quantity} of "Where the Crawdads Sing" (${selectedFormat}) to your cart.`);
   };
 
@@ -44,7 +54,7 @@ export default function ProductPage() {
                     <div className="js-slick-carousel u-slick">
                       <div className="js-slide">
                         <img
-                          src="https://placehold.it/300x452"
+                          src="https://placehold.co/300x452"
                           alt="Where the Crawdads Sing Cover"
                           className="mx-auto img-fluid"
                         />
@@ -345,7 +355,7 @@ export default function ProductPage() {
                               </span>
                               <div className="hover-area text-center">
                                 <img
-                                  src="https://placehold.it/120x180"
+                                  src="https://placehold.co/120x180"
                                   className="img-fluid d-block mx-auto mb-3"
                                   alt="Video description cover"
                                 />
@@ -368,7 +378,7 @@ export default function ProductPage() {
                               </span>
                               <div className="hover-area text-center">
                                 <img
-                                  src="https://placehold.it/120x180"
+                                  src="https://placehold.co/120x180"
                                   className="img-fluid d-block mx-auto mb-3"
                                   alt="Video description cover"
                                 />
@@ -652,7 +662,7 @@ export default function ProductPage() {
                     <div className="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
                       <div className="woocommerce-loop-product__thumbnail">
                         <Link href="/product" className="d-block">
-                          <img src="https://placehold.it/120x180" className="img-fluid d-block mx-auto" alt="Think Like a Monk" />
+                          <img src="https://placehold.co/120x180" className="img-fluid d-block mx-auto" alt="Think Like a Monk" />
                         </Link>
                       </div>
                       <div className="woocommerce-loop-product__body product__body pt-3 bg-white">
@@ -679,7 +689,7 @@ export default function ProductPage() {
                     <div className="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
                       <div className="woocommerce-loop-product__thumbnail">
                         <Link href="/product" className="d-block">
-                          <img src="https://placehold.it/120x180" className="img-fluid d-block mx-auto" alt="All You Can Ever Know" />
+                          <img src="https://placehold.co/120x180" className="img-fluid d-block mx-auto" alt="All You Can Ever Know" />
                         </Link>
                       </div>
                       <div className="woocommerce-loop-product__body product__body pt-3 bg-white">
@@ -706,7 +716,7 @@ export default function ProductPage() {
                     <div className="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
                       <div className="woocommerce-loop-product__thumbnail">
                         <Link href="/product" className="d-block">
-                          <img src="https://placehold.it/120x180" className="img-fluid d-block mx-auto" alt="Winter Garden" />
+                          <img src="https://placehold.co/120x180" className="img-fluid d-block mx-auto" alt="Winter Garden" />
                         </Link>
                       </div>
                       <div className="woocommerce-loop-product__body product__body pt-3 bg-white">
@@ -733,7 +743,7 @@ export default function ProductPage() {
                     <div className="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
                       <div className="woocommerce-loop-product__thumbnail">
                         <Link href="/product" className="d-block">
-                          <img src="https://placehold.it/120x180" className="img-fluid d-block mx-auto" alt="The Overdue Life of Amy Byler" />
+                          <img src="https://placehold.co/120x180" className="img-fluid d-block mx-auto" alt="The Overdue Life of Amy Byler" />
                         </Link>
                       </div>
                       <div className="woocommerce-loop-product__body product__body pt-3 bg-white">
@@ -760,7 +770,7 @@ export default function ProductPage() {
                     <div className="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
                       <div className="woocommerce-loop-product__thumbnail">
                         <Link href="/product" className="d-block">
-                          <img src="https://placehold.it/120x180" className="img-fluid d-block mx-auto" alt="Think Like a Monk" />
+                          <img src="https://placehold.co/120x180" className="img-fluid d-block mx-auto" alt="Think Like a Monk" />
                         </Link>
                       </div>
                       <div className="woocommerce-loop-product__body product__body pt-3 bg-white">

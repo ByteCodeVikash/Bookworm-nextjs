@@ -6,27 +6,42 @@ import { Badge, Icon } from "@/components/atoms";
 
 export const DealsOfWeek: React.FC<DealsOfWeekProps> = ({ books }) => {
   const [timeLeft, setTimeLeft] = useState({
-    days: 114,
-    hours: 3,
-    minutes: 59,
-    seconds: 59
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
   });
 
   useEffect(() => {
+    const targetDate = new Date();
+    const day = targetDate.getDay();
+    const daysToSunday = (7 - day) % 7;
+    // Set target to Sunday 23:59:59
+    targetDate.setDate(targetDate.getDate() + daysToSunday);
+    targetDate.setHours(23, 59, 59, 999);
+
+    const calculateTimeLeft = () => {
+      const now = new Date().getTime();
+      const difference = targetDate.getTime() - now;
+
+      if (difference <= 0) {
+        return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+      }
+
+      return {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60)
+      };
+    };
+
+    setTimeLeft(calculateTimeLeft());
+
     const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev.seconds > 0) {
-          return { ...prev, seconds: prev.seconds - 1 };
-        } else if (prev.minutes > 0) {
-          return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
-        } else if (prev.hours > 0) {
-          return { ...prev, hours: prev.hours - 1, minutes: 59, seconds: 59 };
-        } else if (prev.days > 0) {
-          return { ...prev, days: prev.days - 1, hours: 23, minutes: 59, seconds: 59 };
-        }
-        return prev;
-      });
+      setTimeLeft(calculateTimeLeft());
     }, 1000);
+
     return () => clearInterval(timer);
   }, []);
 

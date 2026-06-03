@@ -33,26 +33,26 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ slides }) => {
                   <div className="hero row min-height-588 align-items-center">
                     <div className="col-lg-7 col-wd-6 mb-4 mb-lg-0">
                       <div className="media-body mr-wd-4 align-self-center mb-4 mb-md-0">
-                        <p className="hero__pretitle text-uppercase font-weight-bold text-gray-400 mb-2">
+                        <p className="hero__pretitle text-uppercase font-weight-bold text-gray-400 mb-2 animate-fadeInLeft delay-1">
                           {slide.titlePrefix}
                         </p>
                         <h2 className="hero__title font-size-14 mb-4">
-                          <span className="hero__title-line-1 font-weight-regular d-block">
+                          <span className="hero__title-line-1 font-weight-regular d-block animate-fadeInLeft delay-2">
                             {heroTitle || slide.titleSuffix}
                           </span>
-                          <span className="hero__title-line-2 font-weight-bold d-block">
+                          <span className="hero__title-line-2 font-weight-bold d-block animate-fadeInLeft delay-3">
                             {heroSubtitle || slide.titleHighlighted}
                           </span>
                         </h2>
                         <a
                           href={slide.actionUrl}
-                          className="btn btn-dark btn-wide rounded-0 hero__btn py-3 px-5 font-weight-medium"
+                          className="btn btn-dark btn-wide rounded-0 hero__btn py-3 px-5 font-weight-medium animate-fadeInUp delay-4"
                         >
                           {buttonText || "See More"}
                         </a>
                       </div>
                     </div>
-                    <div className="col-lg-5 col-wd-6 text-center">
+                    <div className="col-lg-5 col-wd-6 text-center animate-fadeInRight delay-2">
                       <img
                         className="img-fluid mx-auto"
                         src={slide.imageUrl}

@@ -1,10 +1,13 @@
-"use client";
-
 import React from "react";
 import { SidebarCartProps } from "./types";
 import { Icon } from "@/components/atoms";
+import { useCart } from "@/contexts/CartContext";
+import Link from "next/link";
 
 export const SidebarCart: React.FC<SidebarCartProps> = ({ isOpen, onClose }) => {
+  const { cartItems, removeFromCart, subtotal } = useCart();
+  const totalCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+
   return (
     <aside
       className={`u-sidebar u-sidebar__xl transition-all ${isOpen ? "active" : ""}`}
@@ -36,48 +39,51 @@ export const SidebarCart: React.FC<SidebarCartProps> = ({ isOpen, onClose }) => 
               <div className="u-sidebar__content u-header-sidebar__content">
                 <header className="border-bottom px-4 px-md-6 py-4">
                   <h2 className="font-size-3 mb-0 d-flex align-items-center">
-                    <Icon name="flaticon-icon-126515 mr-3 font-size-5" />Your shopping bag (3)
+                    <Icon name="flaticon-icon-126515 mr-3 font-size-5" />Your shopping bag ({totalCount})
                   </h2>
                 </header>
 
-                <div className="px-4 py-5 px-md-6 border-bottom">
-                  {/* Cart Item 1 */}
-                  <div className="media mb-4">
-                    <div className="mr-3">
-                      <img src="https://placehold.it/120x180" alt="Book thumbnail" width="80" className="img-fluid" />
-                    </div>
-                    <div className="media-body">
-                      <h4 className="font-size-2 mb-1"><a href="#">Think Like a Monk</a></h4>
-                      <div className="text-gray-600 font-size-1 mb-1">1 × $29.00</div>
-                      <button className="btn btn-link text-danger p-0 font-size-1">Remove</button>
-                    </div>
-                  </div>
-
-                  {/* Cart Item 2 */}
-                  <div className="media">
-                    <div className="mr-3">
-                      <img src="https://placehold.it/120x180" alt="Book thumbnail" width="80" className="img-fluid" />
-                    </div>
-                    <div className="media-body">
-                      <h4 className="font-size-2 mb-1"><a href="#">Atomic Habits</a></h4>
-                      <div className="text-gray-600 font-size-1 mb-1">2 × $22.00</div>
-                      <button className="btn btn-link text-danger p-0 font-size-1">Remove</button>
-                    </div>
-                  </div>
+                <div className="px-4 py-5 px-md-6 border-bottom" style={{ maxHeight: "450px", overflowY: "auto" }}>
+                  {cartItems.length === 0 ? (
+                    <div className="text-center py-5 text-gray-600">Your bag is empty.</div>
+                  ) : (
+                    cartItems.map((item) => (
+                      <div className="media mb-4" key={item.id}>
+                        <div className="mr-3" style={{ width: "60px" }}>
+                          <img src={item.image} alt={item.name} className="img-fluid" />
+                        </div>
+                        <div className="media-body">
+                          <h4 className="font-size-2 mb-1 text-truncate" style={{ maxWidth: "180px" }}>
+                            <Link href="/product" onClick={onClose} className="text-dark">{item.name}</Link>
+                          </h4>
+                          <div className="text-gray-600 font-size-1 mb-1">
+                            {item.quantity} × ${item.price.toFixed(2)}
+                          </div>
+                          <button
+                            onClick={() => removeFromCart(item.id)}
+                            className="btn btn-link text-danger p-0 font-size-1 border-0"
+                            style={{ background: "none", textDecoration: "none" }}
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+                    ))
+                  )}
                 </div>
 
                 {/* Subtotal & Checkout Actions */}
                 <div className="px-4 py-5 px-md-6">
                   <div className="d-flex justify-content-between mb-4">
                     <span className="font-weight-medium text-dark">Subtotal:</span>
-                    <span className="font-weight-medium text-dark">$73.00</span>
+                    <span className="font-weight-medium text-dark">${subtotal.toFixed(2)}</span>
                   </div>
-                  <a href="#" className="btn btn-block btn-dark rounded-0 py-3 mb-2 font-weight-medium">
+                  <Link href="/cart" onClick={onClose} className="btn btn-block btn-dark rounded-0 py-3 mb-2 font-weight-medium text-center">
                     View Cart
-                  </a>
-                  <a href="#" className="btn btn-block btn-outline-dark rounded-0 py-3 font-weight-medium">
+                  </Link>
+                  <Link href="/checkout" onClick={onClose} className="btn btn-block btn-outline-dark rounded-0 py-3 font-weight-medium text-center">
                     Checkout
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

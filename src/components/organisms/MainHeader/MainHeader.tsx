@@ -5,6 +5,7 @@ import Link from "next/link";
 import { MainHeaderProps } from "./types";
 import { Logo, Icon } from "@/components/atoms";
 import { SearchBar } from "@/components/molecules";
+import { useCart } from "@/contexts/CartContext";
 
 export const MainHeader: React.FC<MainHeaderProps> = ({
   onToggleCategories,
@@ -12,6 +13,8 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
   onToggleAccount
 }) => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const { cartItems } = useCart();
+  const totalCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   const toggleDropdown = (menuName: string) => {
     if (activeDropdown === menuName) {
@@ -148,10 +151,11 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
               aria-label="Toggle Cart"
             >
               <span className="position-absolute bg-dark width-16 height-16 rounded-circle d-flex align-items-center justify-content-center text-white font-size-n9 right-0" style={{ top: "0" }}>
-                3
+                {totalCount}
               </span>
               <Icon name="flaticon-icon-126515" className="font-size-5" />
             </button>
+
           </div>
         </div>
       </div>

@@ -15,12 +15,12 @@ export default function AboutPage() {
   ];
 
   const partners = [
-    "/assets/img/150x32/img1.png",
-    "/assets/img/150x32/img2.png",
-    "/assets/img/150x32/img3.png",
-    "/assets/img/150x32/img4.png",
-    "/assets/img/150x32/img6.png",
-    "/assets/img/150x32/img5.png",
+    "https://placehold.co/150x32?text=Partner+1",
+    "https://placehold.co/150x32?text=Partner+2",
+    "https://placehold.co/150x32?text=Partner+3",
+    "https://placehold.co/150x32?text=Partner+4",
+    "https://placehold.co/150x32?text=Partner+5",
+    "https://placehold.co/150x32?text=Partner+6",
   ];
 
   return (

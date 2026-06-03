@@ -19,9 +19,9 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
             View All <Icon name="glyph-icon flaticon-next" />
           </a>
         </header>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-wd-5 no-gutters border">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-wd-5 no-gutters border products">
           {books.map((book) => (
-            <div key={book.id} className="col" style={{ listStyleType: "none" }}>
+            <div key={book.id} className="col product" style={{ listStyleType: "none" }}>
               <ProductCard book={book} layout={layout === "card" ? "card" : "grid"} />
             </div>
           ))}

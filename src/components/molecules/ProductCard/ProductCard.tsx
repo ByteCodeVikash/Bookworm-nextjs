@@ -1,13 +1,16 @@
 import React from "react";
 import { ProductCardProps } from "./types";
 import { Badge, Icon } from "@/components/atoms";
+import { useCart } from "@/contexts/CartContext";
 
 export const ProductCard: React.FC<ProductCardProps> = ({ book, layout = "grid" }) => {
+  const { addToCart } = useCart();
+
   if (layout === "card") {
     return (
       <div className="product product__card border-right h-100">
         <div className="media p-3 p-md-4d875 h-100 d-flex align-items-center">
-          <a href="#" className="d-block mr-4">
+          <a href="/product" className="d-block mr-4">
             <img
               src={book.imageUrl}
               alt={book.title}
@@ -19,7 +22,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ book, layout = "grid" 
           <div className="media-body">
             <Badge text={book.format} />
             <h2 className="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-              <a href="#">{book.title}</a>
+              <a href="/product">{book.title}</a>
             </h2>
             <div className="font-size-2 mb-1 text-truncate">
               <a href="#" className="text-gray-700">{book.author}</a>
@@ -46,7 +49,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ book, layout = "grid" 
       <div className="product__inner overflow-hidden p-3 p-md-4d875 h-100 d-flex flex-col justify-content-between">
         <div className="woocommerce-LoopProduct-link woocommerce-loop-product__link d-block position-relative">
           <div className="woocommerce-loop-product__thumbnail">
-            <a href="#" className="d-block">
+            <a href="/product" className="d-block">
               <img
                 src={book.imageUrl}
                 className="img-fluid d-block mx-auto attachment-shop_catalog size-shop_catalog wp-post-image"
@@ -59,7 +62,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ book, layout = "grid" 
           <div className="woocommerce-loop-product__body product__body pt-3 bg-white">
             <Badge text={book.format} />
             <h2 className="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-              <a href="#">{book.title}</a>
+              <a href="/product">{book.title}</a>
             </h2>
             <div className="font-size-2 mb-1 text-truncate">
               <a href="#" className="text-gray-700">{book.author}</a>
@@ -77,7 +80,21 @@ export const ProductCard: React.FC<ProductCardProps> = ({ book, layout = "grid" 
             </div>
           </div>
           <div className="product__hover d-flex align-items-center mt-3">
-            <a href="#" className="text-uppercase text-dark h-dark font-weight-medium mr-auto d-flex align-items-center">
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                addToCart({
+                  id: book.id,
+                  name: book.title,
+                  author: book.author,
+                  price: book.price,
+                  image: book.imageUrl
+                });
+                alert(`"${book.title}" has been added to your cart.`);
+              }}
+              className="text-uppercase text-dark h-dark font-weight-medium mr-auto d-flex align-items-center"
+            >
               <span className="product__add-to-cart mr-2">ADD TO CART</span>
               <span className="product__add-to-cart-icon font-size-4">
                 <Icon name="flaticon-icon-126515" />

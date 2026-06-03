@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { MainLayout } from "@/components";
-
-interface OrderItem {
-  name: string;
-  quantity: number;
-  price: number;
-}
+import { useCart } from "@/contexts/CartContext";
 
 export default function CheckoutPage() {
+  const { cartItems: orderItems, clearCart } = useCart();
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -24,12 +21,6 @@ export default function CheckoutPage() {
     orderNotes: "",
   });
 
-  const [orderItems] = useState<OrderItem[]>([
-    { name: "The Overdue Life of Amy Byler", quantity: 1, price: 79.99 },
-    { name: "All You Can Ever Know: A Memoir", quantity: 1, price: 49.99 },
-    { name: "Winter Garden", quantity: 1, price: 59.99 },
-  ]);
-
   const [shippingMethod, setShippingMethod] = useState<"free" | "flat" | "pickup">("flat");
   const [paymentMethod, setPaymentMethod] = useState<"bacs" | "cheque" | "cod">("cod");
   const [couponCode, setCouponCode] = useState("");
@@ -43,6 +34,15 @@ export default function CheckoutPage() {
     coupon: false,
     payment: true,
   });
+
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [orderNumber, setOrderNumber] = useState("");
+  const [finalOrderInfo, setFinalOrderInfo] = useState<{
+    items: typeof orderItems;
+    grandTotal: number;
+  } | null>(null);
 
   const toggleSection = (section: keyof typeof openSections, e: React.MouseEvent) => {
     e.preventDefault();
@@ -64,14 +64,64 @@ export default function CheckoutPage() {
     }
   };
 
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    if (!formData.firstName.trim()) newErrors.firstName = "First name is required";
+    if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
+    if (!formData.streetAddress.trim()) newErrors.streetAddress = "Street address is required";
+    if (!formData.city.trim()) newErrors.city = "Town / City is required";
+    if (!formData.postcode.trim()) newErrors.postcode = "Postcode is required";
+
+    // Phone validation
+    const phoneTrimmed = formData.phone.trim();
+    if (!phoneTrimmed) {
+      newErrors.phone = "Phone number is required";
+    } else {
+      const phoneRegex = /^[+]?[0-9\s\-()]{7,}$/;
+      if (!phoneRegex.test(phoneTrimmed)) {
+        newErrors.phone = "Please enter a valid phone number (at least 7 digits)";
+      }
+    }
+
+    // Email validation
+    const emailTrimmed = formData.email.trim();
+    if (!emailTrimmed) {
+      newErrors.email = "Email address is required";
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(emailTrimmed)) {
+        newErrors.email = "Please enter a valid email address";
+      }
+    }
+
+    return newErrors;
+  };
+
   const handlePlaceOrder = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.firstName || !formData.lastName || !formData.streetAddress || !formData.city || !formData.postcode || !formData.phone || !formData.email) {
-      alert("Please fill in all required billing fields (*) before placing order.");
+    setIsSubmitted(true);
+    const formErrors = validateForm();
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      // scroll to first error
+      const firstErrorKey = Object.keys(formErrors)[0];
+      const element = document.getElementsByName(firstErrorKey)[0];
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
+        element.focus();
+      }
       return;
     }
-    alert("Thank you! Your order has been placed successfully.");
-    window.location.href = "/my-account";
+
+    setFinalOrderInfo({
+      items: [...orderItems],
+      grandTotal: grandTotal
+    });
+    setErrors({});
+    const randomOrderNum = `BW-${Math.floor(100000 + Math.random() * 900000)}`;
+    setOrderNumber(randomOrderNum);
+    setIsSuccess(true);
+    clearCart();
   };
 
   // Pricing calculations
@@ -80,6 +130,72 @@ export default function CheckoutPage() {
   const shippingCosts = { free: 0, flat: 15, pickup: 8 };
   const shippingCost = shippingCosts[shippingMethod];
   const grandTotal = subtotal - discountAmount + shippingCost;
+
+  if (isSuccess && finalOrderInfo) {
+    return (
+      <MainLayout>
+        <div className="page-header border-bottom">
+          <div className="container">
+            <div className="d-md-flex justify-content-between align-items-center py-4">
+              <h1 className="page-title font-size-3 font-weight-medium m-0 text-lh-lg">Order Confirmation</h1>
+              <nav className="woocommerce-breadcrumb font-size-2">
+                <Link href="/" className="h-primary">Home</Link>
+                <span className="breadcrumb-separator mx-1"><i className="fas fa-angle-right"></i></span>Order Confirmation
+              </nav>
+            </div>
+          </div>
+        </div>
+
+        <div className="site-content bg-punch-light space-bottom-3" id="content">
+          <div className="container py-8">
+            <div className="max-width-800 mx-auto bg-white p-5 p-md-8 border text-center">
+              <div className="text-success mb-4">
+                <i className="far fa-check-circle" style={{ fontSize: "5rem" }}></i>
+              </div>
+              <h2 className="font-size-7 font-weight-medium mb-3 text-dark">Thank You for Your Order!</h2>
+              <p className="text-gray-600 font-size-2 mb-5">
+                Your order has been placed successfully. A confirmation email has been sent to <strong>{formData.email}</strong>.
+              </p>
+
+              <div className="bg-light p-4 mb-5 text-left border">
+                <h4 className="font-size-3 font-weight-bold text-uppercase mb-3 border-bottom pb-2">Order Details</h4>
+                <div className="row font-size-2">
+                  <div className="col-sm-6 mb-3">
+                    <span className="text-gray-600">Order Number:</span><br />
+                    <strong className="text-dark">{orderNumber}</strong>
+                  </div>
+                  <div className="col-sm-6 mb-3">
+                    <span className="text-gray-600">Payment Method:</span><br />
+                    <strong className="text-dark">
+                      {paymentMethod === "bacs" ? "Direct Bank Transfer" : paymentMethod === "cheque" ? "Check Payments" : "Cash on Delivery"}
+                    </strong>
+                  </div>
+                  <div className="col-sm-6 mb-3">
+                    <span className="text-gray-600">Delivery Address:</span><br />
+                    <strong className="text-dark">
+                      {formData.firstName} {formData.lastName}<br />
+                      {formData.streetAddress}{formData.apartment ? `, ${formData.apartment}` : ""}<br />
+                      {formData.city}, {formData.postcode}
+                    </strong>
+                  </div>
+                  <div className="col-sm-6 mb-3">
+                    <span className="text-gray-600">Total Paid:</span><br />
+                    <strong className="text-success font-size-3">£{finalOrderInfo.grandTotal.toFixed(2)}</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div className="d-flex justify-content-center">
+                <Link href="/" className="btn btn-dark rounded-0 px-5 py-3 font-weight-medium font-size-2">
+                  Continue Shopping
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </MainLayout>
+    );
+  }
 
   return (
     <MainLayout>
@@ -143,7 +259,7 @@ export default function CheckoutPage() {
                 )}
 
                 {/* Main Checkout Form */}
-                <form onSubmit={handlePlaceOrder} className="checkout woocommerce-checkout row mt-8">
+                <form noValidate onSubmit={handlePlaceOrder} className="checkout woocommerce-checkout row mt-8">
                   
                   {/* Left Column: Billing Details */}
                   <div className="col-md-6 col-lg-7 col-xl-8 mb-6 mb-md-0" id="customer_details">
@@ -158,11 +274,11 @@ export default function CheckoutPage() {
                           <input
                             type="text"
                             name="firstName"
-                            className="form-control rounded-0"
-                            required
+                            className={`form-control rounded-0 ${errors.firstName ? "border-danger" : ""}`}
                             value={formData.firstName}
                             onChange={handleInputChange}
                           />
+                          {errors.firstName && <div className="text-danger font-size-1 mt-1">{errors.firstName}</div>}
                         </div>
 
                         <div className="col-lg-6 mb-4">
@@ -172,11 +288,11 @@ export default function CheckoutPage() {
                           <input
                             type="text"
                             name="lastName"
-                            className="form-control rounded-0"
-                            required
+                            className={`form-control rounded-0 ${errors.lastName ? "border-danger" : ""}`}
                             value={formData.lastName}
                             onChange={handleInputChange}
                           />
+                          {errors.lastName && <div className="text-danger font-size-1 mt-1">{errors.lastName}</div>}
                         </div>
 
                         <div className="col-12 mb-4">
@@ -215,11 +331,11 @@ export default function CheckoutPage() {
                             type="text"
                             name="streetAddress"
                             placeholder="House number and street name"
-                            className="form-control rounded-0 mb-3"
-                            required
+                            className={`form-control rounded-0 mb-3 ${errors.streetAddress ? "border-danger" : ""}`}
                             value={formData.streetAddress}
                             onChange={handleInputChange}
                           />
+                          {errors.streetAddress && <div className="text-danger font-size-1 mt-1 mb-3">{errors.streetAddress}</div>}
                           <input
                             type="text"
                             name="apartment"
@@ -237,11 +353,11 @@ export default function CheckoutPage() {
                           <input
                             type="text"
                             name="city"
-                            className="form-control rounded-0"
-                            required
+                            className={`form-control rounded-0 ${errors.city ? "border-danger" : ""}`}
                             value={formData.city}
                             onChange={handleInputChange}
                           />
+                          {errors.city && <div className="text-danger font-size-1 mt-1">{errors.city}</div>}
                         </div>
 
                         <div className="col-12 mb-4">
@@ -262,11 +378,11 @@ export default function CheckoutPage() {
                           <input
                             type="text"
                             name="postcode"
-                            className="form-control rounded-0"
-                            required
+                            className={`form-control rounded-0 ${errors.postcode ? "border-danger" : ""}`}
                             value={formData.postcode}
                             onChange={handleInputChange}
                           />
+                          {errors.postcode && <div className="text-danger font-size-1 mt-1">{errors.postcode}</div>}
                         </div>
 
                         <div className="col-12 mb-4">
@@ -276,11 +392,11 @@ export default function CheckoutPage() {
                           <input
                             type="tel"
                             name="phone"
-                            className="form-control rounded-0"
-                            required
+                            className={`form-control rounded-0 ${errors.phone ? "border-danger" : ""}`}
                             value={formData.phone}
                             onChange={handleInputChange}
                           />
+                          {errors.phone && <div className="text-danger font-size-1 mt-1">{errors.phone}</div>}
                         </div>
 
                         <div className="col-12 mb-4">
@@ -290,11 +406,11 @@ export default function CheckoutPage() {
                           <input
                             type="email"
                             name="email"
-                            className="form-control rounded-0"
-                            required
+                            className={`form-control rounded-0 ${errors.email ? "border-danger" : ""}`}
                             value={formData.email}
                             onChange={handleInputChange}
                           />
+                          {errors.email && <div className="text-danger font-size-1 mt-1">{errors.email}</div>}
                         </div>
                       </div>
                     </div>

@@ -20,7 +20,7 @@ export const CategorySection: React.FC<CategorySectionProps> = ({ categories }) 
             All Categories <Icon name="glyph-icon flaticon-next" />
           </a>
         </header>
-        <ul className="list-unstyled my-0 row row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-wd-5">
+        <ul className="list-unstyled my-0 row row-cols-md-2 row-cols-lg-3 row-cols-xl-5">
           {categories.map((cat) => {
             const styles = bgAndTextClasses[cat.id] || { bg: "bg-indigo-light", text: "text-primary-indigo" };
             return (

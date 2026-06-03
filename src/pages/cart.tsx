@@ -1,43 +1,10 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { MainLayout } from "@/components";
-
-interface CartItem {
-  id: string;
-  name: string;
-  author: string;
-  price: number;
-  quantity: number;
-  image: string;
-}
+import { useCart } from "@/contexts/CartContext";
 
 export default function CartPage() {
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    {
-      id: "amy-byler",
-      name: "The Overdue Life of Amy Byler",
-      author: "Kelly Harms",
-      price: 79.99,
-      quantity: 1,
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=160&h=240&q=80",
-    },
-    {
-      id: "ever-know",
-      name: "All You Can Ever Know: A Memoir",
-      author: "Nicole Chung",
-      price: 49.99,
-      quantity: 1,
-      image: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=160&h=240&q=80",
-    },
-    {
-      id: "winter-garden",
-      name: "Winter Garden",
-      author: "Kristin Hannah",
-      price: 59.99,
-      quantity: 1,
-      image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=160&h=240&q=80",
-    },
-  ]);
+  const { cartItems, updateQuantity, removeFromCart } = useCart();
 
   const [shippingMethod, setShippingMethod] = useState<"free" | "flat" | "pickup">("flat");
   const [couponCode, setCouponCode] = useState("");
@@ -51,20 +18,12 @@ export default function CartPage() {
   };
 
   const handleQtyChange = (id: string, delta: number) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) => {
-        if (item.id === id) {
-          const newQty = Math.max(1, item.quantity + delta);
-          return { ...item, quantity: newQty };
-        }
-        return item;
-      })
-    );
+    updateQuantity(id, delta);
   };
 
   const handleRemove = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    removeFromCart(id);
   };
 
   const applyCoupon = (e: React.FormEvent) => {
@@ -92,7 +51,7 @@ export default function CartPage() {
             <nav className="woocommerce-breadcrumb font-size-2">
               <Link href="/" className="h-primary">Home</Link>
               <span className="breadcrumb-separator mx-1"><i className="fas fa-angle-right"></i></span>
-              <Link href="/shop" className="h-primary">Shop</Link>
+              <Link href="/" className="h-primary">Shop</Link>
               <span className="breadcrumb-separator mx-1"><i className="fas fa-angle-right"></i></span>Cart
             </nav>
           </div>
@@ -114,7 +73,7 @@ export default function CartPage() {
               </div>
               <h3 className="font-weight-medium font-size-5 mb-3">Your cart is currently empty.</h3>
               <p className="text-gray-600 mb-5">Add items to your cart to see them listed here.</p>
-              <Link href="/shop" className="btn btn-dark rounded-0 px-6 py-3 font-weight-medium">
+              <Link href="/" className="btn btn-dark rounded-0 px-6 py-3 font-weight-medium">
                 Return to Shop
               </Link>
             </div>
@@ -143,7 +102,7 @@ export default function CartPage() {
                                 <tr key={item.id} className="woocommerce-cart-form__cart-item cart_item border-bottom py-3">
                                   <td className="product-name py-4" data-title="Product">
                                     <div className="d-flex align-items-center">
-                                      <Link href={`/shop/${item.id}`}>
+                                      <Link href="/product">
                                         <img
                                           src={item.image}
                                           className="attachment-shop_thumbnail size-shop_thumbnail wp-post-image rounded-0"
@@ -152,7 +111,7 @@ export default function CartPage() {
                                         />
                                       </Link>
                                       <div className="ml-3 m-w-200-lg-down">
-                                        <Link href={`/shop/${item.id}`} className="font-weight-medium text-dark d-block">
+                                        <Link href="/product" className="font-weight-medium text-dark d-block">
                                           {item.name}
                                         </Link>
                                         <span className="text-gray-600 font-size-2 d-block">

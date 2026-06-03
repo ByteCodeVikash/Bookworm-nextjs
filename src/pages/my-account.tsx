@@ -558,7 +558,7 @@ export default function MyAccountPage() {
                             <tr key={item.id} className="border-bottom">
                               <td className="py-4 align-middle pl-3">
                                 <div className="d-flex align-items-center">
-                                  <Link href={`/shop/${item.id}`}>
+                                  <Link href="/product">
                                     <img
                                       src={item.image}
                                       alt={item.name}
@@ -567,7 +567,7 @@ export default function MyAccountPage() {
                                     />
                                   </Link>
                                   <div className="ml-3">
-                                    <Link href={`/shop/${item.id}`} className="font-weight-bold text-dark d-block">
+                                    <Link href="/product" className="font-weight-bold text-dark d-block">
                                       {item.name}
                                     </Link>
                                     <span className="text-gray-500 font-size-1">{item.author}</span>
