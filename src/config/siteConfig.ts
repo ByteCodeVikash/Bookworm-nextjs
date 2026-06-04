@@ -64,8 +64,8 @@ export const defaultSiteConfig: SiteConfig = {
   businessDetails: {
     storeName: "Bookworm",
     phone: "+1 246-345-0695",
-    email: "support@bookworm.com",
-    address: "1418 Riverwood Drive, Suite 3245 Cottonwood, CA 96022, United States",
+    email: "sale@bookworm.com",
+    address: "1418 River Drive, Suite 35 Cottonhall, CA 9622 United States",
     socials: {
       instagram: "#",
       facebook: "#",
@@ -74,9 +74,9 @@ export const defaultSiteConfig: SiteConfig = {
     }
   },
   content: {
-    heroTitle: "The Bookworm Edit",
-    heroSubtitle: "Featured Books of the Week",
+    heroTitle: "THE BOOKWORM EDITORS’",
+    heroSubtitle: "Featured Books of the February",
     buttonText: "See More",
-    footerText: "All rights reserved."
+    footerText: "All rights reserved"
   }
 };

@@ -28,9 +28,10 @@ const allBooks: Book[] = [
 const uniqueBooks = Array.from(new Map(allBooks.map((item) => [item.id, item])).values());
 
 export const SearchBar: React.FC<SearchBarProps> = ({
-  placeholder = "Search for books by keyword",
+  placeholder = "Search by Keywords",
   className = "",
-  onSearch
+  onSearch,
+  variant = "default"
 }) => {
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -75,13 +76,24 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
 
+  const isV1 = variant === "v1";
+
   return (
     <div ref={searchRef} className="position-relative w-100">
       <form className={`w-100 ${className}`} onSubmit={handleSubmit}>
         <div className="input-group">
+          {isV1 && (
+            <div className="input-group-prepend">
+              <i className="glph-icon flaticon-loupe input-group-text py-2d75 bg-white-100 border-white-100"></i>
+            </div>
+          )}
           <input
             type="text"
-            className="form-control px-5 height-60 border-right-0 border-dark"
+            className={
+              isV1
+                ? "form-control bg-white-100 min-width-380 py-2d75 height-4 border-white-100"
+                : "form-control px-5 height-60 border-right-0 border-dark"
+            }
             placeholder={placeholder}
             aria-label="Search"
             value={query}
@@ -92,11 +104,13 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               }
             }}
           />
-          <div className="input-group-append">
-            <button className="btn btn-dark pr-5 py-3" type="submit">
-              <Icon name="flaticon-search" className="font-size-5" />
-            </button>
-          </div>
+          {!isV1 && (
+            <div className="input-group-append">
+              <button className="btn btn-dark pr-5 py-3" type="submit">
+                <Icon name="flaticon-search" className="font-size-5" />
+              </button>
+            </div>
+          )}
         </div>
       </form>
 

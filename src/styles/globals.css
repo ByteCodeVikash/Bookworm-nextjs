@@ -72,3 +72,10 @@ body {
 .delay-5 {
   animation-delay: 0.9s;
 }
+
+/* Link hover styles */
+.link-black-100:hover {
+  color: #f75454 !important;
+  text-decoration: none;
+}
+

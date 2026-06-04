@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { SidebarCart, SidebarAccount, SidebarCategories } from "@/components/organisms";
 
-import { ConfigSelectorDrawer } from "./ConfigSelectorDrawer";
 import { useSiteConfig } from "@/contexts/ConfigContext";
 import { resolveHeader, resolveFooter } from "../resolvers";
 
@@ -46,8 +45,7 @@ export const DynamicLayoutShell: React.FC<DynamicLayoutShellProps> = ({ children
       {/* Dynamic Footer Section */}
       {React.createElement(FooterComponent)}
 
-      {/* Interactive Customizer Drawer */}
-      <ConfigSelectorDrawer />
+      {/* Interactive Customizer Drawer removed to match reference site */}
 
       {/* Sidebars off-canvas Drawers */}
       <SidebarCart isOpen={isCartOpen} onClose={closeAll} />

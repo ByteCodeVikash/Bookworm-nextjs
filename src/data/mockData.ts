@@ -7,7 +7,7 @@ export const promoSlides: PromoSlide[] = [
     titleHighlighted: "February",
     titleSuffix: "Featured Books of the",
     subtitle: "Featured Books of the",
-    imageUrl: "https://placehold.co/800x420",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-12.png",
     actionUrl: "#"
   },
   {
@@ -16,7 +16,7 @@ export const promoSlides: PromoSlide[] = [
     titleHighlighted: "February",
     titleSuffix: "Featured Books of the",
     subtitle: "Featured Books of the",
-    imageUrl: "https://placehold.co/800x420",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-13.png",
     actionUrl: "#"
   },
   {
@@ -25,7 +25,7 @@ export const promoSlides: PromoSlide[] = [
     titleHighlighted: "February",
     titleSuffix: "Featured Books of the",
     subtitle: "Featured Books of the",
-    imageUrl: "https://placehold.co/800x420",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-22.png",
     actionUrl: "#"
   },
   {
@@ -34,7 +34,7 @@ export const promoSlides: PromoSlide[] = [
     titleHighlighted: "February",
     titleSuffix: "Featured Books of the",
     subtitle: "Featured Books of the",
-    imageUrl: "https://placehold.co/800x420",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-14.png",
     actionUrl: "#"
   }
 ];
@@ -80,7 +80,7 @@ export const bestsellingBooks: Book[] = [
     price: 29,
     category: "Paperback",
     format: "Paperback",
-    imageUrl: "https://placehold.co/150x226"
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-11.png"
   },
   {
     id: "bs2",
@@ -89,7 +89,7 @@ export const bestsellingBooks: Book[] = [
     price: 20,
     category: "Paperback",
     format: "Paperback",
-    imageUrl: "https://placehold.co/150x226"
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-18.png"
   },
   {
     id: "bs3",
@@ -98,7 +98,7 @@ export const bestsellingBooks: Book[] = [
     price: 25,
     category: "Hard Cover",
     format: "Hard Cover",
-    imageUrl: "https://placehold.co/150x226"
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-16.png"
   },
   {
     id: "bs4",
@@ -107,7 +107,7 @@ export const bestsellingBooks: Book[] = [
     price: 22,
     category: "Paperback",
     format: "Paperback",
-    imageUrl: "https://placehold.co/150x226"
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-17.png"
   },
   {
     id: "bs5",
@@ -116,7 +116,7 @@ export const bestsellingBooks: Book[] = [
     price: 18,
     category: "Paperback",
     format: "Paperback",
-    imageUrl: "https://placehold.co/150x226"
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
   }
 ];
 
@@ -133,7 +133,7 @@ export const featuredBooks: {
       price: 29,
       category: "Paperback",
       format: "Paperback",
-      imageUrl: "https://placehold.co/120x180"
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-11.png"
     },
     {
       id: "f2",
@@ -143,7 +143,7 @@ export const featuredBooks: {
       originalPrice: 20,
       category: "Hard Cover",
       format: "Hard Cover",
-      imageUrl: "https://placehold.co/120x180"
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-18.png"
     },
     {
       id: "f3",
@@ -152,7 +152,7 @@ export const featuredBooks: {
       price: 15,
       category: "Hard Cover",
       format: "Hard Cover",
-      imageUrl: "https://placehold.co/120x180"
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-16.png"
     },
     {
       id: "f4",
@@ -161,7 +161,7 @@ export const featuredBooks: {
       price: 20,
       category: "Paperback",
       format: "Paperback",
-      imageUrl: "https://placehold.co/120x180"
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-17.png"
     },
     {
       id: "f5",
@@ -170,7 +170,7 @@ export const featuredBooks: {
       price: 25,
       category: "Hard Cover",
       format: "Hard Cover",
-      imageUrl: "https://placehold.co/120x180"
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
     },
     {
       id: "f6",
@@ -179,7 +179,7 @@ export const featuredBooks: {
       price: 22,
       category: "Paperback",
       format: "Paperback",
-      imageUrl: "https://placehold.co/120x180"
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-20.png"
     }
   ],
   onsale: [
@@ -201,7 +201,7 @@ export const featuredBooks: {
       originalPrice: 18,
       category: "Paperback",
       format: "Paperback",
-      imageUrl: "https://placehold.co/120x180"
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-18.png"
     }
   ],
   mostviewed: [
@@ -235,7 +235,7 @@ export const dealsOfWeekBooks: Book[] = [
     originalPrice: 35,
     category: "Kindle Edition",
     format: "Kindle Edition",
-    imageUrl: "https://placehold.co/200x327"
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-10.png"
   },
   {
     id: "d2",
@@ -245,7 +245,7 @@ export const dealsOfWeekBooks: Book[] = [
     originalPrice: 30,
     category: "Hard Cover",
     format: "Hard Cover",
-    imageUrl: "https://placehold.co/200x327"
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-11.png"
   }
 ];
 
@@ -263,7 +263,7 @@ export const newReleasesBooks: {
       price: 15,
       category: "Hard Cover",
       format: "Hard Cover",
-      imageUrl: "https://placehold.co/120x180"
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
     },
     {
       id: "nr_h2",
@@ -272,7 +272,7 @@ export const newReleasesBooks: {
       price: 18,
       category: "Paperback",
       format: "Paperback",
-      imageUrl: "https://placehold.co/120x180"
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-18.png"
     }
   ],
   science: [
@@ -305,7 +305,7 @@ export const newReleasesBooks: {
       price: 25,
       category: "Hard Cover",
       format: "Hard Cover",
-      imageUrl: "https://placehold.co/120x180"
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-16.png"
     }
   ]
 };
@@ -318,7 +318,7 @@ export const biographiesBooks: Book[] = [
     price: 15,
     category: "Hard Cover",
     format: "Hard Cover",
-    imageUrl: "https://placehold.co/120x183"
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-17.png"
   },
   {
     id: "bio2",
@@ -327,7 +327,7 @@ export const biographiesBooks: Book[] = [
     price: 15,
     category: "Hard Cover",
     format: "Hard Cover",
-    imageUrl: "https://placehold.co/120x183"
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-16.png"
   },
   {
     id: "bio3",
@@ -336,7 +336,7 @@ export const biographiesBooks: Book[] = [
     price: 29,
     category: "Paperback",
     format: "Paperback",
-    imageUrl: "https://placehold.co/120x183"
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
   }
 ];
 
@@ -344,31 +344,31 @@ export const favoriteAuthors: Author[] = [
   {
     id: "auth1",
     name: "Barbara O'Neil",
-    imageUrl: "https://placehold.co/142x142",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/author1.png",
     booksCount: 25
   },
   {
     id: "auth2",
     name: "Stephen King",
-    imageUrl: "https://placehold.co/142x142",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/author2.png",
     booksCount: 25
   },
   {
     id: "auth3",
     name: "David Walliams",
-    imageUrl: "https://placehold.co/142x142",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/author3.png",
     booksCount: 25
   },
   {
     id: "auth4",
     name: "Joe Wicks",
-    imageUrl: "https://placehold.co/142x142",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/author4.png",
     booksCount: 25
   },
   {
     id: "auth5",
     name: "Jessica Simpson",
-    imageUrl: "https://placehold.co/142x142",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/author5.png",
     booksCount: 25
   }
 ];

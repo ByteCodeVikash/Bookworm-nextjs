@@ -30,18 +30,23 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
         <div className="d-flex align-items-center position-relative flex-wrap">
           {/* Categories Toggler */}
           <div className="offcanvas-toggler mr-4 mr-lg-8">
-            <button
-              onClick={onToggleCategories}
-              className="cat-menu btn btn-link border-0 p-0"
+            <a
+              id="offcanvasNavToggler"
+              href="javascript:;"
+              role="button"
+              onClick={(e) => {
+                e.preventDefault();
+                onToggleCategories();
+              }}
+              className="cat-menu text-dark d-block"
               aria-label="Toggle Categories Menu"
-              style={{ color: "inherit" }}
             >
               <svg width="20px" height="18px">
                 <path fillRule="evenodd" fill="rgb(25, 17, 11)" d="M-0.000,-0.000 L20.000,-0.000 L20.000,2.000 L-0.000,2.000 L-0.000,-0.000 Z" />
                 <path fillRule="evenodd" fill="rgb(25, 17, 11)" d="M-0.000,8.000 L15.000,8.000 L15.000,10.000 L-0.000,10.000 L-0.000,8.000 Z" />
                 <path fillRule="evenodd" fill="rgb(25, 17, 11)" d="M-0.000,16.000 L20.000,16.000 L20.000,18.000 L-0.000,18.000 L-0.000,16.000 Z" />
               </svg>
-            </button>
+            </a>
           </div>
 
           {/* Branding Logo */}
@@ -100,10 +105,50 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
                 </ul>
               </li>
 
-              <li className="nav-item" style={{ listStyleType: "none" }}>
-                <Link href="/my-account" className="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium">
-                  My Account
-                </Link>
+              <li
+                className={`nav-item dropdown ${activeDropdown === "pages" ? "show" : ""}`}
+                onMouseEnter={() => setActiveDropdown("pages")}
+                onMouseLeave={() => setActiveDropdown(null)}
+                style={{ listStyleType: "none" }}
+              >
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleDropdown("pages");
+                  }}
+                  className="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
+                >
+                  Pages
+                </a>
+                <ul className={`dropdown-unfold dropdown-menu font-size-2 rounded-0 border-gray-900 ${activeDropdown === "pages" ? "show" : ""}`} style={{ listStyleType: "none" }}>
+                  <li style={{ listStyleType: "none" }}><Link href="/about" className="dropdown-item link-black-100">About Us</Link></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/contact" className="dropdown-item link-black-100">Contact Us</Link></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/faq" className="dropdown-item link-black-100">FAQ</Link></li>
+                </ul>
+              </li>
+
+              <li
+                className={`nav-item dropdown ${activeDropdown === "blog" ? "show" : ""}`}
+                onMouseEnter={() => setActiveDropdown("blog")}
+                onMouseLeave={() => setActiveDropdown(null)}
+                style={{ listStyleType: "none" }}
+              >
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleDropdown("blog");
+                  }}
+                  className="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
+                >
+                  Blog
+                </a>
+                <ul className={`dropdown-unfold dropdown-menu font-size-2 rounded-0 border-gray-900 ${activeDropdown === "blog" ? "show" : ""}`} style={{ listStyleType: "none" }}>
+                  <li style={{ listStyleType: "none" }}><Link href="/" className="dropdown-item link-black-100">Blog Grid</Link></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/" className="dropdown-item link-black-100">Blog List</Link></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/" className="dropdown-item link-black-100">Blog Single</Link></li>
+                </ul>
               </li>
 
               <li
@@ -120,20 +165,20 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
                   }}
                   className="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
                 >
-                  Pages
+                  Others
                 </a>
                 <ul className={`dropdown-unfold dropdown-menu font-size-2 rounded-0 border-gray-900 ${activeDropdown === "others" ? "show" : ""}`} style={{ listStyleType: "none" }}>
-                  <li style={{ listStyleType: "none" }}><Link href="/about" className="dropdown-item link-black-100">About Us</Link></li>
-                  <li style={{ listStyleType: "none" }}><Link href="/contact" className="dropdown-item link-black-100">Contact Us</Link></li>
-                  <li style={{ listStyleType: "none" }}><Link href="/faq" className="dropdown-item link-black-100">FAQ</Link></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/my-account" className="dropdown-item link-black-100">My Account</Link></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/checkout" className="dropdown-item link-black-100">Checkout</Link></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/cart" className="dropdown-item link-black-100">Cart</Link></li>
                 </ul>
               </li>
             </ul>
           </div>
 
           {/* SearchBar Input Section */}
-          <div className="site-search ml-auto d-none d-md-block mr-4 mr-xl-0" style={{ width: "320px" }}>
-            <SearchBar />
+          <div className="site-search ml-xl-0 ml-md-auto w-r-100">
+            <SearchBar variant="v1" />
           </div>
 
           {/* Mobile Actions toggler */}
@@ -155,7 +200,6 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
               </span>
               <Icon name="flaticon-icon-126515" className="font-size-5" />
             </button>
-
           </div>
         </div>
       </div>
