@@ -79,3 +79,66 @@ body {
   text-decoration: none;
 }
 
+/* Carousel navigation buttons */
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #161619;
+  font-size: 12px;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.carousel-nav-btn:hover:not(.disabled) {
+  background-color: #161619;
+  color: #ffffff;
+  border-color: #161619;
+}
+
+.carousel-nav-btn.disabled {
+  opacity: 0;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.carousel-nav-btn.prev-btn {
+  left: -20px;
+}
+
+.carousel-nav-btn.next-btn {
+  right: -20px;
+}
+
+/* Responsive arrow positioning for smaller screens */
+@media (max-width: 991px) {
+  .carousel-nav-btn.prev-btn {
+    left: -10px;
+  }
+  .carousel-nav-btn.next-btn {
+    right: -10px;
+  }
+}
+
+/* Hover coral styles */
+.hover-coral:hover {
+  color: #f75454 !important;
+}
+
+/* Global uppercase badge inside product card format tags */
+.product__body .text-uppercase.font-size-1 {
+  color: #f75454 !important;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+

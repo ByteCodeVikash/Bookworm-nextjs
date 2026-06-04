@@ -75,48 +75,68 @@ export const featuredCategories: Category[] = [
 export const bestsellingBooks: Book[] = [
   {
     id: "bs1",
-    title: "Think Like a Monk: Train Your Mind for Peace and Purpose Everyday",
-    author: "Jay Shetty",
-    price: 29,
-    category: "Paperback",
-    format: "Paperback",
-    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-11.png"
+    title: "Angry God (All Saints High Book 3)",
+    author: "L.J. Shen",
+    price: 1.30,
+    originalPrice: 1.75,
+    category: "Kindle Edition",
+    format: "KINDLE",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-17.png"
   },
   {
     id: "bs2",
-    title: "The Subtle Art of Not Giving a F*ck: A Counterintuitive Approach",
-    author: "Mark Manson",
-    price: 20,
-    category: "Paperback",
-    format: "Paperback",
+    title: "Dark in Death: An Eve Dallas Novel (In Dea...",
+    author: "J. D. Robb",
+    price: 14.20,
+    category: "Hard Cover",
+    format: "HARDCOVER",
     imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-18.png"
   },
   {
     id: "bs3",
-    title: "Becoming",
-    author: "Michelle Obama",
-    price: 25,
+    title: "The Last Sister (Columbia River Book 1)",
+    author: "Conn Iggulden",
+    price: 29.59,
+    priceRange: "$29.59 - $59.99",
     category: "Hard Cover",
-    format: "Hard Cover",
+    format: "HARDCOVER, KINDLE, PAPE...",
     imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-16.png"
   },
   {
     id: "bs4",
-    title: "Atomic Habits: An Easy & Proven Way to Build Good Habits",
-    author: "James Clear",
-    price: 22,
-    category: "Paperback",
-    format: "Paperback",
-    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-17.png"
+    title: "The Last Sister (Columbia River Book 1)",
+    author: "Jessica Simpson, Max L...",
+    price: 16.59,
+    category: "Hard Cover",
+    format: "HARDCOVER",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
   },
   {
     id: "bs5",
-    title: "Educated: A Memoir",
-    author: "Tara Westover",
-    price: 18,
+    title: "Think Like a Monk: Train Your Mind for...",
+    author: "Luanne Rice",
+    price: 1.75,
+    category: "Kindle Edition",
+    format: "KINDLE",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-11.png"
+  },
+  {
+    id: "bs6",
+    title: "Atomic Habits: An Easy & Proven Way",
+    author: "James Clear",
+    price: 22.00,
     category: "Paperback",
-    format: "Paperback",
-    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
+    format: "PAPERBACK",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-20.png"
+  },
+  {
+    id: "bs7",
+    title: "Becoming",
+    author: "Michelle Obama",
+    price: 25.00,
+    category: "Hard Cover",
+    format: "HARDCOVER",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-16.png"
   }
 ];
 

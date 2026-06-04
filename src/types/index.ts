@@ -8,6 +8,7 @@ export interface Book {
   category: string;
   format: string; // "Paperback" | "Hard Cover" | "Kindle Edition"
   imageUrl: string;
+  priceRange?: string;
 }
 
 export interface Author {
