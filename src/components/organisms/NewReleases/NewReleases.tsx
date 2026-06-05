@@ -85,13 +85,10 @@ export const NewReleases: React.FC<NewReleasesProps> = ({
                     <h3 className="banner_text m-0">
                       <span className="d-block mb-1 font-size-10 font-weight-regular">Get Extra</span>
                       <span className="d-block mb-3 font-size-12 text-primary font-weight-medium">Sale -25%</span>
-                      <span className="d-block mb-5 text-uppercase font-size-7 font-weight-regular text-gray-400">
+                      <span className="d-block mb-3 text-uppercase font-size-7 font-weight-regular text-gray-400">
                         On Order Over $100
                       </span>
                     </h3>
-                    <a href="#" className="btn btn-primary btn-wide rounded-0 font-weight-medium py-3">
-                      View More
-                    </a>
                   </div>
                 </div>
               </div>

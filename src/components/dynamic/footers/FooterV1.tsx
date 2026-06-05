@@ -84,6 +84,8 @@ export const FooterV1: React.FC = () => {
             <h4 className="font-size-3 font-weight-medium mb-3">Explore</h4>
             <ul className="list-unstyled mb-0 font-size-2" style={{ paddingLeft: 0 }}>
               <li className="py-1" style={{ listStyleType: "none" }}><Link href="/about" className="text-gray-600 h-primary">About Us</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/contact" className="text-gray-600 h-primary">Contact Us</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/faq" className="text-gray-600 h-primary">FAQ</Link></li>
               <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Sitemap</Link></li>
               <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Bookmarks</Link></li>
               <li className="py-1" style={{ listStyleType: "none" }}><Link href="/my-account" className="text-gray-600 h-primary">Sign in/Join</Link></li>
@@ -94,7 +96,7 @@ export const FooterV1: React.FC = () => {
           <div className="col-lg-2 col-md-4 mb-6 mb-lg-0">
             <h4 className="font-size-3 font-weight-medium mb-3">Customer Service</h4>
             <ul className="list-unstyled mb-0 font-size-2" style={{ paddingLeft: 0 }}>
-              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/faq" className="text-gray-600 h-primary">Help Center</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/faq" className="text-gray-600 h-primary">FAQ</Link></li>
               <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Returns</Link></li>
               <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Product Recalls</Link></li>
               <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Accessibility</Link></li>
@@ -136,17 +138,6 @@ export const FooterV1: React.FC = () => {
             &copy;2020 Book Worm. All rights reserved
           </div>
           
-          {/* Payment Icons */}
-          <div className="mb-3 mb-md-0 text-center">
-            <ul className="list-inline mb-0">
-              <li className="list-inline-item mx-1"><span className="font-size-5 text-gray-500"><i className="fab fa-cc-visa"></i></span></li>
-              <li className="list-inline-item mx-1"><span className="font-size-5 text-gray-500"><i className="fab fa-cc-mastercard"></i></span></li>
-              <li className="list-inline-item mx-1"><span className="font-size-5 text-gray-500"><i className="fab fa-cc-discover"></i></span></li>
-              <li className="list-inline-item mx-1"><span className="font-size-5 text-gray-500"><i className="fab fa-cc-paypal"></i></span></li>
-              <li className="list-inline-item mx-1"><span className="font-size-5 text-gray-500"><i className="fab fa-cc-amex"></i></span></li>
-            </ul>
-          </div>
-
           {/* Language & Currency Dropdowns */}
           <div className="d-flex justify-content-center justify-content-md-end align-items-center">
             <div className="position-relative mr-5">

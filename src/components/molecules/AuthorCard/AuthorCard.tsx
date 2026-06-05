@@ -3,7 +3,7 @@ import { AuthorCardProps } from "./types";
 
 export const AuthorCard: React.FC<AuthorCardProps> = ({ author }) => {
   return (
-    <a href="#" className="text-reset d-block">
+    <div className="text-reset d-block">
       <img
         src={author.imageUrl}
         className="mx-auto mb-5 d-block rounded-circle"
@@ -15,7 +15,7 @@ export const AuthorCard: React.FC<AuthorCardProps> = ({ author }) => {
         <h2 className="author__name h6 mb-0">{author.name}</h2>
         <div className="text-gray-700 font-size-2">{author.booksCount} Published Books</div>
       </div>
-    </a>
+    </div>
   );
 };
 export default AuthorCard;

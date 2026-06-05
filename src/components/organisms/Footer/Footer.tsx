@@ -45,6 +45,8 @@ export const Footer: React.FC<FooterProps> = () => {
             <h4 className="font-size-3 font-weight-medium mb-3">Explore</h4>
             <ul className="list-unstyled mb-0 font-size-2" style={{ paddingLeft: 0 }}>
               <li className="py-1" style={{ listStyleType: "none" }}><Link href="/about" className="text-gray-600 h-primary">About Us</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/contact" className="text-gray-600 h-primary">Contact Us</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/faq" className="text-gray-600 h-primary">FAQ</Link></li>
               <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Sitemap</Link></li>
               <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Bookmarks</Link></li>
               <li className="py-1" style={{ listStyleType: "none" }}><Link href="/my-account" className="text-gray-600 h-primary">Sign in/Join</Link></li>
@@ -55,7 +57,7 @@ export const Footer: React.FC<FooterProps> = () => {
           <div className="col-lg-2 col-md-4 mb-6 mb-lg-0">
             <h4 className="font-size-3 font-weight-medium mb-3">Customer Service</h4>
             <ul className="list-unstyled mb-0 font-size-2" style={{ paddingLeft: 0 }}>
-              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/faq" className="text-gray-600 h-primary">Help Center</Link></li>
+              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/faq" className="text-gray-600 h-primary">FAQ</Link></li>
               <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Returns</Link></li>
               <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Product Recalls</Link></li>
               <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Accessibility</Link></li>

@@ -14,7 +14,7 @@ export const FavoriteAuthors: React.FC<FavoriteAuthorsProps> = ({ authors }) => 
           </a>
         </header>
         <ul className="list-unstyled my-0 row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
-          {authors.map((author) => (
+          {authors.slice(0, 5).map((author) => (
             <li key={author.id} className="col mb-5 mb-xl-0" style={{ listStyleType: "none" }}>
               <AuthorCard author={author} />
             </li>
