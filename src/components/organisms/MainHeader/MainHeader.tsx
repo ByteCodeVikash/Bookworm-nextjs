@@ -78,10 +78,62 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
                 </ul>
               </li>
 
-              <li className="nav-item" style={{ listStyleType: "none" }}>
-                <Link href="/" className="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium">
+              <li
+                className={`nav-item dropdown ${activeDropdown === "categories" ? "show" : ""}`}
+                onMouseEnter={() => setActiveDropdown("categories")}
+                onMouseLeave={() => setActiveDropdown(null)}
+                style={{ listStyleType: "none" }}
+              >
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleDropdown("categories");
+                  }}
+                  className="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
+                >
                   Categories
-                </Link>
+                </a>
+                <ul
+                  className={`dropdown-unfold dropdown-menu font-size-2 rounded-0 border-gray-900 ${
+                    activeDropdown === "categories" ? "show" : ""
+                  }`}
+                  style={{
+                    listStyleType: "none",
+                    minWidth: "270px",
+                    padding: "15px 0",
+                    margin: 0,
+                    top: "100%",
+                    left: 0,
+                    boxShadow: "0 8px 20px rgba(0, 0, 0, 0.08)",
+                  }}
+                >
+                  {[
+                    { name: "Arts & Photography", icon: "flaticon-gallery" },
+                    { name: "Biographies", icon: "flaticon-resume" },
+                    { name: "Business & Money", icon: "flaticon-credit" },
+                    { name: "Children's Books", icon: "flaticon-baby-boy" },
+                    { name: "Computers & Technology", icon: "fas fa-laptop" },
+                    { name: "Cookbooks, Food & Wine", icon: "flaticon-cook" },
+                    { name: "Crafts, Hobbies & Home", icon: "fas fa-home" },
+                    { name: "Education & Teaching", icon: "fas fa-graduation-cap" },
+                    { name: "Health, Fitness & Dieting", icon: "flaticon-doctor" },
+                    { name: "History", icon: "flaticon-history" },
+                  ].map((cat, idx) => (
+                    <li key={idx} style={{ listStyleType: "none" }}>
+                      <Link
+                        href={`/shop?category=${encodeURIComponent(cat.name)}`}
+                        className="dropdown-item link-black-100 d-flex align-items-center py-2 px-4"
+                        style={{
+                          transition: "all 0.2s ease",
+                        }}
+                      >
+                        <Icon name={`${cat.icon} mr-3 font-size-4 text-gray-500`} />
+                        <span>{cat.name}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </li>
 
               <li
@@ -91,14 +143,14 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
                 style={{ listStyleType: "none" }}
               >
                 <Link
-                  href="/"
+                  href="/shop"
                   className="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
                 >
                   Shop
                 </Link>
                 <ul className={`dropdown-unfold dropdown-menu font-size-2 rounded-0 border-gray-900 ${activeDropdown === "shop" ? "show" : ""}`} style={{ listStyleType: "none" }}>
-                  <li style={{ listStyleType: "none" }}><Link href="/" className="dropdown-item link-black-100">Shop List v1</Link></li>
-                  <li style={{ listStyleType: "none" }}><Link href="/" className="dropdown-item link-black-100">Shop List v2</Link></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/shop" className="dropdown-item link-black-100">Shop List v1</Link></li>
+                  <li style={{ listStyleType: "none" }}><Link href="/shop" className="dropdown-item link-black-100">Shop List v2</Link></li>
                   <li style={{ listStyleType: "none" }}><Link href="/product" className="dropdown-item link-black-100">Single Product</Link></li>
                   <li style={{ listStyleType: "none" }}><Link href="/cart" className="dropdown-item link-black-100">Shop cart</Link></li>
                   <li style={{ listStyleType: "none" }}><Link href="/checkout" className="dropdown-item link-black-100">Shop checkout</Link></li>

@@ -142,3 +142,117 @@ body {
   letter-spacing: 0.5px;
 }
 
+/* Shop Catalog Page Custom Styles */
+.widget-title {
+  font-size: 1rem;
+  letter-spacing: 0.2px;
+}
+
+.custom-checkbox .custom-control-label::before {
+  border-radius: 0;
+  border-color: #d5d5d5;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #161619;
+  border-color: #161619;
+}
+
+/* Catalog Product Grid Borders */
+.product-grid-border {
+  border-left: 1px solid #eaeaea;
+  border-top: 1px solid #eaeaea;
+}
+
+.product-grid-border .col {
+  border-right: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
+}
+
+/* List view cards container styling */
+.list-view-container {
+  border: 1px solid #eaeaea;
+}
+
+.list-view-container .border-bottom {
+  border-bottom: 1px solid #eaeaea !important;
+}
+
+.list-view-container .border-bottom:last-child {
+  border-bottom: 0 !important;
+}
+
+/* Clean Paginations */
+.pagination-clean .page-item .page-link {
+  color: #161619;
+  padding: 8px 16px;
+  margin: 0 4px;
+  background-color: transparent;
+  border-radius: 0;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.pagination-clean .page-item.active .page-link {
+  background-color: #161619 !important;
+  color: #ffffff !important;
+  font-weight: bold;
+}
+
+.pagination-clean .page-item .page-link:hover {
+  background-color: #f8f9fa;
+  color: #161619;
+}
+
+.pagination-clean .page-item.disabled .page-link {
+  color: #a0a0a0;
+  pointer-events: none;
+  background-color: transparent;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+/* Custom scrollbars for author widgets */
+.widget ::-webkit-scrollbar {
+  width: 4px;
+}
+
+.widget ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.widget ::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 2px;
+}
+
+.widget ::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+@media (min-width: 1200px) {
+  .row-cols-wd-6 > .col {
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+  }
+}
+
+/* Deals of the Week custom styling */
+.deals-card-0 {
+  border-right: 1px solid #eaeaea;
+}
+@media (max-width: 767.98px) {
+  .deals-card-0 {
+    border-right: none !important;
+    border-bottom: 1px solid #eaeaea;
+  }
+}
+
+
+

@@ -34,14 +34,14 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ slides }) => {
                     <div className="col-lg-7 col-wd-6 mb-4 mb-lg-0">
                       <div className="media-body mr-wd-4 align-self-center mb-4 mb-md-0">
                         <p className="hero__pretitle text-uppercase font-weight-bold text-gray-400 mb-2 animate-fadeInLeft delay-1">
-                          {slide.titlePrefix}
+                          {heroTitle || slide.titlePrefix}
                         </p>
                         <h2 className="hero__title font-size-14 mb-4">
                           <span className="hero__title-line-1 font-weight-regular d-block animate-fadeInLeft delay-2">
-                            {heroTitle || slide.titleSuffix}
+                            {slide.titleSuffix}
                           </span>
                           <span className="hero__title-line-2 font-weight-bold d-block animate-fadeInLeft delay-3">
-                            {heroSubtitle || slide.titleHighlighted}
+                            {slide.titleHighlighted}
                           </span>
                         </h2>
                         <a

@@ -44,7 +44,7 @@ const getSectionDefaultProps = (type: SectionType, customProps?: Record<string, 
       if (customProps?.title === "Biography Books") {
         return { title: "Biography Books", books: biographiesBooks, layout: "card", ...customProps };
       }
-      return { title: "Bestselling Books", books: bestsellingBooks, layout: "grid", ...customProps };
+      return { title: "Bestselling Books", books: bestsellingBooks, layout: "grid", viewAllLink: "/shop", ...customProps };
     case "FeaturedBooksTab":
       return {
         featured: featuredBooks.featured,

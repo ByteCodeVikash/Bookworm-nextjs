@@ -36,6 +36,7 @@ export interface SiteConfig {
       facebook?: string;
       youtube?: string;
       twitter?: string;
+      pinterest?: string;
     };
   };
   content: {
@@ -54,7 +55,7 @@ export const defaultSiteConfig: SiteConfig = {
   homepageStructure: [
     { id: "hero", type: "HeroSlider", visible: true },
     { id: "categories", type: "CategorySection", visible: true },
-    { id: "bestsellers", type: "ProductSection", visible: true, props: { title: "Bestselling Books", layout: "grid" } },
+    { id: "bestsellers", type: "ProductSection", visible: true, props: { title: "Bestselling Books", layout: "grid", viewAllLink: "/shop" } },
     { id: "featured-tabs", type: "FeaturedBooksTab", visible: true },
     { id: "deals", type: "DealsOfWeek", visible: true },
     { id: "new-releases", type: "NewReleases", visible: true },
@@ -70,7 +71,8 @@ export const defaultSiteConfig: SiteConfig = {
       instagram: "#",
       facebook: "#",
       youtube: "#",
-      twitter: "#"
+      twitter: "#",
+      pinterest: "#"
     }
   },
   content: {

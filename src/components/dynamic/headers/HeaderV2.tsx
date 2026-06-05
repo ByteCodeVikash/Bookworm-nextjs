@@ -41,7 +41,7 @@ export const HeaderV2: React.FC<HeaderProps> = ({
             <Link href="/about" className="text-dark font-weight-medium font-size-2 hover-text-primary transition mx-2">
               About
             </Link>
-            <Link href="/product" className="text-dark font-weight-medium font-size-2 hover-text-primary transition mx-2">
+            <Link href="/shop" className="text-dark font-weight-medium font-size-2 hover-text-primary transition mx-2">
               Shop
             </Link>
             <Link href="/contact" className="text-dark font-weight-medium font-size-2 hover-text-primary transition mx-2">

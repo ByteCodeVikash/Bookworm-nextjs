@@ -62,56 +62,66 @@ export const ProductSection: React.FC<ProductSectionProps> = ({
           </a>
         </header>
 
-        <div className="position-relative bestselling-carousel-container">
-          {/* Left Navigation Arrow */}
-          {showArrows && (
-            <button
-              onClick={handlePrev}
-              disabled={currentIndex === 0}
-              className={`carousel-nav-btn prev-btn ${currentIndex === 0 ? "disabled" : ""}`}
-              aria-label="Previous books"
-            >
-              <i className="fas fa-chevron-left"></i>
-            </button>
-          )}
-
-          {/* Viewport */}
-          <div className="carousel-viewport border bg-white overflow-hidden" style={{ borderRadius: "4px" }}>
-            <div
-              className="d-flex carousel-track"
-              style={{
-                transform: `translateX(-${(currentIndex * 100) / visibleSlides}%)`,
-                transition: "transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)",
-              }}
-            >
-              {books.map((book, index) => (
-                <div
-                  key={book.id}
-                  className="bestselling-carousel-item flex-shrink-0"
-                  style={{
-                    flex: `0 0 ${100 / visibleSlides}%`,
-                    maxWidth: `${100 / visibleSlides}%`,
-                    borderRight: index === books.length - 1 ? "none" : "1px solid #eaeaea",
-                  }}
-                >
-                  <ProductCard book={book} layout="grid" showBorder={false} />
-                </div>
-              ))}
-            </div>
+        {layout === "card" ? (
+          <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 bg-white border no-gutters" style={{ borderRadius: "4px" }}>
+            {books.map((book) => (
+              <div key={book.id} className="col border-right border-bottom">
+                <ProductCard book={book} layout="card" showBorder={false} />
+              </div>
+            ))}
           </div>
+        ) : (
+          <div className="position-relative bestselling-carousel-container">
+            {/* Left Navigation Arrow */}
+            {showArrows && (
+              <button
+                onClick={handlePrev}
+                disabled={currentIndex === 0}
+                className={`carousel-nav-btn prev-btn ${currentIndex === 0 ? "disabled" : ""}`}
+                aria-label="Previous books"
+              >
+                <i className="fas fa-chevron-left"></i>
+              </button>
+            )}
 
-          {/* Right Navigation Arrow */}
-          {showArrows && (
-            <button
-              onClick={handleNext}
-              disabled={currentIndex === maxIndex}
-              className={`carousel-nav-btn next-btn ${currentIndex === maxIndex ? "disabled" : ""}`}
-              aria-label="Next books"
-            >
-              <i className="fas fa-chevron-right"></i>
-            </button>
-          )}
-        </div>
+            {/* Viewport */}
+            <div className="carousel-viewport border bg-white overflow-hidden" style={{ borderRadius: "4px" }}>
+              <div
+                className="d-flex carousel-track"
+                style={{
+                  transform: `translateX(-${(currentIndex * 100) / visibleSlides}%)`,
+                  transition: "transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)",
+                }}
+              >
+                {books.map((book, index) => (
+                  <div
+                    key={book.id}
+                    className="bestselling-carousel-item flex-shrink-0"
+                    style={{
+                      flex: `0 0 ${100 / visibleSlides}%`,
+                      maxWidth: `${100 / visibleSlides}%`,
+                      borderRight: index === books.length - 1 ? "none" : "1px solid #eaeaea",
+                    }}
+                  >
+                    <ProductCard book={book} layout="grid" showBorder={false} />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right Navigation Arrow */}
+            {showArrows && (
+              <button
+                onClick={handleNext}
+                disabled={currentIndex === maxIndex}
+                className={`carousel-nav-btn next-btn ${currentIndex === maxIndex ? "disabled" : ""}`}
+                aria-label="Next books"
+              >
+                <i className="fas fa-chevron-right"></i>
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );

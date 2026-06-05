@@ -30,7 +30,7 @@ export const CategorySection: React.FC<CategorySectionProps> = ({ categories }) 
                     <Icon name={`glyph-icon ${cat.iconClass}`} />
                   </div>
                   <div className="product-category__body">
-                    <h3 className="text-truncate font-size-3">{cat.name}</h3>
+                    <h3 className="font-size-3">{cat.name}</h3>
                     <a href="#" className="stretched-link text-dark">
                       Shop Now
                     </a>

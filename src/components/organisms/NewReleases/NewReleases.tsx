@@ -76,7 +76,7 @@ export const NewReleases: React.FC<NewReleasesProps> = ({
                     <div className="banner__image pb-1 mb-5">
                       <img
                         className="img-fluid"
-                        src="https://placehold.co/350x282"
+                        src="https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-2.png"
                         alt="Promo sale banner"
                         width="350"
                         height="282"

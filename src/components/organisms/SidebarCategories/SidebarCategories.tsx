@@ -11,14 +11,14 @@ export const SidebarCategories: React.FC<SidebarCategoriesProps> = ({ isOpen, on
   const categoriesList = [
     { name: "Arts & Photography", icon: "flaticon-gallery" },
     { name: "Biographies", icon: "flaticon-resume" },
-    { name: "Business & Money", icon: "flaticon-calculator" },
-    { name: "Children's Books", icon: "flaticon-boy" },
-    { name: "Computers & Technology", icon: "flaticon-laptop" },
+    { name: "Business & Money", icon: "flaticon-credit" },
+    { name: "Children's Books", icon: "flaticon-baby-boy" },
+    { name: "Computers & Technology", icon: "fas fa-laptop" },
     { name: "Cookbooks, Food & Wine", icon: "flaticon-cook" },
-    { name: "Crafts, Hobbies & Home", icon: "flaticon-house" },
-    { name: "Education & Teaching", icon: "flaticon-graduation-cap" },
+    { name: "Crafts, Hobbies & Home", icon: "fas fa-home" },
+    { name: "Education & Teaching", icon: "fas fa-graduation-cap" },
     { name: "Health, Fitness & Dieting", icon: "flaticon-doctor" },
-    { name: "History", icon: "flaticon-compass" }
+    { name: "History", icon: "flaticon-history" }
   ];
 
   return (

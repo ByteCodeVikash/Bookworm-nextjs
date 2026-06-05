@@ -19,7 +19,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ book, layout = "grid",
     return (
       <div className={`product product__card h-100 ${showBorder ? "border-right" : "border-0"}`}>
         <div className="media p-3 p-md-4d875 h-100 d-flex align-items-center">
-          <a href="/product" className="d-block mr-4 flex-shrink-0" style={{ width: "120px", height: "183px" }}>
+          <a href={`/product?id=${book.id}`} className="d-block mr-4 flex-shrink-0" style={{ width: "120px", height: "183px" }}>
             <img
               src={imgSrc}
               onError={handleImgError}
@@ -33,11 +33,22 @@ export const ProductCard: React.FC<ProductCardProps> = ({ book, layout = "grid",
           <div className="media-body">
             <Badge text={book.format} />
             <h2 className="woocommerce-loop-product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark">
-              <a href="/product">{book.title}</a>
+              <a href={`/product?id=${book.id}`}>{book.title}</a>
             </h2>
             <div className="font-size-2 mb-1 text-truncate">
               <a href="#" className="text-gray-700">{book.author}</a>
             </div>
+            {book.rating !== undefined && (
+              <div className="rating-stars mb-2" style={{ fontSize: "11px" }}>
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <i
+                    key={i}
+                    className="fa fa-star"
+                    style={{ color: i < book.rating! ? "#f8c114" : "#e5e5e5", marginRight: "2px" }}
+                  ></i>
+                ))}
+              </div>
+            )}
             <div className="price d-flex align-items-center font-weight-medium font-size-3">
               {book.priceRange ? (
                 <span className="woocommerce-Price-amount amount">
@@ -65,14 +76,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ book, layout = "grid",
 
   return (
     <div className={`product h-100 ${showBorder ? "border" : ""}`}>
-      <div className="product__inner overflow-hidden p-3 p-md-4d875 h-100">
+      <div className="product__inner p-3 p-md-4d875 h-100">
         <div className="woocommerce-LoopProduct-link woocommerce-loop-product__link d-flex flex-column h-100 justify-content-between">
           <div>
             <div
               className="woocommerce-loop-product__thumbnail d-flex align-items-center justify-content-center mb-3 bg-white"
               style={{ height: "180px", width: "100%", overflow: "hidden" }}
             >
-              <a href="/product" className="d-block">
+              <a href={`/product?id=${book.id}`} className="d-block">
                 <img
                   src={imgSrc}
                   onError={handleImgError}
@@ -88,11 +99,22 @@ export const ProductCard: React.FC<ProductCardProps> = ({ book, layout = "grid",
                 className="woocommerce-loop-product__title product__title h6 text-lh-md mb-1 text-height-2 crop-text-2 h-dark"
                 style={{ minHeight: "44px" }}
               >
-                <a href="/product">{book.title}</a>
+                <a href={`/product?id=${book.id}`}>{book.title}</a>
               </h2>
               <div className="font-size-2 mb-1 text-truncate">
                 <a href="#" className="text-gray-700">{book.author}</a>
               </div>
+              {book.rating !== undefined && (
+                <div className="rating-stars mb-2" style={{ fontSize: "11px" }}>
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <i
+                      key={i}
+                      className="fa fa-star"
+                      style={{ color: i < book.rating! ? "#f8c114" : "#e5e5e5", marginRight: "2px" }}
+                    ></i>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 

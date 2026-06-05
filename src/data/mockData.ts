@@ -148,58 +148,58 @@ export const featuredBooks: {
   featured: [
     {
       id: "f1",
-      title: "Think Like a Monk: Train Your Mind for Peace and Purpose Everyday",
-      author: "Jay Shetty",
-      price: 29,
-      category: "Paperback",
-      format: "Paperback",
-      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-11.png"
+      title: "All You Can Ever Know: A Memoir",
+      author: "Nicole Chung",
+      price: 29.59,
+      priceRange: "$29.59 - $59.95",
+      category: "Hardcover, Kindle, Paperback",
+      format: "HARDCOVER, KINDLE, ...",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-17.png"
     },
     {
       id: "f2",
-      title: "The Ride of a Lifetime: Lessons Learned from 15 Years as CEO",
-      author: "Robert Iger",
-      price: 15,
-      originalPrice: 20,
-      category: "Hard Cover",
-      format: "Hard Cover",
+      title: "Dark in Death: An Eve Dallas Novel",
+      author: "J. D. Robb",
+      price: 14.20,
+      category: "Hardcover",
+      format: "HARDCOVER",
       imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-18.png"
     },
     {
       id: "f3",
-      title: "The Rural Diaries: Love, Livestock, and Big Life Lessons",
-      author: "Hilarie Burton",
-      price: 15,
-      category: "Hard Cover",
-      format: "Hard Cover",
-      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-16.png"
+      title: "Ask Again, Yes: A Novel",
+      author: "Mary Beth Keane",
+      price: 11.51,
+      category: "Paperback",
+      format: "PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-12.png"
     },
     {
       id: "f4",
-      title: "The Subtle Art of Not Giving a F*ck: A Counterintuitive Approach",
-      author: "Mark Manson",
-      price: 20,
+      title: "Broken Faith: Inside the Word of God...",
+      author: "Edward Lee",
+      price: 10.29,
       category: "Paperback",
-      format: "Paperback",
-      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-17.png"
+      format: "PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-16.png"
     },
     {
       id: "f5",
-      title: "Becoming",
-      author: "Michelle Obama",
-      price: 25,
-      category: "Hard Cover",
-      format: "Hard Cover",
-      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
+      title: "Think Like a Monk: Train Your Mind for Peace and Purpose Everyday",
+      author: "Jay Shetty",
+      price: 29.00,
+      category: "Paperback",
+      format: "PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-12.png"
     },
     {
       id: "f6",
-      title: "Atomic Habits: An Easy & Proven Way to Build Good Habits",
-      author: "James Clear",
-      price: 22,
+      title: "Eternity Springs: The McBrides of...",
+      author: "Emily March",
+      price: 6.99,
       category: "Paperback",
-      format: "Paperback",
-      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-20.png"
+      format: "PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
     }
   ],
   onsale: [
@@ -211,7 +211,7 @@ export const featuredBooks: {
       originalPrice: 20,
       category: "Hard Cover",
       format: "Hard Cover",
-      imageUrl: "https://placehold.co/120x180"
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
     },
     {
       id: "o2",
@@ -232,7 +232,7 @@ export const featuredBooks: {
       price: 29,
       category: "Paperback",
       format: "Paperback",
-      imageUrl: "https://placehold.co/120x180"
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-12.png"
     },
     {
       id: "m2",
@@ -241,7 +241,7 @@ export const featuredBooks: {
       price: 22,
       category: "Paperback",
       format: "Paperback",
-      imageUrl: "https://placehold.co/120x180"
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-20.png"
     }
   ]
 };
@@ -249,23 +249,96 @@ export const featuredBooks: {
 export const dealsOfWeekBooks: Book[] = [
   {
     id: "d1",
-    title: "Think Like a Monk: Train Your Mind for Peace and Purpose Everyday",
-    author: "Jay Shetty",
-    price: 29,
-    originalPrice: 35,
-    category: "Kindle Edition",
-    format: "Kindle Edition",
-    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-10.png"
+    title: "When We Believed in Mermaids: A Novel",
+    author: "Barbara O'Neal",
+    price: 2.00,
+    category: "Paperback",
+    format: "PAPERBACK",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/1.jpg"
   },
   {
     id: "d2",
-    title: "Becoming",
-    author: "Michelle Obama",
-    price: 25,
-    originalPrice: 30,
+    title: "Angry God (All Saints High Book 3)",
+    author: "L.J. Shen",
+    price: 1.30,
+    originalPrice: 1.75,
+    category: "Kindle Edition",
+    format: "KINDLE",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/22.jpg"
+  },
+  {
+    id: "d3",
+    title: "Last Day",
+    author: "Luanne Rice",
+    price: 1.75,
+    category: "Kindle Edition",
+    format: "KINDLE",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/3.jpg"
+  },
+  {
+    id: "d4",
+    title: "Winter Garden",
+    author: "Kristin Hannah",
+    price: 11.99,
+    category: "Paperback",
+    format: "PAPERBACK",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/4.jpg"
+  },
+  {
+    id: "d5",
+    title: "The Last Sister (Columbia River Book 1)",
+    author: "Kendra Elliot",
+    price: 14.95,
     category: "Hard Cover",
-    format: "Hard Cover",
-    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-11.png"
+    format: "HARDCOVER",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/5.jpg"
+  },
+  {
+    id: "d6",
+    title: "Think Like a Monk: Train Your Mind for Peace and Purpose Every Day",
+    author: "Jay Shetty",
+    price: 16.50,
+    category: "Hard Cover",
+    format: "HARDCOVER",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/6.jpg"
+  },
+  {
+    id: "d7",
+    title: "The Guest List",
+    author: "Lucy Foley",
+    price: 12.99,
+    originalPrice: 16.99,
+    category: "Paperback",
+    format: "PAPERBACK",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/7.jpg"
+  },
+  {
+    id: "d8",
+    title: "The Book of Lost Names",
+    author: "Kristin Harmel",
+    price: 1.99,
+    category: "Kindle Edition",
+    format: "KINDLE",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/8.jpg"
+  },
+  {
+    id: "d9",
+    title: "The Silent Patient",
+    author: "Alex Michaelides",
+    price: 8.99,
+    originalPrice: 15.99,
+    category: "Paperback",
+    format: "PAPERBACK",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/9.jpg"
+  },
+  {
+    id: "d10",
+    title: "Where the Crawdads Sing",
+    author: "Delia Owens",
+    price: 9.99,
+    category: "Hard Cover",
+    format: "HARDCOVER",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/10.jpg"
   }
 ];
 
@@ -303,7 +376,7 @@ export const newReleasesBooks: {
       price: 29,
       category: "Paperback",
       format: "Paperback",
-      imageUrl: "https://placehold.co/120x180"
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-12.png"
     }
   ],
   romance: [
@@ -314,7 +387,7 @@ export const newReleasesBooks: {
       price: 15,
       category: "Hard Cover",
       format: "Hard Cover",
-      imageUrl: "https://placehold.co/120x180"
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-15.png"
     }
   ],
   travel: [
@@ -325,7 +398,7 @@ export const newReleasesBooks: {
       price: 25,
       category: "Hard Cover",
       format: "Hard Cover",
-      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-16.png"
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-14.png"
     }
   ]
 };
@@ -334,20 +407,20 @@ export const biographiesBooks: Book[] = [
   {
     id: "bio1",
     title: "The Rural Diaries: Love, Livestock, and Big Life Lessons Down on Mischief Farm",
-    author: "Hillary Burton",
+    author: "Hilarie Burton",
     price: 15,
     category: "Hard Cover",
     format: "Hard Cover",
-    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-17.png"
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-15.png"
   },
   {
     id: "bio2",
-    title: "The Ride of a Lifetime: Lessons Learned from 15 Years as CEO...",
-    author: "Hillary Burton",
+    title: "The Ride of a Lifetime: Lessons Learned from 15 Years as CEO",
+    author: "Robert Iger",
     price: 15,
     category: "Hard Cover",
     format: "Hard Cover",
-    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-16.png"
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
   },
   {
     id: "bio3",
@@ -356,7 +429,7 @@ export const biographiesBooks: Book[] = [
     price: 29,
     category: "Paperback",
     format: "Paperback",
-    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-12.png"
   }
 ];
 
@@ -364,31 +437,250 @@ export const favoriteAuthors: Author[] = [
   {
     id: "auth1",
     name: "Barbara O'Neil",
-    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/author1.png",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/1.jpg",
     booksCount: 25
   },
   {
     id: "auth2",
     name: "Stephen King",
-    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/author2.png",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/3.jpg",
     booksCount: 25
   },
   {
     id: "auth3",
     name: "David Walliams",
-    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/author3.png",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/4.jpg",
     booksCount: 25
   },
   {
     id: "auth4",
     name: "Joe Wicks",
-    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/author4.png",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/5.jpg",
     booksCount: 25
   },
   {
     id: "auth5",
     name: "Jessica Simpson",
-    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/author5.png",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/6.jpg",
     booksCount: 25
   }
 ];
+
+const baseShopBooks: Book[] = [
+  {
+    id: "shop1",
+    title: "All You Can Ever Know: A Memoir",
+    author: "Nicole Chung",
+    price: 13.29,
+    category: "Biographies & Memoirs",
+    format: "PAPERBACK",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-17.png",
+    rating: 5
+  },
+  {
+    id: "shop2",
+    title: "Dark in Death: An Eve Dallas Novel",
+    author: "J. D. Robb",
+    price: 14.20,
+    category: "Mystery & Thriller",
+    format: "HARDCOVER",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-18.png",
+    rating: 4
+  },
+  {
+    id: "shop3",
+    title: "Broken Faith: Inside the Word of God...",
+    author: "Edward Lee",
+    price: 10.29,
+    category: "Biographies & Memoirs",
+    format: "PAPERBACK",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-16.png",
+    rating: 4
+  },
+  {
+    id: "shop4",
+    title: "The Ride of a Lifetime: Lessons Learned from 15 Years as CEO",
+    author: "Robert Iger",
+    price: 15.00,
+    category: "Biographies & Memoirs",
+    format: "HARDCOVER",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png",
+    rating: 5
+  },
+  {
+    id: "shop5",
+    title: "Beliefs with Dublin: A Story of Learning...",
+    author: "Patrick Taylor",
+    price: 12.59,
+    category: "Literature & Fiction",
+    format: "PAPERBACK",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-13.png",
+    rating: 3
+  },
+  {
+    id: "shop6",
+    title: "Angry God (All Saints High Book 3)",
+    author: "L.J. Shen",
+    price: 1.30,
+    originalPrice: 1.75,
+    category: "Romance",
+    format: "KINDLE",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-17.png",
+    rating: 5
+  },
+  {
+    id: "shop7",
+    title: "Ask Again, Yes: A Novel",
+    author: "Mary Beth Keane",
+    price: 11.51,
+    category: "Paperback",
+    format: "PAPERBACK",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-12.png",
+    rating: 4
+  },
+  {
+    id: "shop8",
+    title: "Beneath a Scarlet Sky: A Novel",
+    author: "Conn Iggulden",
+    price: 2.00,
+    originalPrice: 14.00,
+    category: "Mystery & Thriller",
+    format: "KINDLE EDITION",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-13.png",
+    rating: 4
+  },
+  {
+    id: "shop9",
+    title: "Beneath a Scarlet Sky: A Novel",
+    author: "James Patterson",
+    price: 12.99,
+    originalPrice: 14.00,
+    category: "Mystery & Thriller",
+    format: "KINDLE",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-14.png",
+    rating: 5
+  },
+  {
+    id: "shop10",
+    title: "The Rural Diaries: Love, Livestock, and Big Life Lessons Down on Mischief Farm",
+    author: "Hilarie Burton",
+    price: 15.00,
+    category: "History",
+    format: "HARDCOVER",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-15.png",
+    rating: 5
+  },
+  {
+    id: "shop11",
+    title: "Broken Faith: Inside the Word of God...",
+    author: "Edward Lee",
+    price: 10.29,
+    category: "History",
+    format: "HARDCOVER",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-16.png",
+    rating: 5
+  },
+  {
+    id: "shop12",
+    title: "All You Can Ever Know: A Memoir",
+    author: "Nicole Chung",
+    price: 13.29,
+    category: "History",
+    format: "PAPERBACK",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-17.png",
+    rating: 4
+  },
+  {
+    id: "shop13",
+    title: "Beliefs with Dublin: A Story of Learning...",
+    author: "Luanne Rice",
+    price: 10.29,
+    category: "Literature & Fiction",
+    format: "PAPERBACK",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-18.png",
+    rating: 3
+  },
+  {
+    id: "shop14",
+    title: "By Invitation Only: A Novel",
+    author: "Dorothea Benton F...",
+    price: 16.79,
+    category: "Romance",
+    format: "PAPERBACK",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png",
+    rating: 4
+  },
+  {
+    id: "shop15",
+    title: "Call Me by Your Name",
+    author: "Andre Aciman",
+    price: 20.95,
+    priceRange: "$20.95 - $53.35",
+    category: "Romance",
+    format: "HARDCOVER, KINDLE, PAPE...",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-20.png",
+    rating: 3
+  },
+  {
+    id: "shop16",
+    title: "Carrier Minds",
+    author: "John Grisham",
+    price: 12.99,
+    originalPrice: 17.99,
+    category: "Sci-Fi & Fantasy",
+    format: "PAPERBACK",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-21.png",
+    rating: 4
+  },
+  {
+    id: "shop17",
+    title: "Conqueror",
+    author: "Conn Iggulden",
+    price: 25.88,
+    category: "History",
+    format: "HARDCOVER",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-22.png",
+    rating: 5
+  },
+  {
+    id: "shop18",
+    title: "Think Like a Monk: Train Your Mind for Peace and Purpose Everyday",
+    author: "Jay Shetty",
+    price: 29.00,
+    category: "Mystery & Thriller",
+    format: "HARDCOVER",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-12.png",
+    rating: 4
+  },
+  {
+    id: "shop19",
+    title: "Beneath a Scarlet Sky: A Novel",
+    author: "Conn Iggulden",
+    price: 14.00,
+    category: "Mystery & Thriller",
+    format: "HARDCOVER",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-13.png",
+    rating: 4
+  },
+  {
+    id: "shop20",
+    title: "Becoming",
+    author: "Michelle Obama",
+    price: 25.00,
+    category: "Mystery & Thriller",
+    format: "KINDLE",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-14.png",
+    rating: 5
+  }
+];
+
+export const shopBooks: Book[] = [];
+for (let i = 0; i < 4; i++) {
+  baseShopBooks.forEach((book, idx) => {
+    shopBooks.push({
+      ...book,
+      id: `shop${i * 20 + idx + 1}`
+    });
+  });
+}
+

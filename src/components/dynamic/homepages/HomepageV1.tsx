@@ -29,7 +29,7 @@ export const HomepageV1: React.FC = () => {
       <CategorySection categories={featuredCategories} />
 
       {/* 3. Bestselling Books Slider Grid */}
-      <ProductSection title="Bestselling Books" books={bestsellingBooks} layout="grid" />
+      <ProductSection title="Bestselling Books" books={bestsellingBooks} layout="grid" viewAllLink="/shop" />
 
       {/* 4. Tabbed Featured/On-Sale/Most-Viewed Books Loop */}
       <FeaturedBooksTab

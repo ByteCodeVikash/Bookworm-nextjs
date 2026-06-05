@@ -10,8 +10,8 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = () => {
       <div className="col-md-5 mb-3 mb-md-2">
         <input
           type="email"
-          className="form-control px-5 height-60 border-dark"
-          placeholder="Enter email for weekly newsletter."
+          className="form-control px-5 height-60"
+          placeholder="Your email address"
           required
         />
       </div>
