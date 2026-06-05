@@ -28,16 +28,6 @@ export const TopHeader: React.FC<TopHeaderProps> = ({ onToggleCart, onToggleAcco
           {/* Topbar Right */}
           <div className="topbar__nav--right nav mr-md-n3">
             <ul className="header-icons-links nav justify-content-end">
-              <li className="nav-item d-none d-md-block" style={{ listStyleType: "none" }}>
-                <a href="/contact" className="nav-link link-black-100 font-size-3 px-3">
-                  <i className="flaticon-pin font-size-3"></i>
-                </a>
-              </li>
-              <li className="nav-item d-none d-md-block" style={{ listStyleType: "none" }}>
-                <a className="nav-link link-black-100 font-size-3 px-3" href="/">
-                  <i className="flaticon-switch yith-compare-open font-size-3"></i>
-                </a>
-              </li>
               <li className="nav-item d-none d-md-block font-size-4" style={{ listStyleType: "none" }}>
                 <a href="/" className="nav-link link-black-100 font-size-3 px-3">
                   <i className="flaticon-heart font-size-3"></i>

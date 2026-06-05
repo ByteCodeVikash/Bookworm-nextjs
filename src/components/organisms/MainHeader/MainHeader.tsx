@@ -59,23 +59,13 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
           {/* Navigation Links */}
           <div className="site-navigation mr-auto d-none d-xl-block">
             <ul className="nav">
-              <li
-                className={`nav-item dropdown ${activeDropdown === "home" ? "show" : ""}`}
-                onMouseEnter={() => setActiveDropdown("home")}
-                onMouseLeave={() => setActiveDropdown(null)}
-                style={{ listStyleType: "none" }}
-              >
+              <li className="nav-item" style={{ listStyleType: "none" }}>
                 <Link
                   href="/"
-                  className="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
+                  className="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
                 >
                   Home
                 </Link>
-                <ul className={`dropdown-unfold dropdown-menu font-size-2 rounded-0 border-gray-900 ${activeDropdown === "home" ? "show" : ""}`} style={{ listStyleType: "none" }}>
-                  <li style={{ listStyleType: "none" }}><Link href="/" className="dropdown-item link-black-100">Home v1</Link></li>
-                  <li style={{ listStyleType: "none" }}><Link href="/" className="dropdown-item link-black-100">Home v2</Link></li>
-                  <li style={{ listStyleType: "none" }}><Link href="/" className="dropdown-item link-black-100">Home v3</Link></li>
-                </ul>
               </li>
 
               <li
@@ -136,94 +126,22 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
                 </ul>
               </li>
 
-              <li
-                className={`nav-item dropdown ${activeDropdown === "shop" ? "show" : ""}`}
-                onMouseEnter={() => setActiveDropdown("shop")}
-                onMouseLeave={() => setActiveDropdown(null)}
-                style={{ listStyleType: "none" }}
-              >
+              <li className="nav-item" style={{ listStyleType: "none" }}>
                 <Link
                   href="/shop"
-                  className="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
+                  className="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
                 >
                   Shop
                 </Link>
-                <ul className={`dropdown-unfold dropdown-menu font-size-2 rounded-0 border-gray-900 ${activeDropdown === "shop" ? "show" : ""}`} style={{ listStyleType: "none" }}>
-                  <li style={{ listStyleType: "none" }}><Link href="/shop" className="dropdown-item link-black-100">Shop List v1</Link></li>
-                  <li style={{ listStyleType: "none" }}><Link href="/shop" className="dropdown-item link-black-100">Shop List v2</Link></li>
-                  <li style={{ listStyleType: "none" }}><Link href="/product" className="dropdown-item link-black-100">Single Product</Link></li>
-                  <li style={{ listStyleType: "none" }}><Link href="/cart" className="dropdown-item link-black-100">Shop cart</Link></li>
-                  <li style={{ listStyleType: "none" }}><Link href="/checkout" className="dropdown-item link-black-100">Shop checkout</Link></li>
-                </ul>
               </li>
 
-              <li
-                className={`nav-item dropdown ${activeDropdown === "pages" ? "show" : ""}`}
-                onMouseEnter={() => setActiveDropdown("pages")}
-                onMouseLeave={() => setActiveDropdown(null)}
-                style={{ listStyleType: "none" }}
-              >
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleDropdown("pages");
-                  }}
-                  className="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
+              <li className="nav-item" style={{ listStyleType: "none" }}>
+                <Link
+                  href="/about"
+                  className="nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
                 >
-                  Pages
-                </a>
-                <ul className={`dropdown-unfold dropdown-menu font-size-2 rounded-0 border-gray-900 ${activeDropdown === "pages" ? "show" : ""}`} style={{ listStyleType: "none" }}>
-                  <li style={{ listStyleType: "none" }}><Link href="/about" className="dropdown-item link-black-100">About Us</Link></li>
-                  <li style={{ listStyleType: "none" }}><Link href="/contact" className="dropdown-item link-black-100">Contact Us</Link></li>
-                  <li style={{ listStyleType: "none" }}><Link href="/faq" className="dropdown-item link-black-100">FAQ</Link></li>
-                </ul>
-              </li>
-
-              <li
-                className={`nav-item dropdown ${activeDropdown === "blog" ? "show" : ""}`}
-                onMouseEnter={() => setActiveDropdown("blog")}
-                onMouseLeave={() => setActiveDropdown(null)}
-                style={{ listStyleType: "none" }}
-              >
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleDropdown("blog");
-                  }}
-                  className="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
-                >
-                  Blog
-                </a>
-                <ul className={`dropdown-unfold dropdown-menu font-size-2 rounded-0 border-gray-900 ${activeDropdown === "blog" ? "show" : ""}`} style={{ listStyleType: "none" }}>
-                  <li style={{ listStyleType: "none" }}><Link href="/" className="dropdown-item link-black-100">Blog Grid</Link></li>
-                  <li style={{ listStyleType: "none" }}><Link href="/" className="dropdown-item link-black-100">Blog List</Link></li>
-                  <li style={{ listStyleType: "none" }}><Link href="/" className="dropdown-item link-black-100">Blog Single</Link></li>
-                </ul>
-              </li>
-
-              <li
-                className={`nav-item dropdown ${activeDropdown === "others" ? "show" : ""}`}
-                onMouseEnter={() => setActiveDropdown("others")}
-                onMouseLeave={() => setActiveDropdown(null)}
-                style={{ listStyleType: "none" }}
-              >
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleDropdown("others");
-                  }}
-                  className="dropdown-toggle nav-link link-black-100 mx-4 px-0 py-5 font-weight-medium d-flex align-items-center"
-                >
-                  Others
-                </a>
-                <ul className={`dropdown-unfold dropdown-menu font-size-2 rounded-0 border-gray-900 ${activeDropdown === "others" ? "show" : ""}`} style={{ listStyleType: "none" }}>
-                  <li style={{ listStyleType: "none" }}><Link href="/my-account" className="dropdown-item link-black-100">My Account</Link></li>
-                  <li style={{ listStyleType: "none" }}><Link href="/checkout" className="dropdown-item link-black-100">Checkout</Link></li>
-                  <li style={{ listStyleType: "none" }}><Link href="/cart" className="dropdown-item link-black-100">Cart</Link></li>
-                </ul>
+                  About Us
+                </Link>
               </li>
             </ul>
           </div>
