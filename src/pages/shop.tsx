@@ -9,9 +9,11 @@ import { Book } from "@/types";
 export default function ShopPage() {
   const router = useRouter();
   const queryCategory = router.query.category as string | undefined;
+  const queryAuthor = router.query.author as string | undefined;
 
   // Filter and view states
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
 
   // Sync category query param with local state
   useEffect(() => {
@@ -21,7 +23,15 @@ export default function ShopPage() {
       setSelectedCategory(null);
     }
   }, [queryCategory]);
-  const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
+
+  // Sync author query param with local state
+  useEffect(() => {
+    if (queryAuthor) {
+      setSelectedAuthors([queryAuthor]);
+    } else {
+      setSelectedAuthors([]);
+    }
+  }, [queryAuthor]);
   const [selectedFormats, setSelectedFormats] = useState<string[]>([]);
   const [minPrice, setMinPrice] = useState<number>(0);
   const [maxPrice, setMaxPrice] = useState<number>(100);

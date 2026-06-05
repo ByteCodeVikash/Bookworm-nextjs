@@ -7,7 +7,8 @@ import {
   featuredBooks,
   dealsOfWeekBooks,
   newReleasesBooks,
-  biographiesBooks
+  biographiesBooks,
+  shopBooks
 } from "@/data/mockData";
 
 // Consolidate all books from mock data
@@ -21,11 +22,20 @@ const allBooks: Book[] = [
   ...newReleasesBooks.science,
   ...newReleasesBooks.romance,
   ...newReleasesBooks.travel,
-  ...biographiesBooks
+  ...biographiesBooks,
+  ...shopBooks
 ];
 
 // Deduplicate books by ID
 const uniqueBooks = Array.from(new Map(allBooks.map((item) => [item.id, item])).values());
+
+// Extract unique categories and authors from all books
+const uniqueCategories = Array.from(
+  new Set(uniqueBooks.map((book) => book.category).filter(Boolean))
+);
+const uniqueAuthors = Array.from(
+  new Set(uniqueBooks.map((book) => book.author).filter(Boolean))
+);
 
 export const SearchBar: React.FC<SearchBarProps> = ({
   placeholder = "Search by Keywords",
@@ -36,23 +46,42 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
+  const [filteredCategories, setFilteredCategories] = useState<string[]>([]);
+  const [filteredAuthors, setFilteredAuthors] = useState<string[]>([]);
   const searchRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (query.trim().length === 0) {
       setFilteredBooks([]);
+      setFilteredCategories([]);
+      setFilteredAuthors([]);
       setIsOpen(false);
       return;
     }
 
     const lowerQuery = query.toLowerCase();
-    const matches = uniqueBooks.filter(
+
+    // Match categories
+    const matchedCategories = uniqueCategories.filter((cat) =>
+      cat.toLowerCase().includes(lowerQuery)
+    );
+
+    // Match authors
+    const matchedAuthors = uniqueAuthors.filter((author) =>
+      author.toLowerCase().includes(lowerQuery)
+    );
+
+    // Match books
+    const matchedBooks = uniqueBooks.filter(
       (book) =>
         book.title.toLowerCase().includes(lowerQuery) ||
         book.author.toLowerCase().includes(lowerQuery) ||
         book.category.toLowerCase().includes(lowerQuery)
     );
-    setFilteredBooks(matches);
+
+    setFilteredBooks(matchedBooks);
+    setFilteredCategories(matchedCategories);
+    setFilteredAuthors(matchedAuthors);
     setIsOpen(true);
   }, [query]);
 
@@ -120,59 +149,135 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           className="position-absolute bg-white border border-gray-300 w-100 mt-1 shadow-lg overflow-auto rounded-0"
           style={{ top: "100%", left: 0, zIndex: 1000, maxHeight: "350px" }}
         >
-          {filteredBooks.length > 0 ? (
-            filteredBooks.map((book) => (
-              <div
-                key={book.id}
-                onClick={() => {
-                  setQuery("");
-                  setIsOpen(false);
-                  window.location.href = `/product`;
-                }}
-                className="d-flex align-items-center justify-content-between p-3 border-bottom cursor-pointer"
-                style={{
-                  transition: "background-color 0.2s",
-                  cursor: "pointer",
-                  backgroundColor: "#ffffff"
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#f8f9fa";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "#ffffff";
-                }}
-              >
-                <div className="d-flex align-items-center" style={{ minWidth: 0 }}>
-                  <img
-                    src={book.imageUrl}
-                    alt={book.title}
-                    width="40"
-                    height="60"
-                    style={{ objectFit: "cover", marginRight: "12px", flexShrink: 0 }}
-                  />
-                  <div style={{ minWidth: 0 }}>
-                    <div
-                      className="font-weight-medium font-size-2 text-dark text-truncate"
-                      style={{ maxWidth: "200px" }}
-                    >
-                      {book.title}
-                    </div>
-                    <div
-                      className="font-size-1 text-gray-500 text-truncate"
-                      style={{ maxWidth: "200px" }}
-                    >
-                      {book.author}
+          {/* Category Results */}
+          {filteredCategories.length > 0 && (
+            <div>
+              <div className="bg-gray-100 px-3 py-2 font-weight-bold font-size-1 text-uppercase text-gray-500 border-bottom">
+                Categories
+              </div>
+              {filteredCategories.map((cat) => (
+                <div
+                  key={cat}
+                  onClick={() => {
+                    setQuery("");
+                    setIsOpen(false);
+                    window.location.href = `/shop?category=${encodeURIComponent(cat)}`;
+                  }}
+                  className="d-flex align-items-center p-3 border-bottom cursor-pointer"
+                  style={{
+                    transition: "background-color 0.2s",
+                    cursor: "pointer",
+                    backgroundColor: "#ffffff"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "#f8f9fa";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "#ffffff";
+                  }}
+                >
+                  <Icon name="far fa-folder mr-3 text-gray-500 font-size-3" />
+                  <span className="font-weight-medium font-size-2 text-dark">{cat}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Author Results */}
+          {filteredAuthors.length > 0 && (
+            <div>
+              <div className="bg-gray-100 px-3 py-2 font-weight-bold font-size-1 text-uppercase text-gray-500 border-bottom">
+                Authors
+              </div>
+              {filteredAuthors.map((author) => (
+                <div
+                  key={author}
+                  onClick={() => {
+                    setQuery("");
+                    setIsOpen(false);
+                    window.location.href = `/shop?author=${encodeURIComponent(author)}`;
+                  }}
+                  className="d-flex align-items-center p-3 border-bottom cursor-pointer"
+                  style={{
+                    transition: "background-color 0.2s",
+                    cursor: "pointer",
+                    backgroundColor: "#ffffff"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "#f8f9fa";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "#ffffff";
+                  }}
+                >
+                  <Icon name="far fa-user mr-3 text-gray-500 font-size-3" />
+                  <span className="font-weight-medium font-size-2 text-dark">{author}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Book Results */}
+          {filteredBooks.length > 0 && (
+            <div>
+              <div className="bg-gray-100 px-3 py-2 font-weight-bold font-size-1 text-uppercase text-gray-500 border-bottom">
+                Books
+              </div>
+              {filteredBooks.map((book) => (
+                <div
+                  key={book.id}
+                  onClick={() => {
+                    setQuery("");
+                    setIsOpen(false);
+                    window.location.href = `/product?id=${book.id}`;
+                  }}
+                  className="d-flex align-items-center justify-content-between p-3 border-bottom cursor-pointer"
+                  style={{
+                    transition: "background-color 0.2s",
+                    cursor: "pointer",
+                    backgroundColor: "#ffffff"
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "#f8f9fa";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "#ffffff";
+                  }}
+                >
+                  <div className="d-flex align-items-center" style={{ minWidth: 0 }}>
+                    <img
+                      src={book.imageUrl}
+                      alt={book.title}
+                      width="40"
+                      height="60"
+                      style={{ objectFit: "cover", marginRight: "12px", flexShrink: 0 }}
+                    />
+                    <div style={{ minWidth: 0 }}>
+                      <div
+                        className="font-weight-medium font-size-2 text-dark text-truncate"
+                        style={{ maxWidth: "200px" }}
+                      >
+                        {book.title}
+                      </div>
+                      <div
+                        className="font-size-1 text-gray-500 text-truncate"
+                        style={{ maxWidth: "200px" }}
+                      >
+                        {book.author}
+                      </div>
                     </div>
                   </div>
+                  <div className="font-weight-medium text-dark ml-2 flex-shrink-0">
+                    ${book.price.toFixed(2)}
+                  </div>
                 </div>
-                <div className="font-weight-medium text-dark ml-2 flex-shrink-0">
-                  ${book.price.toFixed(2)}
-                </div>
-              </div>
-            ))
-          ) : (
+              ))}
+            </div>
+          )}
+
+          {filteredCategories.length === 0 && filteredAuthors.length === 0 && filteredBooks.length === 0 && (
             <div className="p-4 text-center text-gray-600 font-size-2">
-              No books found matching &quot;{query}&quot;
+              No results found matching &quot;{query}&quot;
             </div>
           )}
         </div>

@@ -671,6 +671,26 @@ const baseShopBooks: Book[] = [
     format: "KINDLE",
     imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-14.png",
     rating: 5
+  },
+  {
+    id: "shop21",
+    title: "Harry Potter and the Sorcerer's Stone",
+    author: "J.K. Rowling",
+    price: 19.99,
+    category: "Sci-Fi & Fantasy",
+    format: "HARDCOVER",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-13.png",
+    rating: 5
+  },
+  {
+    id: "shop22",
+    title: "The Institute: A Novel",
+    author: "Stephen King",
+    price: 14.99,
+    category: "Mystery & Thriller",
+    format: "HARDCOVER",
+    imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-12.png",
+    rating: 5
   }
 ];
 
@@ -679,7 +699,7 @@ for (let i = 0; i < 4; i++) {
   baseShopBooks.forEach((book, idx) => {
     shopBooks.push({
       ...book,
-      id: `shop${i * 20 + idx + 1}`
+      id: `shop${i * baseShopBooks.length + idx + 1}`
     });
   });
 }
