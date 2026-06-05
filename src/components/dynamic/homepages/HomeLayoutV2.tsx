@@ -2,7 +2,6 @@ import React from "react";
 import {
   HeroSlider,
   DealsOfWeek,
-  CategorySection,
   NewReleases,
   ProductSection,
   FavoriteAuthors
@@ -10,7 +9,6 @@ import {
 import {
   promoSlides,
   dealsOfWeekBooks,
-  featuredCategories,
   newReleasesBooks,
   bestsellingBooks,
   favoriteAuthors
@@ -29,11 +27,6 @@ export const HomeLayoutV2: React.FC = () => {
         <div className="container">
           <DealsOfWeek books={dealsOfWeekBooks} />
         </div>
-      </div>
-
-      {/* 3. Highlighted Categories Grid */}
-      <div className="mb-6 container">
-        <CategorySection categories={featuredCategories} />
       </div>
 
       {/* 4. Tabbed New Releases Column with Promo Banner */}

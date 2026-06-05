@@ -351,21 +351,76 @@ export const newReleasesBooks: {
   history: [
     {
       id: "nr_h1",
-      title: "The Ride of a Lifetime: Lessons Learned from 15 Years as CEO",
-      author: "Robert Iger",
-      price: 15,
-      category: "Hard Cover",
-      format: "Hard Cover",
-      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
+      title: "All You Can Ever Know: A Memoir",
+      author: "J. D. Robb",
+      price: 14.20,
+      category: "History",
+      format: "HARDCOVER",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-18.png"
     },
     {
       id: "nr_h2",
-      title: "Educated: A Memoir",
-      author: "Tara Westover",
-      price: 18,
-      category: "Paperback",
-      format: "Paperback",
-      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-18.png"
+      title: "Broken Faith: Inside the Word of Faith...",
+      author: "Edward Lee",
+      price: 10.29,
+      category: "History",
+      format: "PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-16.png"
+    },
+    {
+      id: "nr_h3",
+      title: "Eternity Springs: The McBrides of Texas Ev...",
+      author: "Emily March",
+      price: 6.99,
+      category: "History",
+      format: "PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
+    },
+    {
+      id: "nr_h4",
+      title: "Jesus: The God Who Knows Your Name",
+      author: "Max Lucado",
+      price: 16.59,
+      category: "History",
+      format: "HARDCOVER",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
+    },
+    {
+      id: "nr_h5",
+      title: "Next Level Basic: The Definitive Basic Bitch...",
+      author: "Stassi Schroeder",
+      price: 4.72,
+      category: "History",
+      format: "KINDLE",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-17.png"
+    },
+    {
+      id: "nr_h6",
+      title: "The Rural Diaries: Love, Livestock, and Big Lif...",
+      author: "Hilarie Burton",
+      price: 14.92,
+      category: "History",
+      format: "HARDCOVER",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-15.png"
+    },
+    {
+      id: "nr_h7",
+      title: "The Stellenbosch Mafia: Inside the...",
+      author: "Pieter du Toit",
+      price: 29.95,
+      priceRange: "$29.95 - $59.95",
+      category: "History",
+      format: "HARDCOVER, KINDLE, PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-22.png"
+    },
+    {
+      id: "nr_h8",
+      title: "Think Like a Monk: Train Your Mind for...",
+      author: "Anna Burns",
+      price: 56.00,
+      category: "History",
+      format: "KINDLE EDITION",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-12.png"
     }
   ],
   science: [
@@ -373,10 +428,74 @@ export const newReleasesBooks: {
       id: "nr_s1",
       title: "Think Like a Monk: Train Your Mind for Peace and Purpose Everyday",
       author: "Jay Shetty",
-      price: 29,
-      category: "Paperback",
-      format: "Paperback",
+      price: 29.00,
+      category: "Science",
+      format: "PAPERBACK",
       imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-12.png"
+    },
+    {
+      id: "nr_s2",
+      title: "Atomic Habits: An Easy & Proven Way to Build Good Habits",
+      author: "James Clear",
+      price: 22.00,
+      category: "Science",
+      format: "PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-20.png"
+    },
+    {
+      id: "nr_s3",
+      title: "The Ride of a Lifetime: Lessons Learned from 15 Years as CEO",
+      author: "Robert Iger",
+      price: 15.00,
+      category: "Science",
+      format: "HARDCOVER",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
+    },
+    {
+      id: "nr_s4",
+      title: "Dark in Death: An Eve Dallas Novel",
+      author: "J. D. Robb",
+      price: 14.20,
+      category: "Science",
+      format: "HARDCOVER",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-18.png"
+    },
+    {
+      id: "nr_s5",
+      title: "All You Can Ever Know: A Memoir",
+      author: "Nicole Chung",
+      price: 29.59,
+      priceRange: "$29.59 - $59.95",
+      category: "Science",
+      format: "PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-17.png"
+    },
+    {
+      id: "nr_s6",
+      title: "Ask Again, Yes: A Novel",
+      author: "Mary Beth Keane",
+      price: 11.51,
+      category: "Science",
+      format: "PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-12.png"
+    },
+    {
+      id: "nr_s7",
+      title: "Broken Faith: Inside the Word of God...",
+      author: "Edward Lee",
+      price: 10.29,
+      category: "Science",
+      format: "PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-16.png"
+    },
+    {
+      id: "nr_s8",
+      title: "Becoming",
+      author: "Michelle Obama",
+      price: 25.00,
+      category: "Science",
+      format: "HARDCOVER",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-16.png"
     }
   ],
   romance: [
@@ -384,10 +503,76 @@ export const newReleasesBooks: {
       id: "nr_r1",
       title: "The Rural Diaries: Love, Livestock, and Big Life Lessons",
       author: "Hilarie Burton",
-      price: 15,
-      category: "Hard Cover",
-      format: "Hard Cover",
+      price: 15.00,
+      category: "Romance",
+      format: "HARDCOVER",
       imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-15.png"
+    },
+    {
+      id: "nr_r2",
+      title: "Eternity Springs: The McBrides of Texas Ev...",
+      author: "Emily March",
+      price: 6.99,
+      category: "Romance",
+      format: "PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
+    },
+    {
+      id: "nr_r3",
+      title: "By Invitation Only: A Novel",
+      author: "Dorothea Benton F...",
+      price: 16.79,
+      category: "Romance",
+      format: "PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
+    },
+    {
+      id: "nr_r4",
+      title: "Call Me by Your Name",
+      author: "Andre Aciman",
+      price: 20.95,
+      priceRange: "$20.95 - $53.35",
+      category: "Romance",
+      format: "PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-20.png"
+    },
+    {
+      id: "nr_r5",
+      title: "Angry God (All Saints High Book 3)",
+      author: "L.J. Shen",
+      price: 1.30,
+      originalPrice: 1.75,
+      category: "Romance",
+      format: "KINDLE",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-17.png"
+    },
+    {
+      id: "nr_r6",
+      title: "Dark in Death: An Eve Dallas Novel",
+      author: "J. D. Robb",
+      price: 14.20,
+      category: "Romance",
+      format: "HARDCOVER",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-18.png"
+    },
+    {
+      id: "nr_r7",
+      title: "All You Can Ever Know: A Memoir",
+      author: "Nicole Chung",
+      price: 29.59,
+      priceRange: "$29.59 - $59.95",
+      category: "Romance",
+      format: "HARDCOVER",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-17.png"
+    },
+    {
+      id: "nr_r8",
+      title: "Broken Faith: Inside the Word of God...",
+      author: "Edward Lee",
+      price: 10.29,
+      category: "Romance",
+      format: "PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-16.png"
     }
   ],
   travel: [
@@ -395,10 +580,74 @@ export const newReleasesBooks: {
       id: "nr_t1",
       title: "Becoming",
       author: "Michelle Obama",
-      price: 25,
-      category: "Hard Cover",
-      format: "Hard Cover",
+      price: 25.00,
+      category: "Travel",
+      format: "HARDCOVER",
       imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-14.png"
+    },
+    {
+      id: "nr_t2",
+      title: "Conqueror",
+      author: "Conn Iggulden",
+      price: 25.88,
+      category: "Travel",
+      format: "HARDCOVER",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-22.png"
+    },
+    {
+      id: "nr_t3",
+      title: "Carrier Minds",
+      author: "John Grisham",
+      price: 12.99,
+      originalPrice: 17.99,
+      category: "Travel",
+      format: "PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-21.png"
+    },
+    {
+      id: "nr_t4",
+      title: "Atomic Habits: An Easy & Proven Way",
+      author: "James Clear",
+      price: 22.00,
+      category: "Travel",
+      format: "PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-20.png"
+    },
+    {
+      id: "nr_t5",
+      title: "Educated: A Memoir",
+      author: "Tara Westover",
+      price: 18.00,
+      category: "Travel",
+      format: "PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-18.png"
+    },
+    {
+      id: "nr_t6",
+      title: "The Ride of a Lifetime: Lessons Learned from 15 Years as CEO",
+      author: "Robert Iger",
+      price: 15.00,
+      category: "Travel",
+      format: "HARDCOVER",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
+    },
+    {
+      id: "nr_t7",
+      title: "Think Like a Monk: Train Your Mind for...",
+      author: "Jay Shetty",
+      price: 29.00,
+      category: "Travel",
+      format: "PAPERBACK",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-12.png"
+    },
+    {
+      id: "nr_t8",
+      title: "Dark in Death: An Eve Dallas Novel",
+      author: "J. D. Robb",
+      price: 14.20,
+      category: "Travel",
+      format: "HARDCOVER",
+      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-18.png"
     }
   ]
 };

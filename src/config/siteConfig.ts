@@ -54,7 +54,6 @@ export const defaultSiteConfig: SiteConfig = {
   homepageVersion: "home-v1",
   homepageStructure: [
     { id: "hero", type: "HeroSlider", visible: true },
-    { id: "categories", type: "CategorySection", visible: true },
     { id: "bestsellers", type: "ProductSection", visible: true, props: { title: "Bestselling Books", layout: "grid", viewAllLink: "/shop" } },
     { id: "featured-tabs", type: "FeaturedBooksTab", visible: true },
     { id: "deals", type: "DealsOfWeek", visible: true },

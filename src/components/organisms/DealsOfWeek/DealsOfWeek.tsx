@@ -49,16 +49,16 @@ export const DealsOfWeek: React.FC<DealsOfWeekProps> = ({ books }) => {
                   <div className="media p-4 p-md-5 d-block d-md-flex align-items-center">
                     <div
                       className="woocommerce-loop-product__thumbnail mb-4 mb-md-0 text-center mx-auto mx-md-0"
-                      style={{ width: "150px", flexShrink: 0 }}
+                      style={{ width: "180px", flexShrink: 0 }}
                     >
                       <a href="#" className="d-block">
                         <img
                           src={book.imageUrl}
                           className="attachment-shop_catalog size-shop_catalog wp-post-image img-fluid"
                           alt={book.title}
-                          width="150"
-                          height="225"
-                          style={{ objectFit: "contain", maxHeight: "225px" }}
+                          width="180"
+                          height="270"
+                          style={{ objectFit: "contain", maxHeight: "270px" }}
                         />
                       </a>
                     </div>

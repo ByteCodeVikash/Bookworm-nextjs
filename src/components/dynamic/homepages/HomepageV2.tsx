@@ -3,14 +3,12 @@ import {
   HeroSlider,
   ProductSection,
   DealsOfWeek,
-  CategorySection,
   FavoriteAuthors
 } from "@/components";
 import {
   promoSlides,
   bestsellingBooks,
   dealsOfWeekBooks,
-  featuredCategories,
   favoriteAuthors
 } from "@/data/mockData";
 
@@ -32,11 +30,6 @@ export const HomepageV2: React.FC = () => {
         <div className="container">
           <DealsOfWeek books={dealsOfWeekBooks} />
         </div>
-      </div>
-
-      {/* 4. Highlighted Categories Grid */}
-      <div className="mb-6 container">
-        <CategorySection categories={featuredCategories} />
       </div>
 
       {/* 5. Favorite Authors Circular Profiles Loop */}

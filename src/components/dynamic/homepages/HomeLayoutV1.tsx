@@ -1,7 +1,6 @@
 import React from "react";
 import {
   HeroSlider,
-  CategorySection,
   ProductSection,
   FeaturedBooksTab,
   DealsOfWeek,
@@ -10,7 +9,6 @@ import {
 } from "@/components";
 import {
   promoSlides,
-  featuredCategories,
   bestsellingBooks,
   featuredBooks,
   dealsOfWeekBooks,
@@ -24,9 +22,6 @@ export const HomeLayoutV1: React.FC = () => {
     <div className="home-layout-v1">
       {/* 1. Hero Promo Slides Carousel */}
       <HeroSlider slides={promoSlides} />
-
-      {/* 2. Highlighted Categories Grid */}
-      <CategorySection categories={featuredCategories} />
 
       {/* 3. Bestselling Books Slider Grid */}
       <ProductSection title="Bestselling Books" books={bestsellingBooks} layout="grid" viewAllLink="/shop" />

@@ -70,7 +70,7 @@ export const NewReleases: React.FC<NewReleasesProps> = ({
           <div className="tab-pane fade show active" role="tabpanel">
             <div className="row no-gutters">
               {/* Promo Banner Left */}
-              <div className="col-xl-4 border-right-0 border bg-gray-200 px-1">
+              <div className="col-xl-4 border-right-0 border px-1" style={{ backgroundColor: "#fff5f4" }}>
                 <div className="banner px-lg-8 px-3 py-4 py-xl-0 d-flex h-100 align-items-center justify-content-center">
                   <div className="banner__body text-center">
                     <div className="banner__image pb-1 mb-5">
@@ -95,10 +95,10 @@ export const NewReleases: React.FC<NewReleasesProps> = ({
 
               {/* Tab Grid Right */}
               <div className="col-xl-8">
-                <ul className="products list-unstyled row no-gutters row-cols-2 row-cols-lg-3 row-cols-wd-4 border-top border-left my-0">
+                <ul className="products list-unstyled row no-gutters row-cols-2 row-cols-md-3 row-cols-xl-4 border-top border-left my-0">
                   {booksToRender.map((book) => (
-                    <li key={book.id} className="product col" style={{ listStyleType: "none" }}>
-                      <ProductCard book={book} layout="grid" />
+                    <li key={book.id} className="product col border-bottom border-right" style={{ listStyleType: "none" }}>
+                      <ProductCard book={book} layout="grid" showBorder={false} />
                     </li>
                   ))}
                 </ul>

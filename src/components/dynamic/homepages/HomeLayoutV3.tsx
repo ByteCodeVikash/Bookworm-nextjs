@@ -1,13 +1,11 @@
 import React from "react";
 import {
-  CategorySection,
   FeaturedBooksTab,
   NewReleases,
   ProductSection,
   FavoriteAuthors
 } from "@/components";
 import {
-  featuredCategories,
   featuredBooks,
   newReleasesBooks,
   biographiesBooks,
@@ -17,11 +15,6 @@ import {
 export const HomeLayoutV3: React.FC = () => {
   return (
     <div className="home-layout-v3 container py-5">
-      {/* 1. Highlighted Categories Grid right at the top */}
-      <div className="mb-6">
-        <CategorySection categories={featuredCategories} />
-      </div>
-
       {/* 2. Large Tabbed Featured/On-Sale/Most-Viewed Books Loop */}
       <div className="mb-6">
         <FeaturedBooksTab
