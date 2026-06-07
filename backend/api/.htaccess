@@ -1,0 +1,26 @@
+# backend/api/.htaccess
+# Hostinger Shared Hosting — Public PHP API Directory
+# ──────────────────────────────────────────────────────────────────
+
+# Disable directory listing
+Options -Indexes
+
+# Block direct access to config files
+<FilesMatch "(db\.php|db\.local\.php|db\.production\.php|auth_helper\.php)$">
+    Deny from all
+</FilesMatch>
+
+# Fix: Hostinger sometimes strips Authorization headers via CGI/FastCGI
+# This rewrites it back into the environment so PHP can read it
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+</IfModule>
+
+# Allow CORS headers
+<IfModule mod_headers.c>
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
+</IfModule>

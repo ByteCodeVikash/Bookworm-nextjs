@@ -1,0 +1,28 @@
+# backend/api/admin/.htaccess
+# Hostinger Shared Hosting — Admin PHP API Directory
+# ──────────────────────────────────────────────────────────────────
+
+# Disable directory listing
+Options -Indexes
+
+# Block direct access to helper files (not public endpoints)
+<FilesMatch "^auth_helper\.php$">
+    Deny from all
+</FilesMatch>
+
+# CRITICAL FIX: Hostinger CGI/FastCGI strips Authorization headers.
+# This rewrite rule passes it back to PHP via HTTP_AUTHORIZATION.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=REDIRECT_HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+</IfModule>
+
+# Allow CORS headers on admin endpoints
+<IfModule mod_headers.c>
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
+</IfModule>

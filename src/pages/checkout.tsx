@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { MainLayout } from "@/components";
 import { useCart } from "@/contexts/CartContext";
+import { fetchApi } from "@/utils/api";
 
 export default function CheckoutPage() {
   const { cartItems: orderItems, clearCart } = useCart();
@@ -97,7 +98,7 @@ export default function CheckoutPage() {
     return newErrors;
   };
 
-  const handlePlaceOrder = (e: React.FormEvent) => {
+  const handlePlaceOrder = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitted(true);
     const formErrors = validateForm();
@@ -113,15 +114,57 @@ export default function CheckoutPage() {
       return;
     }
 
-    setFinalOrderInfo({
-      items: [...orderItems],
-      grandTotal: grandTotal
-    });
-    setErrors({});
-    const randomOrderNum = `BW-${Math.floor(100000 + Math.random() * 900000)}`;
-    setOrderNumber(randomOrderNum);
-    setIsSuccess(true);
-    clearCart();
+    try {
+      const orderPayload = {
+        userId: 1, // Default logged-in user id
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        companyName: formData.companyName,
+        country: formData.country,
+        streetAddress: formData.streetAddress,
+        apartment: formData.apartment,
+        city: formData.city,
+        county: formData.county,
+        postcode: formData.postcode,
+        phone: formData.phone,
+        email: formData.email,
+        orderNotes: formData.orderNotes,
+        shippingMethod: shippingMethod,
+        shippingCost: shippingCost,
+        paymentMethod: paymentMethod,
+        couponCode: couponCode || null,
+        discountAmount: discountAmount,
+        subtotal: subtotal,
+        grandTotal: grandTotal,
+        items: orderItems.map(item => ({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity
+        }))
+      };
+
+      const res = await fetchApi<{ success: boolean; orderId: string }>("/api/orders.php", {
+        method: "POST",
+        body: JSON.stringify(orderPayload)
+      });
+
+      if (res && res.success) {
+        setFinalOrderInfo({
+          items: [...orderItems],
+          grandTotal: grandTotal
+        });
+        setErrors({});
+        setOrderNumber(res.orderId);
+        setIsSuccess(true);
+        clearCart();
+      } else {
+        alert("Failed to place order. Please check the details.");
+      }
+    } catch (err) {
+      console.error("Failed to place order:", err);
+      alert("Failed to place order. Please check your network and try again.");
+    }
   };
 
   // Pricing calculations

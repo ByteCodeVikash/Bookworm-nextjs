@@ -1,40 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   FeaturedBooksTab,
   NewReleases,
   ProductSection
 } from "@/components";
-import {
-  featuredBooks,
-  newReleasesBooks,
-  biographiesBooks
-} from "@/data/mockData";
+import { fetchBooks } from "@/utils/storeApi";
+import { Book } from "@/types";
 
 export const HomepageV3: React.FC = () => {
+  const [featured, setFeatured] = useState<Book[]>([]);
+  const [onsale, setOnsale] = useState<Book[]>([]);
+  const [mostviewed, setMostviewed] = useState<Book[]>([]);
+  const [nrHistory, setNrHistory] = useState<Book[]>([]);
+  const [nrScience, setNrScience] = useState<Book[]>([]);
+  const [nrRomance, setNrRomance] = useState<Book[]>([]);
+  const [nrTravel, setNrTravel] = useState<Book[]>([]);
+  const [biographies, setBiographies] = useState<Book[]>([]);
+
+  useEffect(() => {
+    let active = true;
+    Promise.all([
+      fetchBooks("featured"),
+      fetchBooks("onsale"),
+      fetchBooks("mostviewed"),
+      fetchBooks("new_release", "history"),
+      fetchBooks("new_release", "science"),
+      fetchBooks("new_release", "romance"),
+      fetchBooks("new_release", "travel"),
+      fetchBooks("biographies"),
+    ]).then(([f, os, mv, nrH, nrS, nrR, nrT, bio]) => {
+      if (!active) return;
+      setFeatured(f); setOnsale(os); setMostviewed(mv);
+      setNrHistory(nrH); setNrScience(nrS); setNrRomance(nrR); setNrTravel(nrT);
+      setBiographies(bio);
+    });
+    return () => { active = false; };
+  }, []);
+
   return (
     <div className="homepage-v3 container py-5">
-      {/* 2. Tabbed Featured/On-Sale/Most-Viewed Books Loop */}
       <div className="mb-6">
-        <FeaturedBooksTab
-          featured={featuredBooks.featured}
-          onsale={featuredBooks.onsale}
-          mostviewed={featuredBooks.mostviewed}
-        />
+        <FeaturedBooksTab featured={featured} onsale={onsale} mostviewed={mostviewed} />
       </div>
-
-      {/* 3. Multi-tabbed New Releases Column with Promo Banner */}
       <div className="mb-6">
-        <NewReleases
-          history={newReleasesBooks.history}
-          science={newReleasesBooks.science}
-          romance={newReleasesBooks.romance}
-          travel={newReleasesBooks.travel}
-        />
+        <NewReleases history={nrHistory} science={nrScience} romance={nrRomance} travel={nrTravel} />
       </div>
-
-      {/* 4. Biography Books Horizontal Media Card Grid */}
       <div className="mb-4">
-        <ProductSection title="Trending Biographies" books={biographiesBooks} layout="card" />
+        <ProductSection title="Trending Biographies" books={biographies} layout="card" />
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import { MainHeaderProps } from "./types";
 import { Logo, Icon } from "@/components/atoms";
 import { SearchBar } from "@/components/molecules";
 import { useCart } from "@/contexts/CartContext";
+import { useStoreSettings } from "@/contexts/StoreSettingsContext";
 
 export const MainHeader: React.FC<MainHeaderProps> = ({
   onToggleCategories,
@@ -14,6 +15,7 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
 }) => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const { cartItems } = useCart();
+  const { categories } = useStoreSettings();
   const totalCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   const toggleDropdown = (menuName: string) => {
@@ -98,31 +100,31 @@ export const MainHeader: React.FC<MainHeaderProps> = ({
                     boxShadow: "0 8px 20px rgba(0, 0, 0, 0.08)",
                   }}
                 >
-                  {[
-                    { name: "Arts & Photography", icon: "flaticon-gallery" },
-                    { name: "Biographies", icon: "flaticon-resume" },
-                    { name: "Business & Money", icon: "flaticon-credit" },
-                    { name: "Children's Books", icon: "flaticon-baby-boy" },
-                    { name: "Computers & Technology", icon: "fas fa-laptop" },
-                    { name: "Cookbooks, Food & Wine", icon: "flaticon-cook" },
-                    { name: "Crafts, Hobbies & Home", icon: "fas fa-home" },
-                    { name: "Education & Teaching", icon: "fas fa-graduation-cap" },
-                    { name: "Health, Fitness & Dieting", icon: "flaticon-doctor" },
-                    { name: "History", icon: "flaticon-history" },
-                  ].map((cat, idx) => (
-                    <li key={idx} style={{ listStyleType: "none" }}>
-                      <Link
-                        href={`/shop?category=${encodeURIComponent(cat.name)}`}
-                        className="dropdown-item link-black-100 d-flex align-items-center py-2 px-4"
-                        style={{
-                          transition: "all 0.2s ease",
-                        }}
-                      >
-                        <Icon name={`${cat.icon} mr-3 font-size-4 text-gray-500`} />
-                        <span>{cat.name}</span>
-                      </Link>
-                    </li>
-                  ))}
+                  {categories.length > 0 ? (
+                    categories.map((cat) => (
+                      <li key={cat.id} style={{ listStyleType: "none" }}>
+                        <Link
+                          href={`/shop?category=${encodeURIComponent(cat.name)}`}
+                          className="dropdown-item link-black-100 d-flex align-items-center py-2 px-4"
+                          style={{ transition: "all 0.2s ease" }}
+                        >
+                          <span>{cat.name}</span>
+                          {cat.booksCount !== undefined && (
+                            <span className="ml-auto text-gray-500 font-size-1">({cat.booksCount})</span>
+                          )}
+                        </Link>
+                      </li>
+                    ))
+                  ) : (
+                    // Skeleton placeholders while loading
+                    Array.from({ length: 5 }).map((_, i) => (
+                      <li key={i} style={{ listStyleType: "none" }}>
+                        <span className="dropdown-item py-2 px-4">
+                          <span className="d-inline-block bg-gray-200" style={{ width: "60%", height: "14px", borderRadius: "2px" }}></span>
+                        </span>
+                      </li>
+                    ))
+                  )}
                 </ul>
               </li>
 

@@ -32,6 +32,14 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!deployment.env.example
+
+# Backend — production credentials (NEVER commit)
+backend/config/db.local.php
+
+# Uploads — track folder structure but not uploaded images
+backend/uploads/**
+!backend/uploads/**/.gitkeep
 
 # vercel
 .vercel

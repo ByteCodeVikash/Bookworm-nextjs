@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { MainLayout } from "@/components";
+import { fetchApi } from "@/utils/api";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", text: "" });
@@ -37,7 +38,7 @@ export default function ContactPage() {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors: Record<string, string> = {};
     
@@ -54,9 +55,23 @@ export default function ContactPage() {
       setErrors(newErrors);
       setIsSuccess(false);
     } else {
-      setIsSuccess(true);
-      setFormData({ name: "", email: "", subject: "", text: "" });
-      setErrors({});
+      try {
+        await fetchApi("/api/contact.php", {
+          method: "POST",
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.text,
+          }),
+        });
+        setIsSuccess(true);
+        setFormData({ name: "", email: "", subject: "", text: "" });
+        setErrors({});
+      } catch (err) {
+        console.error("Failed to submit contact form:", err);
+        alert("Failed to submit contact message. Please try again.");
+      }
     }
   };
 

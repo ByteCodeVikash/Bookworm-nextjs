@@ -1,12 +1,31 @@
 "use client";
 
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { DealsOfWeekProps } from "./types";
+import { fetchApi } from "@/utils/api";
+import { Book } from "@/types";
 
 export const DealsOfWeek: React.FC<DealsOfWeekProps> = ({ books }) => {
+  const [localBooks, setLocalBooks] = useState<Book[]>(books || []);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const numSlides = Math.ceil(books.length / 2);
+  useEffect(() => {
+    let active = true;
+    const loadData = async () => {
+      try {
+        const data = await fetchApi<Book[]>("/api/books.php?group=deal_of_week");
+        if (active) {
+          setLocalBooks(data);
+        }
+      } catch (err) {
+        console.error("Failed to load deals of the week:", err);
+      }
+    };
+    loadData();
+    return () => { active = false; };
+  }, []);
+
+  const numSlides = Math.ceil(localBooks.length / 2);
 
   const handlePrev = () => {
     setCurrentSlide((prev) => (prev - 1 + numSlides) % numSlides);
@@ -17,7 +36,7 @@ export const DealsOfWeek: React.FC<DealsOfWeekProps> = ({ books }) => {
   };
 
   const startIndex = currentSlide * 2;
-  const activeBooks = books.slice(startIndex, startIndex + 2);
+  const activeBooks = localBooks.slice(startIndex, startIndex + 2);
 
   return (
     <section className="space-bottom-3">

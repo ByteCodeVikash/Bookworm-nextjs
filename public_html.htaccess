@@ -1,0 +1,51 @@
+# public_html/.htaccess
+# Next.js Static Export — Hostinger Apache Routing
+# ─────────────────────────────────────────────────────────────────
+# BUG FIX: Removed the "-d" (directory passthrough) rule.
+# That rule caused Apache to skip rewrites for /admin/, /shop/, etc.
+# With Options -Indexes active, skipping the rewrite → 403 Forbidden.
+# Fix: Let DirectoryIndex serve index.html from any directory naturally.
+# ─────────────────────────────────────────────────────────────────
+
+Options -Indexes
+
+# Tell Apache to serve index.html as the default file in any directory.
+# This is the KEY fix for /admin/ 403 — Apache finds admin/index.html
+# automatically without needing a rewrite rule.
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Rule 1: If the exact file exists on disk, serve it directly (JS, CSS, images, etc.)
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^ - [L]
+
+    # Rule 2: If path/index.html exists on disk, serve it.
+    # This covers /shop/ → shop/index.html, /admin/login/ → admin/login/index.html etc.
+    # NOTE: We do NOT have a -d passthrough rule here. That was the 403 bug.
+    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
+    RewriteRule ^(.*?)/?$ /$1/index.html [L]
+
+    # Rule 3: Fallback — serve root index.html for any unmatched path (404 handler)
+    RewriteRule ^ /index.html [L]
+</IfModule>
+
+# Cache static assets aggressively (safe — Next.js hashes filenames)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+</IfModule>
+
+# Security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

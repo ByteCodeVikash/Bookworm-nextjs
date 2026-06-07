@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   HeroSlider,
   ProductSection,
@@ -7,48 +7,56 @@ import {
   NewReleases,
   FavoriteAuthors
 } from "@/components";
-import {
-  promoSlides,
-  bestsellingBooks,
-  featuredBooks,
-  dealsOfWeekBooks,
-  newReleasesBooks,
-  biographiesBooks,
-  favoriteAuthors
-} from "@/data/mockData";
+import { fetchBanners, fetchBooks, fetchAuthors } from "@/utils/storeApi";
+import { Book, Author, PromoSlide } from "@/types";
 
 export const HomeLayoutV1: React.FC = () => {
+  const [slides, setSlides] = useState<PromoSlide[]>([]);
+  const [bestsellers, setBestsellers] = useState<Book[]>([]);
+  const [featured, setFeatured] = useState<Book[]>([]);
+  const [onsale, setOnsale] = useState<Book[]>([]);
+  const [mostviewed, setMostviewed] = useState<Book[]>([]);
+  const [deals, setDeals] = useState<Book[]>([]);
+  const [nrHistory, setNrHistory] = useState<Book[]>([]);
+  const [nrScience, setNrScience] = useState<Book[]>([]);
+  const [nrRomance, setNrRomance] = useState<Book[]>([]);
+  const [nrTravel, setNrTravel] = useState<Book[]>([]);
+  const [biographies, setBiographies] = useState<Book[]>([]);
+  const [authors, setAuthors] = useState<Author[]>([]);
+
+  useEffect(() => {
+    let active = true;
+    Promise.all([
+      fetchBanners(),
+      fetchBooks("bestsellers"),
+      fetchBooks("featured"),
+      fetchBooks("onsale"),
+      fetchBooks("mostviewed"),
+      fetchBooks("deal_of_week"),
+      fetchBooks("new_release", "history"),
+      fetchBooks("new_release", "science"),
+      fetchBooks("new_release", "romance"),
+      fetchBooks("new_release", "travel"),
+      fetchBooks("biographies"),
+      fetchAuthors(),
+    ]).then(([b, bs, f, os, mv, d, nrH, nrS, nrR, nrT, bio, a]) => {
+      if (!active) return;
+      setSlides(b); setBestsellers(bs); setFeatured(f); setOnsale(os);
+      setMostviewed(mv); setDeals(d); setNrHistory(nrH); setNrScience(nrS);
+      setNrRomance(nrR); setNrTravel(nrT); setBiographies(bio); setAuthors(a);
+    });
+    return () => { active = false; };
+  }, []);
+
   return (
     <div className="home-layout-v1">
-      {/* 1. Hero Promo Slides Carousel */}
-      <HeroSlider slides={promoSlides} />
-
-      {/* 3. Bestselling Books Slider Grid */}
-      <ProductSection title="Bestselling Books" books={bestsellingBooks} layout="grid" viewAllLink="/shop" />
-
-      {/* 4. Tabbed Featured/On-Sale/Most-Viewed Books Loop */}
-      <FeaturedBooksTab
-        featured={featuredBooks.featured}
-        onsale={featuredBooks.onsale}
-        mostviewed={featuredBooks.mostviewed}
-      />
-
-      {/* 5. Countdown Special Weekly Deals Block */}
-      <DealsOfWeek books={dealsOfWeekBooks} />
-
-      {/* 6. Multi-tabbed New Releases Column with Promo Banner */}
-      <NewReleases
-        history={newReleasesBooks.history}
-        science={newReleasesBooks.science}
-        romance={newReleasesBooks.romance}
-        travel={newReleasesBooks.travel}
-      />
-
-      {/* 7. Biography Books Horizontal Media Card Grid */}
-      <ProductSection title="Biography Books" books={biographiesBooks} layout="card" />
-
-      {/* 8. Favorite Authors Circular Profiles Loop */}
-      <FavoriteAuthors authors={favoriteAuthors} />
+      <HeroSlider slides={slides} />
+      <ProductSection title="Bestselling Books" books={bestsellers} layout="grid" viewAllLink="/shop" />
+      <FeaturedBooksTab featured={featured} onsale={onsale} mostviewed={mostviewed} />
+      <DealsOfWeek books={deals} />
+      <NewReleases history={nrHistory} science={nrScience} romance={nrRomance} travel={nrTravel} />
+      <ProductSection title="Biography Books" books={biographies} layout="card" />
+      <FavoriteAuthors authors={authors} />
     </div>
   );
 };

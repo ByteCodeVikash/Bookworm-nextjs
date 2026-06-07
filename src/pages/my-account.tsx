@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { MainLayout } from "@/components";
+import { fetchApi } from "@/utils/api";
 
 type TabName = "dashboard" | "orders" | "downloads" | "addresses" | "details" | "wishlist";
 
@@ -52,12 +53,24 @@ export default function MyAccountPage() {
   const [isEditingBilling, setIsEditingBilling] = useState(false);
   const [isEditingShipping, setIsEditingShipping] = useState(false);
 
-  // Mock Orders
-  const [orders] = useState<Order[]>([
-    { id: "#30785", date: "March 26, 2026", status: "On hold", total: 1855.0, itemsCount: 5 },
-    { id: "#29841", date: "February 14, 2026", status: "Completed", total: 129.98, itemsCount: 2 },
-    { id: "#28445", date: "January 08, 2026", status: "Completed", total: 79.99, itemsCount: 1 },
-  ]);
+  // Dynamic Orders from database
+  const [orders, setOrders] = useState<Order[]>([]);
+
+  useEffect(() => {
+    let active = true;
+    const loadOrders = async () => {
+      try {
+        const data = await fetchApi<Order[]>("/api/orders.php?userId=1");
+        if (active) {
+          setOrders(data);
+        }
+      } catch (err) {
+        console.error("Failed to load orders:", err);
+      }
+    };
+    loadOrders();
+    return () => { active = false; };
+  }, []);
 
   // Wishlist mock data
   const [wishlist, setWishlist] = useState<WishlistItem[]>([

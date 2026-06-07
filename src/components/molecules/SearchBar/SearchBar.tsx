@@ -2,40 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { SearchBarProps } from "./types";
 import { Icon } from "@/components/atoms";
 import { Book } from "@/types";
-import {
-  bestsellingBooks,
-  featuredBooks,
-  dealsOfWeekBooks,
-  newReleasesBooks,
-  biographiesBooks,
-  shopBooks
-} from "@/data/mockData";
-
-// Consolidate all books from mock data
-const allBooks: Book[] = [
-  ...bestsellingBooks,
-  ...featuredBooks.featured,
-  ...featuredBooks.onsale,
-  ...featuredBooks.mostviewed,
-  ...dealsOfWeekBooks,
-  ...newReleasesBooks.history,
-  ...newReleasesBooks.science,
-  ...newReleasesBooks.romance,
-  ...newReleasesBooks.travel,
-  ...biographiesBooks,
-  ...shopBooks
-];
-
-// Deduplicate books by ID
-const uniqueBooks = Array.from(new Map(allBooks.map((item) => [item.id, item])).values());
-
-// Extract unique categories and authors from all books
-const uniqueCategories = Array.from(
-  new Set(uniqueBooks.map((book) => book.category).filter(Boolean))
-);
-const uniqueAuthors = Array.from(
-  new Set(uniqueBooks.map((book) => book.author).filter(Boolean))
-);
+import { fetchApi } from "@/utils/api";
 
 export const SearchBar: React.FC<SearchBarProps> = ({
   placeholder = "Search by Keywords",
@@ -59,30 +26,31 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       return;
     }
 
-    const lowerQuery = query.toLowerCase();
+    let active = true;
+    const searchData = async () => {
+      try {
+        const res = await fetchApi<{
+          books: Book[];
+          authors: Array<{ id: string; name: string }>;
+          categories: Array<{ id: string; name: string }>;
+        }>(`/api/search.php?q=${encodeURIComponent(query)}`);
 
-    // Match categories
-    const matchedCategories = uniqueCategories.filter((cat) =>
-      cat.toLowerCase().includes(lowerQuery)
-    );
+        if (active) {
+          setFilteredBooks(res.books || []);
+          setFilteredCategories((res.categories || []).map((c) => c.name));
+          setFilteredAuthors((res.authors || []).map((a) => a.name));
+          setIsOpen(true);
+        }
+      } catch (err) {
+        console.error("Search failed:", err);
+      }
+    };
 
-    // Match authors
-    const matchedAuthors = uniqueAuthors.filter((author) =>
-      author.toLowerCase().includes(lowerQuery)
-    );
-
-    // Match books
-    const matchedBooks = uniqueBooks.filter(
-      (book) =>
-        book.title.toLowerCase().includes(lowerQuery) ||
-        book.author.toLowerCase().includes(lowerQuery) ||
-        book.category.toLowerCase().includes(lowerQuery)
-    );
-
-    setFilteredBooks(matchedBooks);
-    setFilteredCategories(matchedCategories);
-    setFilteredAuthors(matchedAuthors);
-    setIsOpen(true);
+    const delay = setTimeout(searchData, 200);
+    return () => {
+      active = false;
+      clearTimeout(delay);
+    };
   }, [query]);
 
   // Click outside detection

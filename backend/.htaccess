@@ -1,0 +1,24 @@
+# backend/.htaccess
+# Hostinger Shared Hosting — Backend PHP API Root
+# ──────────────────────────────────────────────────────────────────
+
+# Protect config files from direct browser access
+<FilesMatch "^db\.(php|local\.php|production\.php)$">
+    Deny from all
+</FilesMatch>
+
+# Disable directory listing for security
+Options -Indexes
+
+# Allow CORS for all PHP API files
+<FilesMatch "\.php$">
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
+</FilesMatch>
+
+# Enable mod_headers if available
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>

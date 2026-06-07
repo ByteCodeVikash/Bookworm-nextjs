@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { FeaturedBooksTabProps } from "./types";
 import { ProductCard } from "@/components/molecules";
+import { fetchApi } from "@/utils/api";
+import { Book } from "@/types";
 
 export const FeaturedBooksTab: React.FC<FeaturedBooksTabProps> = ({
   featured,
@@ -10,8 +12,33 @@ export const FeaturedBooksTab: React.FC<FeaturedBooksTabProps> = ({
   mostviewed
 }) => {
   const [activeTab, setActiveTab] = useState<"featured" | "onsale" | "mostviewed">("featured");
+  const [localFeatured, setLocalFeatured] = useState<Book[]>(featured || []);
+  const [localOnSale, setLocalOnSale] = useState<Book[]>(onsale || []);
+  const [localMostViewed, setLocalMostViewed] = useState<Book[]>(mostviewed || []);
 
-  const booksToRender = activeTab === "featured" ? featured : activeTab === "onsale" ? onsale : mostviewed;
+  useEffect(() => {
+    let active = true;
+    const loadData = async () => {
+      try {
+        const [featData, saleData, viewData] = await Promise.all([
+          fetchApi<Book[]>("/api/books.php?group=featured"),
+          fetchApi<Book[]>("/api/books.php?group=onsale"),
+          fetchApi<Book[]>("/api/books.php?group=mostviewed"),
+        ]);
+        if (active) {
+          setLocalFeatured(featData);
+          setLocalOnSale(saleData);
+          setLocalMostViewed(viewData);
+        }
+      } catch (err) {
+        console.error("Failed to load featured books:", err);
+      }
+    };
+    loadData();
+    return () => { active = false; };
+  }, []);
+
+  const booksToRender = activeTab === "featured" ? localFeatured : activeTab === "onsale" ? localOnSale : localMostViewed;
 
   return (
     <section className="space-bottom-3">

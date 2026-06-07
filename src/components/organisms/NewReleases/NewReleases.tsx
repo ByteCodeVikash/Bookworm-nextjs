@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { NewReleasesProps } from "./types";
 import { ProductCard } from "@/components/molecules";
+import { fetchApi } from "@/utils/api";
+import { Book } from "@/types";
 
 export const NewReleases: React.FC<NewReleasesProps> = ({
   history,
@@ -11,15 +13,43 @@ export const NewReleases: React.FC<NewReleasesProps> = ({
   travel
 }) => {
   const [activeTab, setActiveTab] = useState<"history" | "science" | "romance" | "travel">("history");
+  const [localHistory, setLocalHistory] = useState<Book[]>(history || []);
+  const [localScience, setLocalScience] = useState<Book[]>(science || []);
+  const [localRomance, setLocalRomance] = useState<Book[]>(romance || []);
+  const [localTravel, setLocalTravel] = useState<Book[]>(travel || []);
+
+  useEffect(() => {
+    let active = true;
+    const loadData = async () => {
+      try {
+        const [histData, sciData, romData, travData] = await Promise.all([
+          fetchApi<Book[]>("/api/books.php?group=new_release&new_release_tab=history"),
+          fetchApi<Book[]>("/api/books.php?group=new_release&new_release_tab=science"),
+          fetchApi<Book[]>("/api/books.php?group=new_release&new_release_tab=romance"),
+          fetchApi<Book[]>("/api/books.php?group=new_release&new_release_tab=travel"),
+        ]);
+        if (active) {
+          setLocalHistory(histData);
+          setLocalScience(sciData);
+          setLocalRomance(romData);
+          setLocalTravel(travData);
+        }
+      } catch (err) {
+        console.error("Failed to load new releases:", err);
+      }
+    };
+    loadData();
+    return () => { active = false; };
+  }, []);
 
   const booksToRender =
     activeTab === "history"
-      ? history
+      ? localHistory
       : activeTab === "science"
-      ? science
+      ? localScience
       : activeTab === "romance"
-      ? romance
-      : travel;
+      ? localRomance
+      : localTravel;
 
   return (
     <section className="space-bottom-3 banner-with-product">

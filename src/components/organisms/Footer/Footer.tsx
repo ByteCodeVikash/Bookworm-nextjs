@@ -3,8 +3,17 @@ import Link from "next/link";
 import { FooterProps } from "./types";
 import { Logo, Icon } from "@/components/atoms";
 import { NewsletterForm } from "@/components/molecules";
+import { useStoreSettings } from "@/contexts/StoreSettingsContext";
 
 export const Footer: React.FC<FooterProps> = () => {
+  const { settings, categories } = useStoreSettings();
+
+  const storeName = settings.store_name || "Bookworm";
+  const storeEmail = settings.store_email || "support@bookworm.com";
+  const storePhone = settings.store_phone || "+1 246-345-0695";
+  const storeAddress = settings.store_address || "1418 Riverwood Drive, Suite 3245\nCottonwood, CA 96022, United States";
+  const year = new Date().getFullYear();
+
   return (
     <footer className="bg-white border-top">
       {/* Newsletter Bar */}
@@ -21,21 +30,20 @@ export const Footer: React.FC<FooterProps> = () => {
       {/* Widgets & Links */}
       <div className="space-top-3 space-bottom-2 container">
         <div className="row">
-          {/* Logo & Contact details */}
+          {/* Logo & Contact details — from DB settings */}
           <div className="col-lg-4 mb-6 mb-lg-0">
             <div className="pb-4">
               <Link href="/" className="d-inline-block mb-4">
                 <Logo />
               </Link>
-              <p className="text-gray-600 font-size-2 mb-4">
-                1418 Riverwood Drive, Suite 3245 Cottonwood,<br />
-                CA 96022, United States
+              <p className="text-gray-600 font-size-2 mb-4" style={{ whiteSpace: "pre-line" }}>
+                {storeAddress}
               </p>
               <div className="font-size-2 text-dark font-weight-medium mb-1">
-                Email: <span className="text-gray-600 font-weight-normal">support@bookworm.com</span>
+                Email: <span className="text-gray-600 font-weight-normal">{storeEmail}</span>
               </div>
               <div className="font-size-2 text-dark font-weight-medium">
-                Phone: <span className="text-gray-600 font-weight-normal">+1 246-345-0695</span>
+                Phone: <span className="text-gray-600 font-weight-normal">{storePhone}</span>
               </div>
             </div>
           </div>
@@ -48,7 +56,6 @@ export const Footer: React.FC<FooterProps> = () => {
               <li className="py-1" style={{ listStyleType: "none" }}><Link href="/contact" className="text-gray-600 h-primary">Contact Us</Link></li>
               <li className="py-1" style={{ listStyleType: "none" }}><Link href="/faq" className="text-gray-600 h-primary">FAQ</Link></li>
               <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Sitemap</Link></li>
-              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Bookmarks</Link></li>
               <li className="py-1" style={{ listStyleType: "none" }}><Link href="/my-account" className="text-gray-600 h-primary">Sign in/Join</Link></li>
             </ul>
           </div>
@@ -76,16 +83,21 @@ export const Footer: React.FC<FooterProps> = () => {
             </ul>
           </div>
 
-          {/* Categories column */}
-          <div className="col-lg-2 col-md-4">
-            <h4 className="font-size-3 font-weight-medium mb-3">Categories</h4>
-            <ul className="list-unstyled mb-0 font-size-2" style={{ paddingLeft: 0 }}>
-              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Action & Adventure</Link></li>
-              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Arts & Photography</Link></li>
-              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Biographies</Link></li>
-              <li className="py-1" style={{ listStyleType: "none" }}><Link href="/" className="text-gray-600 h-primary">Business & Money</Link></li>
-            </ul>
-          </div>
+          {/* Categories column — DB-driven */}
+          {categories.length > 0 && (
+            <div className="col-lg-2 col-md-4">
+              <h4 className="font-size-3 font-weight-medium mb-3">Categories</h4>
+              <ul className="list-unstyled mb-0 font-size-2" style={{ paddingLeft: 0 }}>
+                {categories.slice(0, 6).map((cat) => (
+                  <li key={cat.id} className="py-1" style={{ listStyleType: "none" }}>
+                    <Link href={`/shop?category=${encodeURIComponent(cat.name)}`} className="text-gray-600 h-primary">
+                      {cat.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
 
@@ -93,13 +105,13 @@ export const Footer: React.FC<FooterProps> = () => {
       <div className="bg-gray-200 py-4 border-top">
         <div className="container d-md-flex justify-content-between align-items-center font-size-2 text-gray-600">
           <div className="mb-2 mb-md-0 text-center text-md-left">
-            &copy; 2026 Bookworm. All rights reserved.
+            &copy; {year} {storeName}. All rights reserved.
           </div>
           <div className="d-flex justify-content-center">
-            <a href="#" className="text-gray-600 mx-2 font-size-4" aria-label="Instagram"><Icon name="fab fa-instagram" /></a>
-            <a href="#" className="text-gray-600 mx-2 font-size-4" aria-label="Facebook"><Icon name="fab fa-facebook-f" /></a>
-            <a href="#" className="text-gray-600 mx-2 font-size-4" aria-label="Youtube"><Icon name="fab fa-youtube" /></a>
-            <a href="#" className="text-gray-600 mx-2 font-size-4" aria-label="Twitter"><Icon name="fab fa-twitter" /></a>
+            <a href={settings.social_instagram || "#"} className="text-gray-600 mx-2 font-size-4" aria-label="Instagram"><Icon name="fab fa-instagram" /></a>
+            <a href={settings.social_facebook || "#"} className="text-gray-600 mx-2 font-size-4" aria-label="Facebook"><Icon name="fab fa-facebook-f" /></a>
+            <a href={settings.social_youtube || "#"} className="text-gray-600 mx-2 font-size-4" aria-label="Youtube"><Icon name="fab fa-youtube" /></a>
+            <a href={settings.social_twitter || "#"} className="text-gray-600 mx-2 font-size-4" aria-label="Twitter"><Icon name="fab fa-twitter" /></a>
           </div>
         </div>
       </div>

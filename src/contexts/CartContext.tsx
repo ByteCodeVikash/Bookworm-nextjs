@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { fetchApi } from "@/utils/api";
 
 export interface CartItem {
   id: string;
@@ -52,55 +53,114 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("bookworm_cart");
-    if (saved) {
+    let active = true;
+    const loadCart = async () => {
       try {
-        setCartItems(JSON.parse(saved));
-      } catch (e) {
-        setCartItems(defaultCartItems);
+        const data = await fetchApi<CartItem[]>("/api/cart.php?userId=1");
+        if (active) {
+          if (data && Array.isArray(data) && data.length > 0) {
+            setCartItems(data);
+          } else {
+            // Check localStorage
+            const saved = localStorage.getItem("bookworm_cart");
+            if (saved) {
+              setCartItems(JSON.parse(saved));
+            } else {
+              setCartItems(defaultCartItems);
+            }
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load cart from API:", err);
+        const saved = localStorage.getItem("bookworm_cart");
+        if (saved && active) {
+          try {
+            setCartItems(JSON.parse(saved));
+          } catch (e) {
+            setCartItems(defaultCartItems);
+          }
+        } else if (active) {
+          setCartItems(defaultCartItems);
+        }
+      } finally {
+        if (active) {
+          setIsLoaded(true);
+        }
       }
-    } else {
-      setCartItems(defaultCartItems);
-    }
-    setIsLoaded(true);
+    };
+    loadCart();
+    return () => { active = false; };
   }, []);
 
-  const saveCart = (items: CartItem[]) => {
-    setCartItems(items);
-    localStorage.setItem("bookworm_cart", JSON.stringify(items));
-  };
-
-  const addToCart = (item: Omit<CartItem, "quantity"> & { quantity?: number }) => {
+  const addToCart = async (item: Omit<CartItem, "quantity"> & { quantity?: number }) => {
     const qty = item.quantity ?? 1;
     const existingIndex = cartItems.findIndex((i) => i.id === item.id);
+    let newItems = [...cartItems];
     if (existingIndex > -1) {
-      const newItems = [...cartItems];
       newItems[existingIndex].quantity += qty;
-      saveCart(newItems);
     } else {
-      saveCart([...cartItems, { ...item, quantity: qty }]);
+      newItems.push({ ...item, quantity: qty });
+    }
+    setCartItems(newItems);
+    localStorage.setItem("bookworm_cart", JSON.stringify(newItems));
+
+    try {
+      await fetchApi("/api/cart.php", {
+        method: "POST",
+        body: JSON.stringify({ userId: 1, bookId: item.id, quantity: qty })
+      });
+    } catch (err) {
+      console.error("Failed to sync addToCart to API:", err);
     }
   };
 
-  const removeFromCart = (id: string) => {
-    saveCart(cartItems.filter((i) => i.id !== id));
+  const removeFromCart = async (id: string) => {
+    const newItems = cartItems.filter((i) => i.id !== id);
+    setCartItems(newItems);
+    localStorage.setItem("bookworm_cart", JSON.stringify(newItems));
+
+    try {
+      await fetchApi(`/api/cart.php?userId=1&bookId=${encodeURIComponent(id)}`, {
+        method: "DELETE"
+      });
+    } catch (err) {
+      console.error("Failed to sync removeFromCart to API:", err);
+    }
   };
 
-  const updateQuantity = (id: string, delta: number) => {
+  const updateQuantity = async (id: string, delta: number) => {
     const newItems = cartItems
       .map((item) => {
         if (item.id === id) {
-          const newQty = item.quantity + delta;
-          return { ...item, quantity: newQty };
+          return { ...item, quantity: item.quantity + delta };
         }
         return item;
       })
       .filter((item) => item.quantity > 0);
-    saveCart(newItems);
+    setCartItems(newItems);
+    localStorage.setItem("bookworm_cart", JSON.stringify(newItems));
+
+    try {
+      await fetchApi("/api/cart.php", {
+        method: "POST",
+        body: JSON.stringify({ userId: 1, bookId: id, quantity: delta })
+      });
+    } catch (err) {
+      console.error("Failed to sync updateQuantity to API:", err);
+    }
   };
 
-  const clearCart = () => {
-    saveCart([]);
+  const clearCart = async () => {
+    setCartItems([]);
+    localStorage.setItem("bookworm_cart", JSON.stringify([]));
+
+    try {
+      await fetchApi("/api/cart.php?userId=1", {
+        method: "DELETE"
+      });
+    } catch (err) {
+      console.error("Failed to sync clearCart to API:", err);
+    }
   };
 
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);

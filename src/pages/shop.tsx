@@ -3,35 +3,60 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { MainLayout } from "@/components";
 import { ProductCard } from "@/components/molecules/ProductCard/ProductCard";
-import { shopBooks } from "@/data/mockData";
-import { Book } from "@/types";
+import { fetchApi } from "@/utils/api";
+import { fetchCategories, fetchAuthors, fetchBooks } from "@/utils/storeApi";
+import { Book, Category, Author } from "@/types";
 
 export default function ShopPage() {
   const router = useRouter();
   const queryCategory = router.query.category as string | undefined;
   const queryAuthor = router.query.author as string | undefined;
 
-  // Filter and view states
+  // ─── DB-fetched data ────────────────────────────────────────────────────────
+  const [books, setBooks] = useState<Book[]>([]);
+  const [categoriesList, setCategoriesList] = useState<Category[]>([]);
+  const [authorsList, setAuthorsList] = useState<Author[]>([]);
+  const [featuredSidebarBooks, setFeaturedSidebarBooks] = useState<Book[]>([]);
+
+  useEffect(() => {
+    let active = true;
+    const loadData = async () => {
+      try {
+        const [booksData, cats, auths, featuredBooks] = await Promise.all([
+          fetchApi<Book[]>("/api/books.php"),
+          fetchCategories(),
+          fetchAuthors(),
+          fetchBooks("featured"),
+        ]);
+        if (active) {
+          setBooks(Array.isArray(booksData) ? booksData : []);
+          setCategoriesList(cats);
+          setAuthorsList(auths);
+          setFeaturedSidebarBooks(featuredBooks.slice(0, 3));
+        }
+      } catch (err) {
+        console.error("Failed to load shop data:", err);
+      }
+    };
+    loadData();
+    return () => { active = false; };
+  }, []);
+
+  // Derive unique formats dynamically from loaded books
+  const formatsList = useMemo(() => {
+    const counts: Record<string, number> = {};
+    books.forEach((b) => {
+      const fmt = b.format?.trim();
+      if (fmt) counts[fmt] = (counts[fmt] || 0) + 1;
+    });
+    return Object.entries(counts)
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }, [books]);
+
+  // ─── Filter & view state ────────────────────────────────────────────────────
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
-
-  // Sync category query param with local state
-  useEffect(() => {
-    if (queryCategory) {
-      setSelectedCategory(queryCategory);
-    } else {
-      setSelectedCategory(null);
-    }
-  }, [queryCategory]);
-
-  // Sync author query param with local state
-  useEffect(() => {
-    if (queryAuthor) {
-      setSelectedAuthors([queryAuthor]);
-    } else {
-      setSelectedAuthors([]);
-    }
-  }, [queryAuthor]);
   const [selectedFormats, setSelectedFormats] = useState<string[]>([]);
   const [minPrice, setMinPrice] = useState<number>(0);
   const [maxPrice, setMaxPrice] = useState<number>(100);
@@ -43,113 +68,25 @@ export default function ShopPage() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
-  // Cleaned, unique categories list from the screenshot
-  const categoriesList = [
-    "Arts & Photography",
-    "Baby",
-    "Biographies & Memoirs",
-    "Business & Money",
-    "Children's",
-    "Christian Books & Bibles",
-    "Food & Drink",
-    "Health",
-    "History",
-    "Holiday & Home",
-    "Humor & Entertainment",
-    "Literature & Fiction",
-    "Love",
-    "Mystery & Thriller",
-    "Politics & Social Sciences",
-    "Reference",
-    "Religion & Spirituality",
-    "Research & Publishing Guides",
-    "Romance",
-    "Sci-Fi & Fantasy",
-    "Sports & Outdoors",
-    "Uncategorized"
-  ];
+  // Sync URL query params with local state
+  useEffect(() => {
+    setSelectedCategory(queryCategory || null);
+  }, [queryCategory]);
 
-  // Exact authors list and counts from the screenshot
-  const authorsList = [
-    { name: "A. K. Pinero", count: 2 },
-    { name: "Audrey Carlan", count: 1 },
-    { name: "Anna Banks", count: 1 },
-    { name: "Anna Barnes", count: 1 },
-    { name: "Bobbie Annon", count: 1 },
-    { name: "Barbara O'Neal", count: 1 },
-    { name: "Blake Crouch", count: 1 },
-    { name: "Ben Goldacre", count: 1 },
-    { name: "Brené Brown", count: 1 },
-    { name: "Britney King", count: 1 },
-    { name: "Colleen Atwood", count: 1 },
-    { name: "Conn Iggulden", count: 2 },
-    { name: "Dave Meltzer", count: 1 },
-    { name: "Dale Carnegie", count: 1 },
-    { name: "Donna R. Hoffman", count: 1 },
-    { name: "Dorothea Benton F...", count: 1 },
-    { name: "Douglas Kennedy", count: 1 },
-    { name: "Fiona Barton", count: 1 },
-    { name: "J. D. Robb", count: 16 },
-    { name: "James Patterson", count: 15 },
-    { name: "John Grisham", count: 1 },
-    { name: "Jay Shetty", count: 1 },
-    { name: "Jessica Simpson", count: 1 },
-    { name: "Joan Didion", count: 1 },
-    { name: "Joshua Whitehead", count: 1 },
-    { name: "Kelly Harms", count: 1 },
-    { name: "Kristin Hannah", count: 1 },
-    { name: "L.J. Shen", count: 1 },
-    { name: "Luanne Rice", count: 1 },
-    { name: "Mary Beth Keane", count: 1 },
-    { name: "Max L...", count: 2 },
-    { name: "Nicole Chung", count: 1 },
-    { name: "Nora Roberts", count: 7 },
-    { name: "Patrick Taylor", count: 1 },
-    { name: "Peter de Jonge", count: 1 },
-    { name: "Stephen King", count: 1 },
-    { name: "T. J. Newman", count: 1 }
-  ];
+  useEffect(() => {
+    setSelectedAuthors(queryAuthor ? [queryAuthor] : []);
+  }, [queryAuthor]);
 
-  // Exact formats list and counts from the screenshot
-  const formatsList = [
-    { name: "Hardcover", count: 12 },
-    { name: "Kindle", count: 14 },
-    { name: "Kindle Edition", count: 13 },
-    { name: "Paperback", count: 14 }
-  ];
-
-  // Exact ratings list and counts from the screenshot
+  // Ratings sidebar (derived from data but static display)
   const ratingsList = [
-    { rating: 5, count: 22 },
-    { rating: 4, count: 5 },
-    { rating: 3, count: 3 },
-    { rating: 2, count: 2 },
-    { rating: 1, count: 1 }
-  ];
+    { rating: 5, count: books.filter((b) => b.rating === 5).length },
+    { rating: 4, count: books.filter((b) => b.rating === 4).length },
+    { rating: 3, count: books.filter((b) => b.rating === 3).length },
+    { rating: 2, count: books.filter((b) => b.rating === 2).length },
+    { rating: 1, count: books.filter((b) => b.rating === 1).length },
+  ].filter((r) => r.count > 0);
 
-  // Exact featured books list from the screenshot
-  const featuredSidebarBooks = [
-    {
-      id: "featured-1",
-      title: "Winds of the Forest Book III",
-      price: 13.20,
-      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-17.png"
-    },
-    {
-      id: "featured-2",
-      title: "Little Blue Envelope: A Novel (Search the Release in An Outlying Universe)",
-      price: 13.29,
-      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-12.png"
-    },
-    {
-      id: "featured-3",
-      title: "Open Book: A Memoir",
-      price: 16.79,
-      imageUrl: "https://bookworm.madrasthemes.com/wp-content/uploads/2020/08/img1-19.png"
-    }
-  ];
-
-  // Handle filter changes
+  // ─── Filter handlers ────────────────────────────────────────────────────────
   const handleAuthorToggle = (author: string) => {
     setSelectedAuthors((prev) =>
       prev.includes(author) ? prev.filter((a) => a !== author) : [...prev, author]
@@ -190,11 +127,10 @@ export default function ShopPage() {
     setCurrentPage(1);
   };
 
-  // Filtered and sorted books
+  // ─── Filtering & sorting ────────────────────────────────────────────────────
   const filteredBooks = useMemo(() => {
-    let result = [...shopBooks];
+    let result = [...books];
 
-    // Category Filter
     if (selectedCategory) {
       result = result.filter((b) => {
         const catA = b.category.toLowerCase();
@@ -208,12 +144,12 @@ export default function ShopPage() {
       });
     }
 
-    // Author Filter
     if (selectedAuthors.length > 0) {
-      result = result.filter((b) => selectedAuthors.some((auth) => b.author.toLowerCase().includes(auth.toLowerCase().replace("...", ""))));
+      result = result.filter((b) =>
+        selectedAuthors.some((auth) => b.author.toLowerCase().includes(auth.toLowerCase().replace("...", "")))
+      );
     }
 
-    // Format Filter
     if (selectedFormats.length > 0) {
       result = result.filter((b) => {
         const bookFmts = b.format.toLowerCase();
@@ -221,29 +157,20 @@ export default function ShopPage() {
       });
     }
 
-    // Price Filter
     result = result.filter((b) => b.price >= minPrice && b.price <= maxPrice);
 
-    // Rating Filter
     if (selectedRatings.length > 0) {
       result = result.filter((b) => b.rating !== undefined && selectedRatings.includes(b.rating));
     }
 
-    // Sorting
-    if (sortOption === "price-asc") {
-      result.sort((a, b) => a.price - b.price);
-    } else if (sortOption === "price-desc") {
-      result.sort((a, b) => b.price - a.price);
-    } else if (sortOption === "rating") {
-      result.sort((a, b) => (b.rating || 0) - (a.rating || 0));
-    } else if (sortOption === "title") {
-      result.sort((a, b) => a.title.localeCompare(b.title));
-    }
+    if (sortOption === "price-asc") result.sort((a, b) => a.price - b.price);
+    else if (sortOption === "price-desc") result.sort((a, b) => b.price - a.price);
+    else if (sortOption === "rating") result.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+    else if (sortOption === "title") result.sort((a, b) => a.title.localeCompare(b.title));
 
     return result;
-  }, [selectedCategory, selectedAuthors, selectedFormats, minPrice, maxPrice, selectedRatings, sortOption]);
+  }, [books, selectedCategory, selectedAuthors, selectedFormats, minPrice, maxPrice, selectedRatings, sortOption]);
 
-  // Paginated books
   const paginatedBooks = useMemo(() => {
     const startIndex = (currentPage - 1) * pageSize;
     return filteredBooks.slice(startIndex, startIndex + pageSize);
@@ -254,7 +181,7 @@ export default function ShopPage() {
   return (
     <MainLayout>
       <div className="container-fluid px-3 px-md-5 py-4 bg-white">
-        
+
         {/* Breadcrumbs */}
         <nav aria-label="breadcrumb" className="mb-4">
           <ol className="breadcrumb bg-transparent p-0 m-0 font-size-2">
@@ -268,13 +195,13 @@ export default function ShopPage() {
         </nav>
 
         <div className="row">
-          
+
           {/* Left Sidebar Filter Section */}
           <aside className="col-lg-3 pr-lg-4 mb-5 mb-lg-0">
             <div className="border-bottom pb-3 mb-4 d-flex justify-content-between align-items-center">
               <h5 className="font-weight-bold mb-0" style={{ fontSize: "20px" }}>Filters</h5>
-              <button 
-                onClick={resetFilters} 
+              <button
+                onClick={resetFilters}
                 className="btn btn-link text-primary font-size-1 p-0 border-0 text-decoration-none"
                 style={{ color: "#f75454" }}
               >
@@ -282,7 +209,7 @@ export default function ShopPage() {
               </button>
             </div>
 
-            {/* Categories filter */}
+            {/* Categories filter — DB-driven */}
             <div className="widget mb-4 border-bottom pb-4">
               <h6 className="widget-title font-weight-bold mb-3 d-flex justify-content-between align-items-center" style={{ fontSize: "16px" }}>
                 Categories
@@ -300,13 +227,16 @@ export default function ShopPage() {
                     </button>
                   </li>
                   {categoriesList.map((cat) => (
-                    <li key={cat} className="mb-2">
+                    <li key={cat.id} className="mb-2">
                       <button
-                        onClick={() => { setSelectedCategory(cat); setCurrentPage(1); }}
-                        className={`btn btn-link p-0 text-left border-0 text-decoration-none ${selectedCategory === cat ? "text-primary font-weight-bold" : "text-gray-700"}`}
-                        style={{ color: selectedCategory === cat ? "#f75454" : undefined }}
+                        onClick={() => { setSelectedCategory(cat.name); setCurrentPage(1); }}
+                        className={`btn btn-link p-0 text-left border-0 text-decoration-none ${selectedCategory === cat.name ? "text-primary font-weight-bold" : "text-gray-700"}`}
+                        style={{ color: selectedCategory === cat.name ? "#f75454" : undefined }}
                       >
-                        {cat}
+                        {cat.name}
+                        {cat.booksCount !== undefined && (
+                          <span className="text-gray-500 font-size-1 ml-1">({cat.booksCount})</span>
+                        )}
                       </button>
                     </li>
                   ))}
@@ -314,7 +244,7 @@ export default function ShopPage() {
               </div>
             </div>
 
-            {/* Author filter */}
+            {/* Author filter — DB-driven */}
             <div className="widget mb-4 border-bottom pb-4">
               <h6 className="widget-title font-weight-bold mb-3 d-flex justify-content-between align-items-center" style={{ fontSize: "16px" }}>
                 Author
@@ -322,28 +252,30 @@ export default function ShopPage() {
               </h6>
               <div style={{ maxHeight: "380px", overflowY: "auto", paddingRight: "5px" }}>
                 {authorsList.map((author) => (
-                  <div key={author.name} className="custom-control custom-checkbox mb-2 font-size-2">
+                  <div key={author.id} className="custom-control custom-checkbox mb-2 font-size-2">
                     <input
                       type="checkbox"
                       className="custom-control-input"
-                      id={`author-${author.name.replace(/\s+/g, "-").replace(/\./g, "")}`}
+                      id={`author-${String(author.id)}`}
                       checked={selectedAuthors.includes(author.name)}
                       onChange={() => handleAuthorToggle(author.name)}
                     />
-                    <label 
+                    <label
                       className="custom-control-label d-flex justify-content-between align-items-center text-gray-700 pointer"
-                      htmlFor={`author-${author.name.replace(/\s+/g, "-").replace(/\./g, "")}`}
+                      htmlFor={`author-${String(author.id)}`}
                       style={{ cursor: "pointer", width: "100%" }}
                     >
                       <span>{author.name}</span>
-                      <span className="text-gray-500 font-size-1 ml-2">({author.count})</span>
+                      {author.booksCount !== undefined && (
+                        <span className="text-gray-500 font-size-1 ml-2">({author.booksCount})</span>
+                      )}
                     </label>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Format filter */}
+            {/* Format filter — derived from actual loaded books */}
             <div className="widget mb-4 border-bottom pb-4">
               <h6 className="widget-title font-weight-bold mb-3 d-flex justify-content-between align-items-center" style={{ fontSize: "16px" }}>
                 Format
@@ -358,7 +290,7 @@ export default function ShopPage() {
                     checked={selectedFormats.includes(format.name)}
                     onChange={() => handleFormatToggle(format.name)}
                   />
-                  <label 
+                  <label
                     className="custom-control-label d-flex justify-content-between align-items-center text-gray-700 pointer"
                     htmlFor={`format-${format.name.replace(/\s+/g, "-")}`}
                     style={{ cursor: "pointer", width: "100%" }}
@@ -402,8 +334,8 @@ export default function ShopPage() {
                   </div>
                 </div>
                 <div className="d-flex align-items-center justify-content-between mt-3">
-                  <button 
-                    onClick={applyPriceFilter} 
+                  <button
+                    onClick={applyPriceFilter}
                     className="btn btn-sm rounded-0 px-3 py-1 font-size-2 text-uppercase font-weight-bold"
                     style={{ backgroundColor: "#f75454", color: "#ffffff", border: "none" }}
                   >
@@ -416,7 +348,7 @@ export default function ShopPage() {
               </div>
             </div>
 
-            {/* Filter by Review */}
+            {/* Filter by Review — derived from actual book data */}
             <div className="widget mb-4 border-bottom pb-4">
               <h6 className="widget-title font-weight-bold mb-3 d-flex justify-content-between align-items-center" style={{ fontSize: "16px" }}>
                 By Review
@@ -432,7 +364,7 @@ export default function ShopPage() {
                       checked={selectedRatings.includes(item.rating)}
                       onChange={() => handleRatingToggle(item.rating)}
                     />
-                    <label 
+                    <label
                       className="custom-control-label d-flex align-items-center text-gray-700 pointer mb-0 pl-1"
                       htmlFor={`review-${item.rating}`}
                       style={{ cursor: "pointer" }}
@@ -453,7 +385,7 @@ export default function ShopPage() {
               ))}
             </div>
 
-            {/* Featured Books Widget */}
+            {/* Featured Books Widget — DB-driven */}
             <div className="widget d-none d-lg-block">
               <h6 className="widget-title font-weight-bold mb-3 d-flex justify-content-between align-items-center" style={{ fontSize: "16px" }}>
                 Featured Books
@@ -462,17 +394,17 @@ export default function ShopPage() {
               <div className="featured-books-list">
                 {featuredSidebarBooks.map((book) => (
                   <div key={book.id} className="d-flex align-items-center mb-3">
-                    <Link href="/product" className="d-block flex-shrink-0 mr-3" style={{ width: "50px", height: "70px" }}>
-                      <img 
-                        src={book.imageUrl} 
-                        alt={book.title} 
-                        className="img-fluid h-100 w-100" 
+                    <Link href={`/product?id=${book.id}`} className="d-block flex-shrink-0 mr-3" style={{ width: "50px", height: "70px" }}>
+                      <img
+                        src={book.imageUrl}
+                        alt={book.title}
+                        className="img-fluid h-100 w-100"
                         style={{ objectFit: "contain" }}
                       />
                     </Link>
                     <div>
                       <h6 className="font-size-2 font-weight-medium text-lh-md mb-1 crop-text-2">
-                        <Link href="/product" className="text-dark h-dark text-decoration-none">{book.title}</Link>
+                        <Link href={`/product?id=${book.id}`} className="text-dark h-dark text-decoration-none">{book.title}</Link>
                       </h6>
                       <div className="font-weight-bold text-dark font-size-2">
                         ${book.price.toFixed(2)}
@@ -487,7 +419,7 @@ export default function ShopPage() {
 
           {/* Right Product Grid Column */}
           <main className="col-lg-9 pl-lg-4">
-            
+
             {/* Catalog Top Filter Controls Bar */}
             <div className="d-flex flex-column flex-md-row align-items-md-center justify-content-between border-bottom pb-3 mb-4 gap-3">
               <div className="font-size-2 text-gray-700">
@@ -495,7 +427,6 @@ export default function ShopPage() {
               </div>
 
               <div className="d-flex align-items-center gap-3 flex-wrap">
-                {/* Sorting Select */}
                 <div className="d-flex align-items-center">
                   <span className="font-size-2 text-gray-600 mr-2 whitespace-nowrap">Sort:</span>
                   <select
@@ -512,7 +443,6 @@ export default function ShopPage() {
                   </select>
                 </div>
 
-                {/* Show Count Select */}
                 <div className="d-flex align-items-center">
                   <span className="font-size-2 text-gray-600 mr-2">Show:</span>
                   <select
@@ -527,7 +457,6 @@ export default function ShopPage() {
                   </select>
                 </div>
 
-                {/* Layout Toggles */}
                 <div className="d-flex align-items-center gap-2 border-left pl-3 ml-1">
                   <button
                     onClick={() => setViewMode("grid")}
